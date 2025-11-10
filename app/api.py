@@ -1,18 +1,17 @@
 # app/api.py
 from fastapi import FastAPI
-from pydantic import BaseModel
 import joblib
 import pandas as pd
 from app.schemas import CustomerData
 
 app = FastAPI(title="Telco Churn Predictor", version="1.0")
-
-# Cargar modelo entrenado
 model = joblib.load("app/model.joblib")
+
 
 @app.get("/")
 def home():
     return {"message": "API de predicción de churn de clientes de Telco está activa "}
+
 
 @app.post("/predict")
 def predict(data: CustomerData):
