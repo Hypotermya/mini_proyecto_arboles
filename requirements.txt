@@ -10,3 +10,4 @@ catboost
 lightgbm
 pytest
 imbalanced-learn
+httpx
