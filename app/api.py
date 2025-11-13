@@ -29,6 +29,6 @@ def predict(data: CustomerData):
     pred_label = "Churn" if pred == 1 else "No Churn"
 
     return {
-        "prediction.": pred_label,
+        "prediction": pred_label,
         "probability": round(float(proba), 3),
     }
