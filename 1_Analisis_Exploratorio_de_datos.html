@@ -1,0 +1,2865 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EDA &#8212; Mini proyecto Arboles</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1_Analisis_Exploratorio_de_datos';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Preprocesamiento de datos" href="2_Preprocesamiento_de_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoUN.png" class="logo__image only-light" alt="Mini proyecto Arboles - Home"/>
+    <script>document.write(`<img src="_static/logoUN.png" class="logo__image only-dark" alt="Mini proyecto Arboles - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    EDA
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_Preprocesamiento_de_datos.html">Preprocesamiento de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Modelos.html">Implementacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_interpretabilidad.html">Interpretabilidad usando lime</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F1_Analisis_Exploratorio_de_datos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/1_Analisis_Exploratorio_de_datos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>EDA</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargado-de-datos">Cargado de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones">Funciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos">Analisis Exploratorio de datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado">Analisis univariado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Analisis Bivariado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones">Analisis de correlaciones</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eda">
+<h1>EDA<a class="headerlink" href="#eda" title="Link to this heading">#</a></h1>
+<section id="librerias">
+<h2>Librerias<a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span><span class="p">,</span> <span class="n">normaltest</span><span class="p">,</span> <span class="n">kstest</span><span class="p">,</span><span class="n">f_oneway</span><span class="p">,</span> <span class="n">kruskal</span><span class="p">,</span> <span class="n">chi2_contingency</span><span class="p">,</span> <span class="n">levene</span><span class="p">,</span><span class="n">mannwhitneyu</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cargado-de-datos">
+<h2>Cargado de datos<a class="headerlink" href="#cargado-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/data.csv&quot;</span><span class="p">,</span><span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customerID</th>
+      <th>gender</th>
+      <th>SeniorCitizen</th>
+      <th>Partner</th>
+      <th>Dependents</th>
+      <th>tenure</th>
+      <th>PhoneService</th>
+      <th>MultipleLines</th>
+      <th>InternetService</th>
+      <th>OnlineSecurity</th>
+      <th>...</th>
+      <th>DeviceProtection</th>
+      <th>TechSupport</th>
+      <th>StreamingTV</th>
+      <th>StreamingMovies</th>
+      <th>Contract</th>
+      <th>PaperlessBilling</th>
+      <th>PaymentMethod</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+      <th>Churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7590-VHVEG</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>1</td>
+      <td>No</td>
+      <td>No phone service</td>
+      <td>DSL</td>
+      <td>No</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Electronic check</td>
+      <td>29.85</td>
+      <td>29.85</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5575-GNVDE</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>34</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>One year</td>
+      <td>No</td>
+      <td>Mailed check</td>
+      <td>56.95</td>
+      <td>1889.50</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3668-QPYBK</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>2</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Mailed check</td>
+      <td>53.85</td>
+      <td>108.15</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7795-CFOCW</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>45</td>
+      <td>No</td>
+      <td>No phone service</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>One year</td>
+      <td>No</td>
+      <td>Bank transfer (automatic)</td>
+      <td>42.30</td>
+      <td>1840.75</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9237-HQITU</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>2</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Fiber optic</td>
+      <td>No</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Electronic check</td>
+      <td>70.70</td>
+      <td>151.65</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="funciones">
+<h2>Funciones<a class="headerlink" href="#funciones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Summary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sheet</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hoja: </span><span class="si">{</span><span class="n">sheet</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Crear la tabla de resumen</span>
+    <span class="n">resumen</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Cantidad de filas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s2">&quot;Cantidad de columnas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s2">&quot;Datos faltantes&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="s2">&quot;Filas duplicadas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Convertir el resumen en un DataFrame</span>
+    <span class="n">ResumenHoja</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resumen</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Resumen&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resumen:&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">ResumenHoja</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Encabezado:&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">graficar_distribuciones</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columnas</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;muted&quot;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">columnas</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columnas</span><span class="p">):</span>
+        <span class="c1"># Histograma con KDE</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Histograma de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Boxplot</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightcoral&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boxplot de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribuciones de variables numéricas&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">graficar_categoricas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">cat</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span>  <span class="ow">in</span> <span class="n">cat</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prueba_normalidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Detectar variables numéricas</span>
+    <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+        <span class="n">serie</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>  <span class="c1"># muy pocas muestras → no confiable</span>
+            <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+                <span class="s2">&quot;n_muestras&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">),</span>
+                <span class="s2">&quot;shapiro_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;dagostino_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;ks_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">:</span> <span class="s2">&quot;Muestra insuficiente&quot;</span>
+            <span class="p">})</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Shapiro-Wilk (solo si n &lt;= 5000, más grande no recomendado)</span>
+        <span class="n">stat_shapiro</span><span class="p">,</span> <span class="n">p_shapiro</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">5000</span> <span class="k">else</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+        <span class="c1"># D’Agostino y Pearson</span>
+        <span class="n">stat_dagostino</span><span class="p">,</span> <span class="n">p_dagostino</span> <span class="o">=</span> <span class="n">normaltest</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span>
+
+        <span class="c1"># Kolmogorov-Smirnov contra normal estándar</span>
+        <span class="n">stat_ks</span><span class="p">,</span> <span class="n">p_ks</span> <span class="o">=</span> <span class="n">kstest</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">serie</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">serie</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;norm&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Veredicto final</span>
+        <span class="n">es_normal</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">p_shapiro</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p_shapiro</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">p_dagostino</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">p_ks</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;n_muestras&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">),</span>
+            <span class="s2">&quot;shapiro_p&quot;</span><span class="p">:</span> <span class="n">p_shapiro</span><span class="p">,</span>
+            <span class="s2">&quot;dagostino_p&quot;</span><span class="p">:</span> <span class="n">p_dagostino</span><span class="p">,</span>
+            <span class="s2">&quot;ks_p&quot;</span><span class="p">:</span> <span class="n">p_ks</span><span class="p">,</span>
+            <span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">:</span> <span class="n">es_normal</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analisis_bivariado_numerico</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># Seleccionar solo las columnas numéricas</span>
+    <span class="n">num_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">num_df</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Se necesitan al menos dos variables numéricas para el análisis bivariado.&quot;</span><span class="p">)</span>
+    
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Calcular correlaciones entre todas las parejas posibles</span>
+    <span class="k">for</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">valid_data</span> <span class="o">=</span> <span class="n">num_df</span><span class="p">[[</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  
+        <span class="n">pearson</span> <span class="o">=</span> <span class="n">valid_data</span><span class="p">[</span><span class="n">var1</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">valid_data</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+        <span class="n">spearman</span> <span class="o">=</span> <span class="n">valid_data</span><span class="p">[</span><span class="n">var1</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">valid_data</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+        <span class="n">covarianza</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">valid_data</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">valid_data</span><span class="p">[</span><span class="n">var2</span><span class="p">])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">&#39;Variable 1&#39;</span><span class="p">:</span> <span class="n">var1</span><span class="p">,</span>
+        <span class="s1">&#39;Variable 2&#39;</span><span class="p">:</span> <span class="n">var2</span><span class="p">,</span>
+        <span class="s1">&#39;Correlación Pearson&#39;</span><span class="p">:</span> <span class="n">pearson</span><span class="p">,</span>
+        <span class="s1">&#39;Correlación Spearman&#39;</span><span class="p">:</span> <span class="n">spearman</span><span class="p">,</span>
+        <span class="s1">&#39;Covarianza&#39;</span><span class="p">:</span> <span class="n">covarianza</span>
+        <span class="p">})</span>
+    
+    <span class="n">corr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Correlación Spearman&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===  Correlaciones más altas ===&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">corr_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Correlaciones más bajas ===&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">corr_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+
+    <span class="c1"># Gráficos opcionales para las correlaciones más altas y más bajas</span>
+    <span class="k">if</span> <span class="n">mostrar_graficos</span><span class="p">:</span>
+        <span class="n">pares_altas</span> <span class="o">=</span> <span class="n">corr_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+        <span class="n">pares_bajas</span> <span class="o">=</span> <span class="n">corr_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+        <span class="n">pares_interes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pares_altas</span><span class="p">,</span> <span class="n">pares_bajas</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">pares_interes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Variable 1&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Variable 2&#39;</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">var2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">num_df</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.6</span><span class="p">},</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="se">\n</span><span class="s2">Correlación Spearman: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Correlación Spearman&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">corr_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analisis_bivariado_categorico</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grafico</span><span class="o">=</span><span class="s1">&#39;heatmap&#39;</span><span class="p">):</span>
+    <span class="c1"># Filtrar solo variables categóricas</span>
+    <span class="n">cat_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">cat_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Se necesitan al menos dos variables categóricas para el análisis bivariado.&quot;</span><span class="p">)</span>
+
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterar sobre todas las combinaciones posibles de variables categóricas</span>
+    <span class="k">for</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Crear tabla de contingencia</span>
+        <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">var2</span><span class="p">])</span>
+
+        <span class="c1"># Evitar tablas muy pequeñas</span>
+        <span class="k">if</span> <span class="n">tabla</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">tabla</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Prueba Chi-cuadrado</span>
+        <span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">tabla</span><span class="p">)</span>
+
+        <span class="c1"># Calcular V de Cramer</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">phi2</span> <span class="o">=</span> <span class="n">chi2</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">phi2corr</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">phi2</span> <span class="o">-</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">rcorr</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">kcorr</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">cramer_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phi2corr</span> <span class="o">/</span> <span class="nb">min</span><span class="p">((</span><span class="n">kcorr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">rcorr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">kcorr</span><span class="p">,</span> <span class="n">rcorr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;Variable 1&#39;</span><span class="p">:</span> <span class="n">var1</span><span class="p">,</span>
+            <span class="s1">&#39;Variable 2&#39;</span><span class="p">:</span> <span class="n">var2</span><span class="p">,</span>
+            <span class="s1">&#39;Chi-cuadrado&#39;</span><span class="p">:</span> <span class="n">chi2</span><span class="p">,</span>
+            <span class="s1">&#39;Grados de libertad&#39;</span><span class="p">:</span> <span class="n">dof</span><span class="p">,</span>
+            <span class="s1">&#39;Valor p&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+            <span class="s1">&#39;V de Cramer&#39;</span><span class="p">:</span> <span class="n">cramer_v</span>
+        <span class="p">})</span>
+
+    <span class="c1"># Convertir resultados a DataFrame</span>
+    <span class="n">resumen_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Valor p&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">resumen_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se encontraron combinaciones categóricas válidas.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resumen_df</span>
+
+    <span class="c1"># Mostrar top relaciones significativas</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Relaciones categóricas más significativas (menor valor p) ===&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">resumen_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Relaciones menos significativas ===&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">resumen_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+
+    <span class="c1"># Graficar top relaciones más significativas</span>
+    <span class="k">if</span> <span class="n">mostrar_graficos</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Gráficos de las relaciones más significativas:&quot;</span><span class="p">)</span>
+        <span class="n">top_pairs</span> <span class="o">=</span> <span class="n">resumen_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">top_pairs</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Variable 1&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Variable 2&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Valor p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, V de Cramer = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;V de Cramer&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Normalizar por filas para mostrar proporciones</span>
+            <span class="n">tabla_rel</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">grafico</span> <span class="o">==</span> <span class="s1">&#39;heatmap&#39;</span><span class="p">:</span>
+                <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">tabla_rel</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="se">\n</span><span class="s2">(p = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Valor p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, V = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;V de Cramer&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var2</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var1</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">resumen_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analisis_bivariado_cat_num</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">categoricas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">numericas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">categoricas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">categoricas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">numericas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">categoricas</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+            <span class="n">grupos</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">num</span><span class="p">][</span><span class="n">df</span><span class="p">[</span><span class="n">cat</span><span class="p">]</span> <span class="o">==</span> <span class="n">nivel</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="k">for</span> <span class="n">nivel</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">cat</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+            <span class="n">grupos</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grupos</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grupos</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># ==== NORMALIDAD (Kolmogorov-Smirnov) ====</span>
+            <span class="n">normalidades</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grupos</span><span class="p">:</span>
+                <span class="c1"># Estandarizamos los datos para comparar contra N(0,1)</span>
+                <span class="n">g_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">p_norm</span> <span class="o">=</span> <span class="n">kstest</span><span class="p">(</span><span class="n">g_std</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">)</span>
+                <span class="n">normalidades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_norm</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span>
+
+            <span class="c1"># ==== HOMOCEDASTICIDAD (Levene) ====</span>
+            <span class="n">stat_lev</span><span class="p">,</span> <span class="n">p_levene</span> <span class="o">=</span> <span class="n">levene</span><span class="p">(</span><span class="o">*</span><span class="n">grupos</span><span class="p">)</span>
+            <span class="n">homocedasticas</span> <span class="o">=</span> <span class="n">p_levene</span> <span class="o">&gt;</span> <span class="mf">0.05</span>
+
+            <span class="c1"># ==== ELECCIÓN DE PRUEBA ====</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">normalidades</span><span class="p">)</span> <span class="ow">and</span> <span class="n">homocedasticas</span><span class="p">:</span>
+                <span class="n">prueba</span> <span class="o">=</span> <span class="s2">&quot;ANOVA&quot;</span>
+                <span class="n">stat</span><span class="p">,</span> <span class="n">p_valor</span> <span class="o">=</span> <span class="n">f_oneway</span><span class="p">(</span><span class="o">*</span><span class="n">grupos</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prueba</span> <span class="o">=</span> <span class="s2">&quot;Kruskal-Wallis&quot;</span>
+                <span class="n">stat</span><span class="p">,</span> <span class="n">p_valor</span> <span class="o">=</span> <span class="n">kruskal</span><span class="p">(</span><span class="o">*</span><span class="n">grupos</span><span class="p">)</span>
+
+            <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;Categórica&#39;</span><span class="p">:</span> <span class="n">cat</span><span class="p">,</span>
+                <span class="s1">&#39;Numérica&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">,</span>
+                <span class="s1">&#39;Prueba&#39;</span><span class="p">:</span> <span class="n">prueba</span><span class="p">,</span>
+                <span class="s1">&#39;Normalidad_OK&#39;</span><span class="p">:</span> <span class="nb">all</span><span class="p">(</span><span class="n">normalidades</span><span class="p">),</span>
+                <span class="s1">&#39;Homocedasticidad_OK&#39;</span><span class="p">:</span> <span class="n">homocedasticas</span><span class="p">,</span>
+                <span class="s1">&#39;p-Levene&#39;</span><span class="p">:</span> <span class="n">p_levene</span><span class="p">,</span>
+                <span class="s1">&#39;Estadístico&#39;</span><span class="p">:</span> <span class="n">stat</span><span class="p">,</span>
+                <span class="s1">&#39;p-valor&#39;</span><span class="p">:</span> <span class="n">p_valor</span>
+            <span class="p">})</span>
+
+            <span class="c1"># ==== GRÁFICO ====</span>
+            <span class="k">if</span> <span class="n">mostrar_graficos</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+                <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">num</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> por </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="se">\n</span><span class="s1">(</span><span class="si">{</span><span class="n">prueba</span><span class="si">}</span><span class="s1">, p=</span><span class="si">{</span><span class="n">p_valor</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cramers_v</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">confusion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">chi2</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">confusion</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">confusion</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">phi2</span> <span class="o">=</span> <span class="n">chi2</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">confusion</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">phi2corr</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">phi2</span> <span class="o">-</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">rcorr</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">kcorr</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phi2corr</span> <span class="o">/</span> <span class="nb">min</span><span class="p">((</span><span class="n">kcorr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">rcorr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analizar_colinealidad_y_correlaciones</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">umbral_vif</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Variables numéricas y categóricas</span>
+    <span class="n">num_vars</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">cat_vars</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">cat_vars</span> <span class="o">=</span> <span class="n">cat_vars</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;customerID&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="c1"># ===============================</span>
+    <span class="c1"># CORRELACIONES NUMÉRICAS</span>
+    <span class="c1"># ===============================</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">corr_pearson</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+        <span class="n">corr_spearman</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+        <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;corr_pearson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">corr_pearson</span>
+        <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;corr_spearman&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">corr_spearman</span>
+
+        <span class="k">if</span> <span class="n">mostrar_graficos</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_pearson</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de correlación (Pearson)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_spearman</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;vlag&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de correlación (Spearman)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># ===============================</span>
+    <span class="c1"># COLINEALIDAD (VIF)</span>
+    <span class="c1"># ===============================</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_vars</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s2">&quot;Variable&quot;</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="s2">&quot;VIF&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+        <span class="p">})</span>
+        <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;Colinealidad&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">umbral_vif</span><span class="p">,</span> <span class="s2">&quot;Alta&quot;</span><span class="p">,</span> <span class="s2">&quot;Aceptable&quot;</span><span class="p">)</span>
+        <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;vif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vif_data</span>
+
+    <span class="c1"># ===============================</span>
+    <span class="c1"># CORRELACIONES CATEGÓRICAS (Cramér’s V)</span>
+    <span class="c1"># ===============================</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">matriz_cramer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">cat_vars</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_vars</span><span class="p">))),</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">cat_vars</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cat_vars</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">cat_vars</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">cramers_v</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">var2</span><span class="p">])</span>
+            <span class="n">matriz_cramer</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="n">matriz_cramer</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">var2</span><span class="p">,</span> <span class="n">var1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;cramers_v&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">matriz_cramer</span>
+
+        <span class="k">if</span> <span class="n">mostrar_graficos</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matriz_cramer</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlación entre variables categóricas (Cramérs V)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">resultados</span><span class="p">[</span><span class="s1">&#39;vif&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-exploratorio-de-datos">
+<h2>Analisis Exploratorio de datos<a class="headerlink" href="#analisis-exploratorio-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s1">&#39;df&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: df
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>7043</td>
+      <td>21</td>
+      <td>11</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customerID</th>
+      <th>gender</th>
+      <th>SeniorCitizen</th>
+      <th>Partner</th>
+      <th>Dependents</th>
+      <th>tenure</th>
+      <th>PhoneService</th>
+      <th>MultipleLines</th>
+      <th>InternetService</th>
+      <th>OnlineSecurity</th>
+      <th>...</th>
+      <th>DeviceProtection</th>
+      <th>TechSupport</th>
+      <th>StreamingTV</th>
+      <th>StreamingMovies</th>
+      <th>Contract</th>
+      <th>PaperlessBilling</th>
+      <th>PaymentMethod</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+      <th>Churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7590-VHVEG</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>1</td>
+      <td>No</td>
+      <td>No phone service</td>
+      <td>DSL</td>
+      <td>No</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Electronic check</td>
+      <td>29.85</td>
+      <td>29.85</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5575-GNVDE</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>34</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>One year</td>
+      <td>No</td>
+      <td>Mailed check</td>
+      <td>56.95</td>
+      <td>1889.50</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3668-QPYBK</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>2</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Mailed check</td>
+      <td>53.85</td>
+      <td>108.15</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7795-CFOCW</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>45</td>
+      <td>No</td>
+      <td>No phone service</td>
+      <td>DSL</td>
+      <td>Yes</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>One year</td>
+      <td>No</td>
+      <td>Bank transfer (automatic)</td>
+      <td>42.30</td>
+      <td>1840.75</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9237-HQITU</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>No</td>
+      <td>No</td>
+      <td>2</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Fiber optic</td>
+      <td>No</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Month-to-month</td>
+      <td>Yes</td>
+      <td>Electronic check</td>
+      <td>70.70</td>
+      <td>151.65</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 7043 entries, 0 to 7042
+Data columns (total 21 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   customerID        7043 non-null   object 
+ 1   gender            7043 non-null   object 
+ 2   SeniorCitizen     7043 non-null   int64  
+ 3   Partner           7043 non-null   object 
+ 4   Dependents        7043 non-null   object 
+ 5   tenure            7043 non-null   int64  
+ 6   PhoneService      7043 non-null   object 
+ 7   MultipleLines     7043 non-null   object 
+ 8   InternetService   7043 non-null   object 
+ 9   OnlineSecurity    7043 non-null   object 
+ 10  OnlineBackup      7043 non-null   object 
+ 11  DeviceProtection  7043 non-null   object 
+ 12  TechSupport       7043 non-null   object 
+ 13  StreamingTV       7043 non-null   object 
+ 14  StreamingMovies   7043 non-null   object 
+ 15  Contract          7043 non-null   object 
+ 16  PaperlessBilling  7043 non-null   object 
+ 17  PaymentMethod     7043 non-null   object 
+ 18  MonthlyCharges    7043 non-null   float64
+ 19  TotalCharges      7032 non-null   float64
+ 20  Churn             7043 non-null   object 
+dtypes: float64(2), int64(2), object(17)
+memory usage: 1.1+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que algunos de los tipos de variables se deben cambiar antes de realizar cualquier analisis posterior</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;SeniorCitizen&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;SeniorCitizen&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TotalCharges&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;TotalCharges&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 7043 entries, 0 to 7042
+Data columns (total 21 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   customerID        7043 non-null   object 
+ 1   gender            7043 non-null   object 
+ 2   SeniorCitizen     7043 non-null   object 
+ 3   Partner           7043 non-null   object 
+ 4   Dependents        7043 non-null   object 
+ 5   tenure            7043 non-null   int64  
+ 6   PhoneService      7043 non-null   object 
+ 7   MultipleLines     7043 non-null   object 
+ 8   InternetService   7043 non-null   object 
+ 9   OnlineSecurity    7043 non-null   object 
+ 10  OnlineBackup      7043 non-null   object 
+ 11  DeviceProtection  7043 non-null   object 
+ 12  TechSupport       7043 non-null   object 
+ 13  StreamingTV       7043 non-null   object 
+ 14  StreamingMovies   7043 non-null   object 
+ 15  Contract          7043 non-null   object 
+ 16  PaperlessBilling  7043 non-null   object 
+ 17  PaymentMethod     7043 non-null   object 
+ 18  MonthlyCharges    7043 non-null   float64
+ 19  TotalCharges      7032 non-null   float64
+ 20  Churn             7043 non-null   object 
+dtypes: float64(2), int64(1), object(18)
+memory usage: 1.1+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<section id="analisis-univariado">
+<h3>Analisis univariado<a class="headerlink" href="#analisis-univariado" title="Link to this heading">#</a></h3>
+<p>analizamos las variables numericas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tenure</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>7043.000000</td>
+      <td>7043.000000</td>
+      <td>7032.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>32.371149</td>
+      <td>64.761692</td>
+      <td>2283.300441</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>24.559481</td>
+      <td>30.090047</td>
+      <td>2266.771362</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>18.250000</td>
+      <td>18.800000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.000000</td>
+      <td>35.500000</td>
+      <td>401.450000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>29.000000</td>
+      <td>70.350000</td>
+      <td>1397.475000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>55.000000</td>
+      <td>89.850000</td>
+      <td>3794.737500</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>72.000000</td>
+      <td>118.750000</td>
+      <td>8684.800000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numericas</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span><span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span><span class="s1">&#39;TotalCharges&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graficar_distribuciones</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">numericas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/547a827f811f747376bcc8f139bdb8a8c80803bda0d3fd09869a8200e7d9ea76.png" src="_images/547a827f811f747376bcc8f139bdb8a8c80803bda0d3fd09869a8200e7d9ea76.png" />
+</div>
+</div>
+<p>Podemos observar que las distribuciones no se asemejan a una normal, ademas podemos observar que no hay outliers en las variables numericas</p>
+<p>ahora analizamos las variables categoricas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categoricas</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;customerID&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graficar_categoricas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">categoricas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4fa3e6a42417a27a0ddb7c1a0703e50f29fc2de4d34997442ec97b03cf0a9a94.png" src="_images/4fa3e6a42417a27a0ddb7c1a0703e50f29fc2de4d34997442ec97b03cf0a9a94.png" />
+<img alt="_images/13e57d70b1669fa48f19a025fefffa1f20cee315abf6b444fd64ecc3aede25de.png" src="_images/13e57d70b1669fa48f19a025fefffa1f20cee315abf6b444fd64ecc3aede25de.png" />
+<img alt="_images/10574c00a4095f406006bc5012d4984f877d459786969f585ffce6e83afa6885.png" src="_images/10574c00a4095f406006bc5012d4984f877d459786969f585ffce6e83afa6885.png" />
+<img alt="_images/2f777efa94db8e629dabba2a686979e5ef4e32eb865fae21a240aabe213dd717.png" src="_images/2f777efa94db8e629dabba2a686979e5ef4e32eb865fae21a240aabe213dd717.png" />
+<img alt="_images/e4eb758687ee3976db3efdbc75a03073f9eb575b8662cc44384b07010a13170c.png" src="_images/e4eb758687ee3976db3efdbc75a03073f9eb575b8662cc44384b07010a13170c.png" />
+<img alt="_images/cdfc9f5ec8ef96a4416a0e285a3e8d3ae46101f8a8f1b7ee5414081100919a1c.png" src="_images/cdfc9f5ec8ef96a4416a0e285a3e8d3ae46101f8a8f1b7ee5414081100919a1c.png" />
+<img alt="_images/6682eb473ba32a5ebbd45b443bc749cd2eb8d57d96413e64fe9406b7dbe5dfe3.png" src="_images/6682eb473ba32a5ebbd45b443bc749cd2eb8d57d96413e64fe9406b7dbe5dfe3.png" />
+<img alt="_images/94df0938aa838fbf94fc3fa54b50f557d16a3f3166c2020be95b42188e3aad48.png" src="_images/94df0938aa838fbf94fc3fa54b50f557d16a3f3166c2020be95b42188e3aad48.png" />
+<img alt="_images/8f0b21433257e547dfc083a6a956f6558db127c23505c554eed5ffea4a923c9e.png" src="_images/8f0b21433257e547dfc083a6a956f6558db127c23505c554eed5ffea4a923c9e.png" />
+<img alt="_images/5544c5d13f0538a4bb44299ba36f75ec8f2592689da139848807cac7f512c9a4.png" src="_images/5544c5d13f0538a4bb44299ba36f75ec8f2592689da139848807cac7f512c9a4.png" />
+<img alt="_images/7632a793a28c648b71a01dba3bc599802cf97ac62c84777e1a56c89d0aed6163.png" src="_images/7632a793a28c648b71a01dba3bc599802cf97ac62c84777e1a56c89d0aed6163.png" />
+<img alt="_images/af954355c7d736dd7ff65801f82ec33bddbb4dce2e44967cad4e96c003babcae.png" src="_images/af954355c7d736dd7ff65801f82ec33bddbb4dce2e44967cad4e96c003babcae.png" />
+<img alt="_images/972e0d951b98339a08336b0eaeccdbf35bbd8898c8224137a536670345db9ced.png" src="_images/972e0d951b98339a08336b0eaeccdbf35bbd8898c8224137a536670345db9ced.png" />
+<img alt="_images/7a1442df25afa39f41b597f55adaf1903790e88478442025dbc448906bf6c5d7.png" src="_images/7a1442df25afa39f41b597f55adaf1903790e88478442025dbc448906bf6c5d7.png" />
+<img alt="_images/acd8dd81a770b35c1fbb2886e7fa0fd1226ecfe80c39482f61426a71efacbfe5.png" src="_images/acd8dd81a770b35c1fbb2886e7fa0fd1226ecfe80c39482f61426a71efacbfe5.png" />
+<img alt="_images/c45c75c9671f37d412dd8204749102071804516c823e2e707947328b02f86a7f.png" src="_images/c45c75c9671f37d412dd8204749102071804516c823e2e707947328b02f86a7f.png" />
+<img alt="_images/7e38e1f4e56abac5325808ff8340bbb31d6343e2ebf1276181bf4032eb00be4f.png" src="_images/7e38e1f4e56abac5325808ff8340bbb31d6343e2ebf1276181bf4032eb00be4f.png" />
+</div>
+</div>
+<p>Podemos observar las categorias de cada uno de las variables categoricas, tambien podemos observar las categorias de la variable objetivo y vemos que esta desbalanceada, esto se tomara en cuenta a la hora de realizar los modelos</p>
+</section>
+<section id="analisis-bivariado">
+<h3>Analisis Bivariado<a class="headerlink" href="#analisis-bivariado" title="Link to this heading">#</a></h3>
+<p>realizamos primero el analisis bivariado numerico</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prueba_normalidad</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>n_muestras</th>
+      <th>shapiro_p</th>
+      <th>dagostino_p</th>
+      <th>ks_p</th>
+      <th>es_normal (alpha=0.05)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>tenure</td>
+      <td>7043</td>
+      <td>NaN</td>
+      <td>0.000000e+00</td>
+      <td>4.439432e-76</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MonthlyCharges</td>
+      <td>7043</td>
+      <td>NaN</td>
+      <td>0.000000e+00</td>
+      <td>2.976198e-98</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>TotalCharges</td>
+      <td>7032</td>
+      <td>NaN</td>
+      <td>9.614342e-176</td>
+      <td>1.586538e-155</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analisis_bivariado_numerico</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===  Correlaciones más altas ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Correlación Pearson</th>
+      <th>Correlación Spearman</th>
+      <th>Covarianza</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>tenure</td>
+      <td>TotalCharges</td>
+      <td>0.825880</td>
+      <td>0.889177</td>
+      <td>45950.743236</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MonthlyCharges</td>
+      <td>TotalCharges</td>
+      <td>0.651065</td>
+      <td>0.638032</td>
+      <td>44401.333073</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>tenure</td>
+      <td>MonthlyCharges</td>
+      <td>0.247900</td>
+      <td>0.276417</td>
+      <td>183.196987</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Correlaciones más bajas ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Correlación Pearson</th>
+      <th>Correlación Spearman</th>
+      <th>Covarianza</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>tenure</td>
+      <td>TotalCharges</td>
+      <td>0.825880</td>
+      <td>0.889177</td>
+      <td>45950.743236</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MonthlyCharges</td>
+      <td>TotalCharges</td>
+      <td>0.651065</td>
+      <td>0.638032</td>
+      <td>44401.333073</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>tenure</td>
+      <td>MonthlyCharges</td>
+      <td>0.247900</td>
+      <td>0.276417</td>
+      <td>183.196987</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/8b5484ccd40d270186ccc95e86f0431dd5d23dda551b66e0964841ae87cdeacb.png" src="_images/8b5484ccd40d270186ccc95e86f0431dd5d23dda551b66e0964841ae87cdeacb.png" />
+<img alt="_images/a5402d644f7d65f7f311b859f5eb2b2b1329a6ce74c5c664a0536582f94ed835.png" src="_images/a5402d644f7d65f7f311b859f5eb2b2b1329a6ce74c5c664a0536582f94ed835.png" />
+<img alt="_images/e13688e8cf89e104d1856eec56766732d94e33075116802501aa1135360653d2.png" src="_images/e13688e8cf89e104d1856eec56766732d94e33075116802501aa1135360653d2.png" />
+<img alt="_images/6a8d8a59e4166a4110005f17393b2bfd9a7f297b1e4b135a5c65858e3a7081fa.png" src="_images/6a8d8a59e4166a4110005f17393b2bfd9a7f297b1e4b135a5c65858e3a7081fa.png" />
+<img alt="_images/d14b66c74a834434a00ccabb7e2399bff5d5ac1106a741a639fc14cc19c0ec7b.png" src="_images/d14b66c74a834434a00ccabb7e2399bff5d5ac1106a741a639fc14cc19c0ec7b.png" />
+<img alt="_images/ef905f8761ecfb6b3fa6271230b086636b86e3ab3fc94e588dab6935b4cfce00.png" src="_images/ef905f8761ecfb6b3fa6271230b086636b86e3ab3fc94e588dab6935b4cfce00.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Correlación Pearson</th>
+      <th>Correlación Spearman</th>
+      <th>Covarianza</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>tenure</td>
+      <td>TotalCharges</td>
+      <td>0.825880</td>
+      <td>0.889177</td>
+      <td>45950.743236</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MonthlyCharges</td>
+      <td>TotalCharges</td>
+      <td>0.651065</td>
+      <td>0.638032</td>
+      <td>44401.333073</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>tenure</td>
+      <td>MonthlyCharges</td>
+      <td>0.247900</td>
+      <td>0.276417</td>
+      <td>183.196987</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Podemos observar que tenure y total charges tienen la correlacion mas alta con 0.8259 en pearson y 0.8892 en spearman lo que significa que clientes con mayor tiempo en la empresa han acumulado más cargos totales.
+Monthlycharges y Totalcharges tiene una correlacion menor con 0.6511 y 0.6380 respectivamente lo que muestra que clientes con cargos mensuales altos tienden a tener cargos totales altos, pero no tanto como la permanencia.
+tenure y Monthlycharges lo que significa que los clientes más antiguos no necesariamente pagan más por mes.</p>
+<p>Ahora realizamos el analisis bivariado de categoricas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analisis_bivariado_categorico</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Relaciones categóricas más significativas (menor valor p) ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Chi-cuadrado</th>
+      <th>Grados de libertad</th>
+      <th>Valor p</th>
+      <th>V de Cramer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PhoneService</td>
+      <td>InternetService</td>
+      <td>1441.623387</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>0.452144</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>OnlineBackup</td>
+      <td>StreamingMovies</td>
+      <td>7174.586977</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.713584</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>OnlineBackup</td>
+      <td>StreamingTV</td>
+      <td>7195.057831</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.714602</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MultipleLines</td>
+      <td>InternetService</td>
+      <td>2217.014120</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.396424</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>OnlineBackup</td>
+      <td>DeviceProtection</td>
+      <td>7284.450039</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.719030</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Relaciones menos significativas ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Chi-cuadrado</th>
+      <th>Grados de libertad</th>
+      <th>Valor p</th>
+      <th>V de Cramer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>148</th>
+      <td>gender</td>
+      <td>Partner</td>
+      <td>0.016356</td>
+      <td>1</td>
+      <td>0.898234</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>gender</td>
+      <td>SeniorCitizen</td>
+      <td>0.015604</td>
+      <td>1</td>
+      <td>0.900589</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>Dependents</td>
+      <td>PhoneService</td>
+      <td>0.010788</td>
+      <td>1</td>
+      <td>0.917277</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>PhoneService</td>
+      <td>Contract</td>
+      <td>0.111346</td>
+      <td>2</td>
+      <td>0.945848</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>Partner</td>
+      <td>InternetService</td>
+      <td>0.005798</td>
+      <td>2</td>
+      <td>0.997105</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gráficos de las relaciones más significativas:
+
+PhoneService vs InternetService (p = 0.0000, V de Cramer = 0.452)
+</pre></div>
+</div>
+<img alt="_images/752019b4ec126b8bf08a72bf66545a8b6994b442f947020ca84717e1807bf67d.png" src="_images/752019b4ec126b8bf08a72bf66545a8b6994b442f947020ca84717e1807bf67d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OnlineBackup vs StreamingMovies (p = 0.0000, V de Cramer = 0.714)
+</pre></div>
+</div>
+<img alt="_images/b5b0c93f4c6b8e974452d13370f35e15770c96e396a6de4f1e22d14822264c63.png" src="_images/b5b0c93f4c6b8e974452d13370f35e15770c96e396a6de4f1e22d14822264c63.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OnlineBackup vs StreamingTV (p = 0.0000, V de Cramer = 0.715)
+</pre></div>
+</div>
+<img alt="_images/7e2403c90336300d3a14f22994ec923a8143eece09611d6f4bf4dcb7cf50bc71.png" src="_images/7e2403c90336300d3a14f22994ec923a8143eece09611d6f4bf4dcb7cf50bc71.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MultipleLines vs InternetService (p = 0.0000, V de Cramer = 0.396)
+</pre></div>
+</div>
+<img alt="_images/39cb5b9231c5fc02bee833478248c12e322b8aee6c7ba044dec05099d1be6c58.png" src="_images/39cb5b9231c5fc02bee833478248c12e322b8aee6c7ba044dec05099d1be6c58.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OnlineBackup vs DeviceProtection (p = 0.0000, V de Cramer = 0.719)
+</pre></div>
+</div>
+<img alt="_images/b74674486d92681bb744c07771c7c86bd6c7113ae00c26a36f4e5ff32ed17f80.png" src="_images/b74674486d92681bb744c07771c7c86bd6c7113ae00c26a36f4e5ff32ed17f80.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Chi-cuadrado</th>
+      <th>Grados de libertad</th>
+      <th>Valor p</th>
+      <th>V de Cramer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PhoneService</td>
+      <td>InternetService</td>
+      <td>1441.623387</td>
+      <td>2</td>
+      <td>0.000000</td>
+      <td>0.452144</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>OnlineBackup</td>
+      <td>StreamingMovies</td>
+      <td>7174.586977</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>0.713584</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>OnlineBackup</td>
+      <td>StreamingTV</td>
+      <td>7195.057831</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>0.714602</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MultipleLines</td>
+      <td>InternetService</td>
+      <td>2217.014120</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>0.396424</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>OnlineBackup</td>
+      <td>DeviceProtection</td>
+      <td>7284.450039</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>0.719030</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>gender</td>
+      <td>Partner</td>
+      <td>0.016356</td>
+      <td>1</td>
+      <td>0.898234</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>gender</td>
+      <td>SeniorCitizen</td>
+      <td>0.015604</td>
+      <td>1</td>
+      <td>0.900589</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>Dependents</td>
+      <td>PhoneService</td>
+      <td>0.010788</td>
+      <td>1</td>
+      <td>0.917277</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>PhoneService</td>
+      <td>Contract</td>
+      <td>0.111346</td>
+      <td>2</td>
+      <td>0.945848</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>Partner</td>
+      <td>InternetService</td>
+      <td>0.005798</td>
+      <td>2</td>
+      <td>0.997105</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>153 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>Podemos observar que las relaciones que son significativas y mas fuertes son principalmente las que tienen que ver con los servicios telefonicos y los servicios de internet con p-valores muy bajos y cramer alto</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analisis_bivariado_cat_num</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">categoricas</span><span class="o">=</span><span class="n">categoricas</span><span class="p">,</span><span class="n">numericas</span><span class="o">=</span><span class="n">numericas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bcbf675aa266ed83b3077ac209103d08459e1dd18b963a216f2c748d952f5eee.png" src="_images/bcbf675aa266ed83b3077ac209103d08459e1dd18b963a216f2c748d952f5eee.png" />
+<img alt="_images/fd0ef20bd95f7c1d13cbe1792e3c16d90ca050644ae34109390a961acb354eed.png" src="_images/fd0ef20bd95f7c1d13cbe1792e3c16d90ca050644ae34109390a961acb354eed.png" />
+<img alt="_images/cfcbd4fbda0551906371168844f3b05184a023433db8cd9df02428d746a4efd9.png" src="_images/cfcbd4fbda0551906371168844f3b05184a023433db8cd9df02428d746a4efd9.png" />
+<img alt="_images/a3a6902018027469ee38d1643d235b4371332fdd574a21f73250c86092ce5e74.png" src="_images/a3a6902018027469ee38d1643d235b4371332fdd574a21f73250c86092ce5e74.png" />
+<img alt="_images/3c0cc7e049af1c587837d3932ebfc66f85a8294d8a33fe31554ce2d3a1986e2d.png" src="_images/3c0cc7e049af1c587837d3932ebfc66f85a8294d8a33fe31554ce2d3a1986e2d.png" />
+<img alt="_images/aee10489876f704377a5a1420decfe5f3c2a82834f0b2379114c72355a05e026.png" src="_images/aee10489876f704377a5a1420decfe5f3c2a82834f0b2379114c72355a05e026.png" />
+<img alt="_images/2dc771e63b24befeb99e32dedf4b60b1751dc63fe9458c34dfa1dca6c59fec97.png" src="_images/2dc771e63b24befeb99e32dedf4b60b1751dc63fe9458c34dfa1dca6c59fec97.png" />
+<img alt="_images/0cf05763fcd71481146eafe3651c267a748ebe22c1b532d2cbabb4145aef5afa.png" src="_images/0cf05763fcd71481146eafe3651c267a748ebe22c1b532d2cbabb4145aef5afa.png" />
+<img alt="_images/07a2052aff00d84aa47d8761780c2fe7d4fc64f4abe575c8cd98819e8c840b76.png" src="_images/07a2052aff00d84aa47d8761780c2fe7d4fc64f4abe575c8cd98819e8c840b76.png" />
+<img alt="_images/00b8519ca90c7c1b3221eeffcc9d1374e17dec16bc5605c39312c66d91c21043.png" src="_images/00b8519ca90c7c1b3221eeffcc9d1374e17dec16bc5605c39312c66d91c21043.png" />
+<img alt="_images/4466ef449a3fd5ccd60ed15d1ad1031a47d7eb6da535bb5571874d067f0b8215.png" src="_images/4466ef449a3fd5ccd60ed15d1ad1031a47d7eb6da535bb5571874d067f0b8215.png" />
+<img alt="_images/15227a9cc1c8b74b55d4347beb253a49efd9c2b29d6209ecb7d422d806f7a066.png" src="_images/15227a9cc1c8b74b55d4347beb253a49efd9c2b29d6209ecb7d422d806f7a066.png" />
+<img alt="_images/7b09cea2aff3665990a18e27fb518795ae2b3c9e9fb3e3f3bb246ece97bd9d22.png" src="_images/7b09cea2aff3665990a18e27fb518795ae2b3c9e9fb3e3f3bb246ece97bd9d22.png" />
+<img alt="_images/da0f2d3b02ded6fb14e9680440888c22d174fd61b5543c756acb35d4d14aef97.png" src="_images/da0f2d3b02ded6fb14e9680440888c22d174fd61b5543c756acb35d4d14aef97.png" />
+<img alt="_images/4fd9d4b452f1d81393dbc947c11c09b0de3e5af2d5538e57cf4382df3090f265.png" src="_images/4fd9d4b452f1d81393dbc947c11c09b0de3e5af2d5538e57cf4382df3090f265.png" />
+<img alt="_images/675fa751e74793364df7d31964f9757ab70796cf16e4434013a6282f32e0e46f.png" src="_images/675fa751e74793364df7d31964f9757ab70796cf16e4434013a6282f32e0e46f.png" />
+<img alt="_images/c3081c02dd747d261fc3f972a179fd4a375b4ea4eb12df116f427f0c267b999d.png" src="_images/c3081c02dd747d261fc3f972a179fd4a375b4ea4eb12df116f427f0c267b999d.png" />
+<img alt="_images/bdc948015bc5ae10d54dee782d59686998aba1b080038d15c6ac030a4947c52c.png" src="_images/bdc948015bc5ae10d54dee782d59686998aba1b080038d15c6ac030a4947c52c.png" />
+<img alt="_images/367b445399c61865eccbead4dd3aa8c0f9252fc404dd0c4272eeb9007db1d4f2.png" src="_images/367b445399c61865eccbead4dd3aa8c0f9252fc404dd0c4272eeb9007db1d4f2.png" />
+<img alt="_images/2a6334b6905c90c6cd69b9a28f422c734cec513ea138c7b6b43346cacd3fb3fc.png" src="_images/2a6334b6905c90c6cd69b9a28f422c734cec513ea138c7b6b43346cacd3fb3fc.png" />
+<img alt="_images/c0d75b04c1e978485834e7cc395b98074bfd2b0e793980fb1676a31cb731b3e6.png" src="_images/c0d75b04c1e978485834e7cc395b98074bfd2b0e793980fb1676a31cb731b3e6.png" />
+<img alt="_images/17943bb3ed9d9cd6cbdfdb655ac95017707865254beb427b8d4b91423bbbf3cd.png" src="_images/17943bb3ed9d9cd6cbdfdb655ac95017707865254beb427b8d4b91423bbbf3cd.png" />
+<img alt="_images/bd7e52f76d84fb38cf97fd8c3548a7dbd1271e394348c5e31683fe7b140679b4.png" src="_images/bd7e52f76d84fb38cf97fd8c3548a7dbd1271e394348c5e31683fe7b140679b4.png" />
+<img alt="_images/9fdf93e009af1e37c398d37bfb625822a7ee7b40269c7afe8fad2b5716a9f993.png" src="_images/9fdf93e009af1e37c398d37bfb625822a7ee7b40269c7afe8fad2b5716a9f993.png" />
+<img alt="_images/3c78bf9ab9608f2e10af6055432bad56e0494793b21b5ff4541184c912116968.png" src="_images/3c78bf9ab9608f2e10af6055432bad56e0494793b21b5ff4541184c912116968.png" />
+<img alt="_images/5112bf8f6d405537f198269b10b84e6a1f3d6d6dc43f61011e8b8f0568f8cb87.png" src="_images/5112bf8f6d405537f198269b10b84e6a1f3d6d6dc43f61011e8b8f0568f8cb87.png" />
+<img alt="_images/288a73ec30adebfeea250c64ddc64b0c066fafebafc201a301f52e0f6e3d38eb.png" src="_images/288a73ec30adebfeea250c64ddc64b0c066fafebafc201a301f52e0f6e3d38eb.png" />
+<img alt="_images/d338350e605501281269adc65917ae9c44fb99e53fa2a0a31bf2c91cd3da8924.png" src="_images/d338350e605501281269adc65917ae9c44fb99e53fa2a0a31bf2c91cd3da8924.png" />
+<img alt="_images/f34fc916e7b96fc7c249fbba447f7e315d9311b021b5f47364de3166ce0189b4.png" src="_images/f34fc916e7b96fc7c249fbba447f7e315d9311b021b5f47364de3166ce0189b4.png" />
+<img alt="_images/9f28db0fd74a588d6d877da2c0277b1a0c0e403cc584f57492ed5c2220ecdd78.png" src="_images/9f28db0fd74a588d6d877da2c0277b1a0c0e403cc584f57492ed5c2220ecdd78.png" />
+<img alt="_images/75befcf35ab3ee515c1a22597c842812e2069457742b6bd5ea531fda94f4d8d0.png" src="_images/75befcf35ab3ee515c1a22597c842812e2069457742b6bd5ea531fda94f4d8d0.png" />
+<img alt="_images/78e8a94fdfc37ad4228775b3c9c6becdf8b881990723a9685df0969cb1329179.png" src="_images/78e8a94fdfc37ad4228775b3c9c6becdf8b881990723a9685df0969cb1329179.png" />
+<img alt="_images/0b9ef7b4a9fa79f883b607edc5f1e7f49e91d85500116f9ff4b4297526a97dbf.png" src="_images/0b9ef7b4a9fa79f883b607edc5f1e7f49e91d85500116f9ff4b4297526a97dbf.png" />
+<img alt="_images/5d6a82476d073e69091acd9a050dc605a2a4fd3e10e01f70a50d1165a07888ef.png" src="_images/5d6a82476d073e69091acd9a050dc605a2a4fd3e10e01f70a50d1165a07888ef.png" />
+<img alt="_images/1832304a6c411f13540f59a56dd47fdbabe959aab96d8dc86a6fa0647141687e.png" src="_images/1832304a6c411f13540f59a56dd47fdbabe959aab96d8dc86a6fa0647141687e.png" />
+<img alt="_images/38e81d88a2cf6709cdf8f45953d25f3bdb7ca4320cb3f77e5184519d799ff9fa.png" src="_images/38e81d88a2cf6709cdf8f45953d25f3bdb7ca4320cb3f77e5184519d799ff9fa.png" />
+<img alt="_images/75d6fffb7ea44a0292d46daf4c67362f7359ec3b4dd9cd652f2dea728ccad46a.png" src="_images/75d6fffb7ea44a0292d46daf4c67362f7359ec3b4dd9cd652f2dea728ccad46a.png" />
+<img alt="_images/b47760aa4f3203fcbf8183decf4129ddfb477f3bf31a625e9745b3c3874980de.png" src="_images/b47760aa4f3203fcbf8183decf4129ddfb477f3bf31a625e9745b3c3874980de.png" />
+<img alt="_images/68ff3bca3aa8d25b35b7d9218fea9dbf4a90715f1045e4e9c4aa427720792418.png" src="_images/68ff3bca3aa8d25b35b7d9218fea9dbf4a90715f1045e4e9c4aa427720792418.png" />
+<img alt="_images/aaabc4a1a6e1f7f51965cdc3802d5d4ac963880fbb02c64e993d28879b253b04.png" src="_images/aaabc4a1a6e1f7f51965cdc3802d5d4ac963880fbb02c64e993d28879b253b04.png" />
+<img alt="_images/132eb4e088fd417e7ad6d530b097d224f61705e09adb14e9e711252b21795219.png" src="_images/132eb4e088fd417e7ad6d530b097d224f61705e09adb14e9e711252b21795219.png" />
+<img alt="_images/dda814d3934b205fa456721b264dd07a70f0975a4196309db3f349961c808600.png" src="_images/dda814d3934b205fa456721b264dd07a70f0975a4196309db3f349961c808600.png" />
+<img alt="_images/d25bde005d7490670b58a1995859f0bd008d532d0b598856ad2e43b786935d6d.png" src="_images/d25bde005d7490670b58a1995859f0bd008d532d0b598856ad2e43b786935d6d.png" />
+<img alt="_images/09450729e50097f7371a2dd216f821dd91e0f66025a9aece064ced4e6842fc67.png" src="_images/09450729e50097f7371a2dd216f821dd91e0f66025a9aece064ced4e6842fc67.png" />
+<img alt="_images/5aefa059d1d0538075c501c6755ddd691c55be927462b6c375e6e21865fbd7d9.png" src="_images/5aefa059d1d0538075c501c6755ddd691c55be927462b6c375e6e21865fbd7d9.png" />
+<img alt="_images/06385a8f6d040a5cb1eef768dc14784f77079f1a39e7beee4b4ffdeaead8606b.png" src="_images/06385a8f6d040a5cb1eef768dc14784f77079f1a39e7beee4b4ffdeaead8606b.png" />
+<img alt="_images/b31bc60b457fb4703adf1f222a44154122979a4cf89ece8d649605273d16bd62.png" src="_images/b31bc60b457fb4703adf1f222a44154122979a4cf89ece8d649605273d16bd62.png" />
+<img alt="_images/2530083cd0307ac6c6c66e4ef33dae8823754bb842daff5eec4206c70e4ff808.png" src="_images/2530083cd0307ac6c6c66e4ef33dae8823754bb842daff5eec4206c70e4ff808.png" />
+<img alt="_images/78559c1bdcf65e7d0c1af06a14415d4deb5b6f10056735431475632ad94762a6.png" src="_images/78559c1bdcf65e7d0c1af06a14415d4deb5b6f10056735431475632ad94762a6.png" />
+<img alt="_images/0704e6d18ed7f68c5deb44fdfc7c462cb9e2d1d34db4fc8bf50fd7d8436fee27.png" src="_images/0704e6d18ed7f68c5deb44fdfc7c462cb9e2d1d34db4fc8bf50fd7d8436fee27.png" />
+<img alt="_images/94af173e9be4eeb5e96483b0f69e7d8bebfa0a7cba90f5352b319e10f1577283.png" src="_images/94af173e9be4eeb5e96483b0f69e7d8bebfa0a7cba90f5352b319e10f1577283.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Categórica</th>
+      <th>Numérica</th>
+      <th>Prueba</th>
+      <th>Normalidad_OK</th>
+      <th>Homocedasticidad_OK</th>
+      <th>p-Levene</th>
+      <th>Estadístico</th>
+      <th>p-valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>gender</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>6.580347e-01</td>
+      <td>0.085589</td>
+      <td>7.698616e-01</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>gender</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>4.688119e-01</td>
+      <td>1.328765</td>
+      <td>2.490250e-01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>gender</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>8.985335e-01</td>
+      <td>0.009748</td>
+      <td>9.213524e-01</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SeniorCitizen</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.737419e-01</td>
+      <td>2.424636</td>
+      <td>1.194410e-01</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SeniorCitizen</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>2.968938e-59</td>
+      <td>344.145851</td>
+      <td>7.979832e-77</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SeniorCitizen</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.726601e-07</td>
+      <td>80.871806</td>
+      <td>2.408455e-19</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Partner</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>7.152704e-21</td>
+      <td>1043.424215</td>
+      <td>6.540410e-229</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Partner</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>8.582990e-03</td>
+      <td>82.843189</td>
+      <td>8.882778e-20</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Partner</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>6.312156e-93</td>
+      <td>828.136615</td>
+      <td>4.118937e-182</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Dependents</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>2.588654e-01</td>
+      <td>189.805949</td>
+      <td>3.505003e-43</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Dependents</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.217301e-12</td>
+      <td>80.639695</td>
+      <td>2.708633e-19</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Dependents</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.585354e-02</td>
+      <td>48.308837</td>
+      <td>3.641076e-12</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>PhoneService</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>4.122160e-01</td>
+      <td>0.506768</td>
+      <td>4.765412e-01</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>PhoneService</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>2.540924e-103</td>
+      <td>404.610290</td>
+      <td>5.461937e-90</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>PhoneService</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>2.493435e-28</td>
+      <td>50.691677</td>
+      <td>1.080769e-12</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>MultipleLines</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.069234e-16</td>
+      <td>858.261297</td>
+      <td>4.274913e-187</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>MultipleLines</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>5.180522e-149</td>
+      <td>1983.536597</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>MultipleLines</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.604029e-238</td>
+      <td>1570.511181</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>InternetService</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.679973e-01</td>
+      <td>11.725077</td>
+      <td>2.844015e-03</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>InternetService</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>5529.733603</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>InternetService</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>1244.151477</td>
+      <td>6.853927e-271</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>OnlineSecurity</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.802765e-07</td>
+      <td>799.358778</td>
+      <td>2.639045e-174</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>OnlineSecurity</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>3572.499599</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>OnlineSecurity</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.311151e-289</td>
+      <td>1669.777859</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>OnlineBackup</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>2.034348e-18</td>
+      <td>990.005719</td>
+      <td>1.054362e-215</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>OnlineBackup</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>3783.521270</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>OnlineBackup</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>2020.575935</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>DeviceProtection</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.095717e-16</td>
+      <td>1008.269813</td>
+      <td>1.140229e-219</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>DeviceProtection</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>3922.424186</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>DeviceProtection</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>2121.757079</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>TechSupport</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4.757375e-07</td>
+      <td>789.708913</td>
+      <td>3.287671e-172</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>TechSupport</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>3615.800544</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>TechSupport</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.517162e-297</td>
+      <td>1729.415995</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>StreamingTV</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>8.221994e-12</td>
+      <td>621.371045</td>
+      <td>1.177584e-135</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>StreamingTV</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>4587.700091</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>StreamingTV</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>2006.055266</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>StreamingMovies</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.261256e-13</td>
+      <td>652.673792</td>
+      <td>1.877962e-142</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>StreamingMovies</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>4562.772023</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>StreamingMovies</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.000000e+00</td>
+      <td>2025.899938</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Contract</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>9.333912e-12</td>
+      <td>3139.236066</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Contract</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4.571288e-83</td>
+      <td>21.226197</td>
+      <td>2.459177e-05</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Contract</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>2.366940e-224</td>
+      <td>1565.788245</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>PaperlessBilling</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>True</td>
+      <td>8.754949e-01</td>
+      <td>0.417000</td>
+      <td>5.184377e-01</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>PaperlessBilling</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>7.013723e-32</td>
+      <td>843.012077</td>
+      <td>2.403050e-185</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>PaperlessBilling</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>9.910410e-35</td>
+      <td>166.603674</td>
+      <td>4.083202e-38</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>PaymentMethod</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>9.885594e-14</td>
+      <td>1158.549349</td>
+      <td>7.218999e-251</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>PaymentMethod</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.087607e-51</td>
+      <td>1103.297368</td>
+      <td>7.009708e-239</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>PaymentMethod</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>8.911828e-136</td>
+      <td>1077.006307</td>
+      <td>3.544082e-233</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Churn</td>
+      <td>tenure</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.963540e-90</td>
+      <td>948.799692</td>
+      <td>2.419140e-208</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Churn</td>
+      <td>MonthlyCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.026124e-78</td>
+      <td>240.342632</td>
+      <td>3.311286e-54</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Churn</td>
+      <td>TotalCharges</td>
+      <td>Kruskal-Wallis</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.126148e-37</td>
+      <td>379.057767</td>
+      <td>1.995726e-84</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Podemos observar que la gran mayoria de variables numericas se relacionan con las categoricas, la unica que no se relaciona es gender por lo que no se considerara para la prediccion</p>
+</section>
+</section>
+<section id="analisis-de-correlaciones">
+<h2>Analisis de correlaciones<a class="headerlink" href="#analisis-de-correlaciones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analizar_colinealidad_y_correlaciones</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">mostrar_graficos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3d5b7990c199ee2a503e02a34e07e55e8d9dc317704edafcaa2335dabc279946.png" src="_images/3d5b7990c199ee2a503e02a34e07e55e8d9dc317704edafcaa2335dabc279946.png" />
+<img alt="_images/0462ad8ddce346d0fc50ab51ac2edb05320bd9c949a731f174c66dae3216eb3d.png" src="_images/0462ad8ddce346d0fc50ab51ac2edb05320bd9c949a731f174c66dae3216eb3d.png" />
+<img alt="_images/e15f08b57ccefb6adf6939b1e0f34071eb120d164701d66ad414e571afde8f3d.png" src="_images/e15f08b57ccefb6adf6939b1e0f34071eb120d164701d66ad414e571afde8f3d.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+      <th>Colinealidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>tenure</td>
+      <td>6.332432</td>
+      <td>Aceptable</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MonthlyCharges</td>
+      <td>3.361075</td>
+      <td>Aceptable</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>TotalCharges</td>
+      <td>8.079181</td>
+      <td>Aceptable</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Podemos observar que en cuanto a las correlaciones existen varias variables con correlaciones demasiado grandes entre si, al realizar modelos de arboles no se afectan demasiado por alta colinealidad por lo que se mantendran en el dataset</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="2_Preprocesamiento_de_datos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Preprocesamiento de datos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargado-de-datos">Cargado de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones">Funciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos">Analisis Exploratorio de datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado">Analisis univariado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado">Analisis Bivariado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlaciones">Analisis de correlaciones</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel Jaimes, Mateo Gomez, Mateo Molinares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

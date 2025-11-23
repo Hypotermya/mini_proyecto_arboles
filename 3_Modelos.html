@@ -1,0 +1,3520 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Implementacion &#8212; Mini proyecto Arboles</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_Modelos';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interpretabilidad usando lime" href="4_interpretabilidad.html" />
+    <link rel="prev" title="Preprocesamiento de datos" href="2_Preprocesamiento_de_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="1_Analisis_Exploratorio_de_datos.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoUN.png" class="logo__image only-light" alt="Mini proyecto Arboles - Home"/>
+    <script>document.write(`<img src="_static/logoUN.png" class="logo__image only-dark" alt="Mini proyecto Arboles - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="1_Analisis_Exploratorio_de_datos.html">
+                    EDA
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_Preprocesamiento_de_datos.html">Preprocesamiento de datos</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Implementacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_interpretabilidad.html">Interpretabilidad usando lime</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F3_Modelos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/3_Modelos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Implementacion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos">Modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-normales">Modelos normales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-balanceados-por-smote">Modelos balanceados por SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gridsearch">Gridsearch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parametros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">implementacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance">Feature importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-mejor-modelo">Exportar mejor modelo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="implementacion">
+<h1>Implementacion<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modelos">
+<h2>Modelos<a class="headerlink" href="#modelos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span><span class="n">GridSearchCV</span><span class="p">,</span><span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightgbm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LGBMClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">catboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatBoostClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Funciones</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/X_train.csv&#39;</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/y_train.csv&#39;</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/X_test.csv&#39;</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/y_test.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modelos-normales">
+<h3>Modelos normales<a class="headerlink" href="#modelos-normales" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_RF</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_RF</span><span class="o">=</span><span class="n">pipeline_RF</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RF</span><span class="o">=</span><span class="n">pipe_RF</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">RF</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.82      0.90      0.86      1035
+           1       0.61      0.45      0.52       374
+
+    accuracy                           0.78      1409
+   macro avg       0.71      0.67      0.69      1409
+weighted avg       0.76      0.78      0.77      1409
+</pre></div>
+</div>
+<img alt="_images/f81c5eb1e7e577052909fa877ff55492ba3d3dec5bb82fbeb405a4aaa6b49597.png" src="_images/f81c5eb1e7e577052909fa877ff55492ba3d3dec5bb82fbeb405a4aaa6b49597.png" />
+<img alt="_images/4ca3d65bc3568fd00fb893ec152fac145d7684eca940cf2ecc97e87e5564fdc7.png" src="_images/4ca3d65bc3568fd00fb893ec152fac145d7684eca940cf2ecc97e87e5564fdc7.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7778566359119943,
+ &#39;Precision&#39;: 0.7632818502371377,
+ &#39;Recall&#39;: 0.7778566359119943,
+ &#39;F1-score&#39;: 0.7659831598091119}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que al realizar el random forest podemos observar que en general los scores hallados son bastante aceptables en general, al examinarlos mas a fondo por clase podemos ver que identifica mejor los No que los yes con scores mucho mayores en general, el ROC AUC es de 0.82 lo cual es bastante aceptable</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_XGB</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">XGBClassifier</span><span class="p">(),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_XGB</span><span class="o">=</span><span class="n">pipeline_XGB</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XGB</span> <span class="o">=</span> <span class="n">pipe_XGB</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">XGB</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.83      0.89      0.86      1035
+           1       0.61      0.48      0.54       374
+
+    accuracy                           0.78      1409
+   macro avg       0.72      0.68      0.70      1409
+weighted avg       0.77      0.78      0.77      1409
+</pre></div>
+</div>
+<img alt="_images/99b13213e2f5a378df232ca8e4e1d8b7d76bd45de687de6d22ee8d53e0301dad.png" src="_images/99b13213e2f5a378df232ca8e4e1d8b7d76bd45de687de6d22ee8d53e0301dad.png" />
+<img alt="_images/c1de328ff89ca9638aa8d198e22a58494a20d3b0a9d0ddb50b027b82fc13fa13.png" src="_images/c1de328ff89ca9638aa8d198e22a58494a20d3b0a9d0ddb50b027b82fc13fa13.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7792760823278921,
+ &#39;Precision&#39;: 0.7675243991009103,
+ &#39;Recall&#39;: 0.7792760823278921,
+ &#39;F1-score&#39;: 0.7708360110778442}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que el AUC sigue siendo el mismo si se compara con el de RandomForest normal, y que los scores de yes suben un poco a comparacion de RandomForest en recall y f1, pero sus resultados son similares a los de random forest</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_LGBM</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">LGBMClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_LGBM</span><span class="o">=</span><span class="n">pipeline_LGBM</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LGBM</span><span class="o">=</span><span class="n">pipe_LGBM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[LightGBM] [Info] Number of positive: 1495, number of negative: 4139
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000299 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 665
+[LightGBM] [Info] Number of data points in the train set: 5634, number of used features: 43
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.265353 -&gt; initscore=-1.018328
+[LightGBM] [Info] Start training from score -1.018328
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">LGBM</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.83      0.89      0.86      1035
+           1       0.63      0.50      0.56       374
+
+    accuracy                           0.79      1409
+   macro avg       0.73      0.70      0.71      1409
+weighted avg       0.78      0.79      0.78      1409
+</pre></div>
+</div>
+<img alt="_images/b5b0805f82af80aab621c09c2f460231ce4bd2ddefbc47b28042b11b9622ce4c.png" src="_images/b5b0805f82af80aab621c09c2f460231ce4bd2ddefbc47b28042b11b9622ce4c.png" />
+<img alt="_images/6ea0fc943059e90b7206173b5cca12a6b1a2f2aa33f813c757648ec37ecacc08.png" src="_images/6ea0fc943059e90b7206173b5cca12a6b1a2f2aa33f813c757648ec37ecacc08.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7885024840312278,
+ &#39;Precision&#39;: 0.7774899605221477,
+ &#39;Recall&#39;: 0.7885024840312278,
+ &#39;F1-score&#39;: 0.7802878662592082}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los resultados de LGBM son mayores a comparacion de los 2 anteriores no solo para la clase yes sino que el ROC es de 0.84, ademas los scores generales tambien son ligeramente mas altos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_Cat</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">CatBoostClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_Cat</span><span class="o">=</span><span class="n">pipeline_Cat</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="o">=</span><span class="n">pipe_Cat</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning rate set to 0.021554
+0:	learn: 0.6777130	total: 141ms	remaining: 2m 20s
+1:	learn: 0.6636405	total: 144ms	remaining: 1m 11s
+2:	learn: 0.6497015	total: 147ms	remaining: 48.9s
+3:	learn: 0.6378296	total: 151ms	remaining: 37.5s
+4:	learn: 0.6256008	total: 154ms	remaining: 30.6s
+5:	learn: 0.6148095	total: 156ms	remaining: 25.9s
+6:	learn: 0.6043957	total: 159ms	remaining: 22.6s
+7:	learn: 0.5940544	total: 162ms	remaining: 20s
+8:	learn: 0.5851612	total: 164ms	remaining: 18.1s
+9:	learn: 0.5764579	total: 168ms	remaining: 16.6s
+10:	learn: 0.5676649	total: 170ms	remaining: 15.3s
+11:	learn: 0.5596121	total: 173ms	remaining: 14.3s
+12:	learn: 0.5520169	total: 176ms	remaining: 13.3s
+13:	learn: 0.5453038	total: 178ms	remaining: 12.6s
+14:	learn: 0.5386681	total: 181ms	remaining: 11.9s
+15:	learn: 0.5319244	total: 184ms	remaining: 11.3s
+16:	learn: 0.5263603	total: 187ms	remaining: 10.8s
+17:	learn: 0.5205782	total: 190ms	remaining: 10.3s
+18:	learn: 0.5148021	total: 192ms	remaining: 9.92s
+19:	learn: 0.5102573	total: 195ms	remaining: 9.57s
+20:	learn: 0.5055667	total: 199ms	remaining: 9.29s
+21:	learn: 0.5010408	total: 202ms	remaining: 8.98s
+22:	learn: 0.4966704	total: 205ms	remaining: 8.71s
+23:	learn: 0.4924888	total: 208ms	remaining: 8.44s
+24:	learn: 0.4885428	total: 211ms	remaining: 8.23s
+25:	learn: 0.4846300	total: 214ms	remaining: 8.03s
+26:	learn: 0.4813375	total: 217ms	remaining: 7.83s
+27:	learn: 0.4784614	total: 220ms	remaining: 7.65s
+28:	learn: 0.4752272	total: 223ms	remaining: 7.47s
+29:	learn: 0.4720682	total: 226ms	remaining: 7.3s
+30:	learn: 0.4692934	total: 228ms	remaining: 7.14s
+31:	learn: 0.4666394	total: 231ms	remaining: 7s
+32:	learn: 0.4638376	total: 234ms	remaining: 6.86s
+33:	learn: 0.4614860	total: 237ms	remaining: 6.74s
+34:	learn: 0.4591593	total: 240ms	remaining: 6.61s
+35:	learn: 0.4573091	total: 243ms	remaining: 6.49s
+36:	learn: 0.4550457	total: 245ms	remaining: 6.38s
+37:	learn: 0.4535153	total: 247ms	remaining: 6.25s
+38:	learn: 0.4515772	total: 250ms	remaining: 6.17s
+39:	learn: 0.4495515	total: 253ms	remaining: 6.08s
+40:	learn: 0.4475439	total: 256ms	remaining: 5.99s
+41:	learn: 0.4457408	total: 259ms	remaining: 5.9s
+42:	learn: 0.4439932	total: 262ms	remaining: 5.83s
+43:	learn: 0.4424378	total: 265ms	remaining: 5.76s
+44:	learn: 0.4409367	total: 268ms	remaining: 5.68s
+45:	learn: 0.4395080	total: 270ms	remaining: 5.61s
+46:	learn: 0.4381290	total: 273ms	remaining: 5.54s
+47:	learn: 0.4368024	total: 276ms	remaining: 5.47s
+48:	learn: 0.4354607	total: 279ms	remaining: 5.42s
+49:	learn: 0.4341965	total: 282ms	remaining: 5.36s
+50:	learn: 0.4330395	total: 285ms	remaining: 5.3s
+51:	learn: 0.4317092	total: 287ms	remaining: 5.24s
+52:	learn: 0.4302510	total: 290ms	remaining: 5.18s
+53:	learn: 0.4294744	total: 292ms	remaining: 5.11s
+54:	learn: 0.4284820	total: 295ms	remaining: 5.06s
+55:	learn: 0.4274416	total: 297ms	remaining: 5.01s
+56:	learn: 0.4265091	total: 300ms	remaining: 4.96s
+57:	learn: 0.4254481	total: 303ms	remaining: 4.92s
+58:	learn: 0.4245682	total: 305ms	remaining: 4.87s
+59:	learn: 0.4233761	total: 308ms	remaining: 4.83s
+60:	learn: 0.4225122	total: 311ms	remaining: 4.79s
+61:	learn: 0.4216324	total: 314ms	remaining: 4.75s
+62:	learn: 0.4208354	total: 317ms	remaining: 4.71s
+63:	learn: 0.4200499	total: 319ms	remaining: 4.67s
+64:	learn: 0.4192747	total: 323ms	remaining: 4.64s
+65:	learn: 0.4185317	total: 326ms	remaining: 4.61s
+66:	learn: 0.4178104	total: 328ms	remaining: 4.57s
+67:	learn: 0.4169409	total: 331ms	remaining: 4.54s
+68:	learn: 0.4162291	total: 334ms	remaining: 4.5s
+69:	learn: 0.4155655	total: 336ms	remaining: 4.47s
+70:	learn: 0.4148473	total: 339ms	remaining: 4.44s
+71:	learn: 0.4141734	total: 342ms	remaining: 4.41s
+72:	learn: 0.4135601	total: 345ms	remaining: 4.38s
+73:	learn: 0.4130567	total: 347ms	remaining: 4.34s
+74:	learn: 0.4125108	total: 350ms	remaining: 4.32s
+75:	learn: 0.4122038	total: 352ms	remaining: 4.27s
+76:	learn: 0.4117530	total: 355ms	remaining: 4.25s
+77:	learn: 0.4110533	total: 358ms	remaining: 4.23s
+78:	learn: 0.4105546	total: 360ms	remaining: 4.2s
+79:	learn: 0.4100171	total: 363ms	remaining: 4.17s
+80:	learn: 0.4095697	total: 366ms	remaining: 4.15s
+81:	learn: 0.4091374	total: 369ms	remaining: 4.13s
+82:	learn: 0.4086302	total: 372ms	remaining: 4.11s
+83:	learn: 0.4081851	total: 375ms	remaining: 4.08s
+84:	learn: 0.4076292	total: 377ms	remaining: 4.06s
+85:	learn: 0.4072436	total: 380ms	remaining: 4.04s
+86:	learn: 0.4067836	total: 383ms	remaining: 4.02s
+87:	learn: 0.4063438	total: 386ms	remaining: 4s
+88:	learn: 0.4058697	total: 389ms	remaining: 3.98s
+89:	learn: 0.4053165	total: 391ms	remaining: 3.96s
+90:	learn: 0.4048762	total: 394ms	remaining: 3.94s
+91:	learn: 0.4044044	total: 397ms	remaining: 3.91s
+92:	learn: 0.4040835	total: 400ms	remaining: 3.9s
+93:	learn: 0.4036813	total: 403ms	remaining: 3.89s
+94:	learn: 0.4032352	total: 406ms	remaining: 3.87s
+95:	learn: 0.4031096	total: 408ms	remaining: 3.85s
+96:	learn: 0.4028381	total: 411ms	remaining: 3.83s
+97:	learn: 0.4023652	total: 414ms	remaining: 3.81s
+98:	learn: 0.4020711	total: 418ms	remaining: 3.81s
+99:	learn: 0.4017304	total: 422ms	remaining: 3.8s
+100:	learn: 0.4014044	total: 425ms	remaining: 3.78s
+101:	learn: 0.4010720	total: 427ms	remaining: 3.76s
+102:	learn: 0.4007415	total: 431ms	remaining: 3.75s
+103:	learn: 0.4002501	total: 433ms	remaining: 3.73s
+104:	learn: 0.3999079	total: 437ms	remaining: 3.72s
+105:	learn: 0.3996435	total: 440ms	remaining: 3.71s
+106:	learn: 0.3993094	total: 443ms	remaining: 3.7s
+107:	learn: 0.3990459	total: 446ms	remaining: 3.68s
+108:	learn: 0.3987333	total: 449ms	remaining: 3.67s
+109:	learn: 0.3983895	total: 452ms	remaining: 3.65s
+110:	learn: 0.3980358	total: 454ms	remaining: 3.64s
+111:	learn: 0.3976712	total: 457ms	remaining: 3.62s
+112:	learn: 0.3972582	total: 460ms	remaining: 3.61s
+113:	learn: 0.3969289	total: 463ms	remaining: 3.6s
+114:	learn: 0.3965602	total: 466ms	remaining: 3.58s
+115:	learn: 0.3963355	total: 469ms	remaining: 3.57s
+116:	learn: 0.3960524	total: 472ms	remaining: 3.56s
+117:	learn: 0.3956498	total: 476ms	remaining: 3.56s
+118:	learn: 0.3954676	total: 479ms	remaining: 3.54s
+119:	learn: 0.3952382	total: 482ms	remaining: 3.54s
+120:	learn: 0.3949706	total: 485ms	remaining: 3.52s
+121:	learn: 0.3946836	total: 487ms	remaining: 3.51s
+122:	learn: 0.3946521	total: 489ms	remaining: 3.49s
+123:	learn: 0.3943712	total: 492ms	remaining: 3.48s
+124:	learn: 0.3941135	total: 495ms	remaining: 3.47s
+125:	learn: 0.3938308	total: 498ms	remaining: 3.46s
+126:	learn: 0.3936011	total: 501ms	remaining: 3.44s
+127:	learn: 0.3932585	total: 503ms	remaining: 3.43s
+128:	learn: 0.3930307	total: 506ms	remaining: 3.42s
+129:	learn: 0.3926656	total: 511ms	remaining: 3.42s
+130:	learn: 0.3923327	total: 515ms	remaining: 3.42s
+131:	learn: 0.3921299	total: 519ms	remaining: 3.41s
+132:	learn: 0.3919943	total: 522ms	remaining: 3.4s
+133:	learn: 0.3917704	total: 526ms	remaining: 3.4s
+134:	learn: 0.3915999	total: 529ms	remaining: 3.39s
+135:	learn: 0.3913296	total: 533ms	remaining: 3.38s
+136:	learn: 0.3910772	total: 536ms	remaining: 3.38s
+137:	learn: 0.3908831	total: 541ms	remaining: 3.38s
+138:	learn: 0.3907344	total: 545ms	remaining: 3.38s
+139:	learn: 0.3905374	total: 548ms	remaining: 3.37s
+140:	learn: 0.3902726	total: 552ms	remaining: 3.36s
+141:	learn: 0.3900570	total: 555ms	remaining: 3.35s
+142:	learn: 0.3898442	total: 559ms	remaining: 3.35s
+143:	learn: 0.3896344	total: 563ms	remaining: 3.34s
+144:	learn: 0.3893721	total: 566ms	remaining: 3.34s
+145:	learn: 0.3890917	total: 569ms	remaining: 3.33s
+146:	learn: 0.3889953	total: 573ms	remaining: 3.32s
+147:	learn: 0.3887729	total: 577ms	remaining: 3.32s
+148:	learn: 0.3885685	total: 580ms	remaining: 3.31s
+149:	learn: 0.3883372	total: 583ms	remaining: 3.3s
+150:	learn: 0.3881352	total: 586ms	remaining: 3.29s
+151:	learn: 0.3879559	total: 589ms	remaining: 3.29s
+152:	learn: 0.3877612	total: 594ms	remaining: 3.29s
+153:	learn: 0.3875384	total: 598ms	remaining: 3.29s
+154:	learn: 0.3873930	total: 602ms	remaining: 3.28s
+155:	learn: 0.3871988	total: 605ms	remaining: 3.27s
+156:	learn: 0.3869971	total: 608ms	remaining: 3.27s
+157:	learn: 0.3868164	total: 611ms	remaining: 3.26s
+158:	learn: 0.3866465	total: 615ms	remaining: 3.25s
+159:	learn: 0.3864893	total: 621ms	remaining: 3.26s
+160:	learn: 0.3862385	total: 625ms	remaining: 3.26s
+161:	learn: 0.3860355	total: 630ms	remaining: 3.26s
+162:	learn: 0.3857841	total: 635ms	remaining: 3.26s
+163:	learn: 0.3856081	total: 638ms	remaining: 3.25s
+164:	learn: 0.3854279	total: 642ms	remaining: 3.25s
+165:	learn: 0.3852957	total: 645ms	remaining: 3.24s
+166:	learn: 0.3851759	total: 648ms	remaining: 3.23s
+167:	learn: 0.3849289	total: 651ms	remaining: 3.22s
+168:	learn: 0.3847675	total: 654ms	remaining: 3.21s
+169:	learn: 0.3844862	total: 657ms	remaining: 3.21s
+170:	learn: 0.3842778	total: 660ms	remaining: 3.2s
+171:	learn: 0.3841650	total: 664ms	remaining: 3.19s
+172:	learn: 0.3840183	total: 667ms	remaining: 3.19s
+173:	learn: 0.3838205	total: 670ms	remaining: 3.18s
+174:	learn: 0.3836954	total: 673ms	remaining: 3.17s
+175:	learn: 0.3834756	total: 676ms	remaining: 3.16s
+176:	learn: 0.3833177	total: 679ms	remaining: 3.15s
+177:	learn: 0.3831583	total: 682ms	remaining: 3.15s
+178:	learn: 0.3829726	total: 685ms	remaining: 3.14s
+179:	learn: 0.3829245	total: 687ms	remaining: 3.13s
+180:	learn: 0.3827510	total: 690ms	remaining: 3.12s
+181:	learn: 0.3825010	total: 693ms	remaining: 3.12s
+182:	learn: 0.3822938	total: 696ms	remaining: 3.11s
+183:	learn: 0.3821072	total: 699ms	remaining: 3.1s
+184:	learn: 0.3819784	total: 703ms	remaining: 3.1s
+185:	learn: 0.3817513	total: 707ms	remaining: 3.09s
+186:	learn: 0.3815501	total: 710ms	remaining: 3.09s
+187:	learn: 0.3814407	total: 713ms	remaining: 3.08s
+188:	learn: 0.3813409	total: 716ms	remaining: 3.07s
+189:	learn: 0.3812216	total: 719ms	remaining: 3.06s
+190:	learn: 0.3811833	total: 722ms	remaining: 3.06s
+191:	learn: 0.3809740	total: 724ms	remaining: 3.05s
+192:	learn: 0.3808319	total: 728ms	remaining: 3.04s
+193:	learn: 0.3807233	total: 731ms	remaining: 3.04s
+194:	learn: 0.3805818	total: 736ms	remaining: 3.04s
+195:	learn: 0.3804575	total: 739ms	remaining: 3.03s
+196:	learn: 0.3802972	total: 743ms	remaining: 3.03s
+197:	learn: 0.3801754	total: 747ms	remaining: 3.02s
+198:	learn: 0.3800727	total: 753ms	remaining: 3.03s
+199:	learn: 0.3799178	total: 757ms	remaining: 3.03s
+200:	learn: 0.3798223	total: 765ms	remaining: 3.04s
+201:	learn: 0.3797073	total: 771ms	remaining: 3.04s
+202:	learn: 0.3796304	total: 790ms	remaining: 3.1s
+203:	learn: 0.3794151	total: 794ms	remaining: 3.1s
+204:	learn: 0.3792428	total: 802ms	remaining: 3.11s
+205:	learn: 0.3791496	total: 806ms	remaining: 3.11s
+206:	learn: 0.3790427	total: 810ms	remaining: 3.1s
+207:	learn: 0.3789198	total: 814ms	remaining: 3.1s
+208:	learn: 0.3788453	total: 818ms	remaining: 3.09s
+209:	learn: 0.3786709	total: 822ms	remaining: 3.09s
+210:	learn: 0.3786309	total: 826ms	remaining: 3.09s
+211:	learn: 0.3784169	total: 829ms	remaining: 3.08s
+212:	learn: 0.3782982	total: 832ms	remaining: 3.08s
+213:	learn: 0.3781733	total: 835ms	remaining: 3.07s
+214:	learn: 0.3779348	total: 838ms	remaining: 3.06s
+215:	learn: 0.3777910	total: 842ms	remaining: 3.05s
+216:	learn: 0.3775910	total: 845ms	remaining: 3.05s
+217:	learn: 0.3774362	total: 848ms	remaining: 3.04s
+218:	learn: 0.3773422	total: 851ms	remaining: 3.03s
+219:	learn: 0.3771264	total: 854ms	remaining: 3.03s
+220:	learn: 0.3769007	total: 857ms	remaining: 3.02s
+221:	learn: 0.3766740	total: 860ms	remaining: 3.01s
+222:	learn: 0.3765049	total: 863ms	remaining: 3s
+223:	learn: 0.3762721	total: 866ms	remaining: 3s
+224:	learn: 0.3761255	total: 869ms	remaining: 2.99s
+225:	learn: 0.3760451	total: 872ms	remaining: 2.99s
+226:	learn: 0.3759635	total: 875ms	remaining: 2.98s
+227:	learn: 0.3758571	total: 878ms	remaining: 2.97s
+228:	learn: 0.3757723	total: 882ms	remaining: 2.97s
+229:	learn: 0.3756737	total: 885ms	remaining: 2.96s
+230:	learn: 0.3755814	total: 888ms	remaining: 2.96s
+231:	learn: 0.3754581	total: 891ms	remaining: 2.95s
+232:	learn: 0.3753328	total: 894ms	remaining: 2.94s
+233:	learn: 0.3752204	total: 898ms	remaining: 2.94s
+234:	learn: 0.3750392	total: 901ms	remaining: 2.93s
+235:	learn: 0.3750328	total: 903ms	remaining: 2.92s
+236:	learn: 0.3749419	total: 906ms	remaining: 2.92s
+237:	learn: 0.3747631	total: 909ms	remaining: 2.91s
+238:	learn: 0.3745071	total: 912ms	remaining: 2.9s
+239:	learn: 0.3743219	total: 915ms	remaining: 2.9s
+240:	learn: 0.3742742	total: 919ms	remaining: 2.89s
+241:	learn: 0.3741295	total: 922ms	remaining: 2.89s
+242:	learn: 0.3740762	total: 925ms	remaining: 2.88s
+243:	learn: 0.3739667	total: 929ms	remaining: 2.88s
+244:	learn: 0.3737637	total: 933ms	remaining: 2.87s
+245:	learn: 0.3736177	total: 936ms	remaining: 2.87s
+246:	learn: 0.3735007	total: 940ms	remaining: 2.87s
+247:	learn: 0.3733044	total: 944ms	remaining: 2.86s
+248:	learn: 0.3730532	total: 948ms	remaining: 2.86s
+249:	learn: 0.3728447	total: 951ms	remaining: 2.85s
+250:	learn: 0.3727806	total: 954ms	remaining: 2.85s
+251:	learn: 0.3727547	total: 957ms	remaining: 2.84s
+252:	learn: 0.3725615	total: 960ms	remaining: 2.83s
+253:	learn: 0.3724024	total: 964ms	remaining: 2.83s
+254:	learn: 0.3723130	total: 967ms	remaining: 2.82s
+255:	learn: 0.3722423	total: 970ms	remaining: 2.82s
+256:	learn: 0.3720543	total: 973ms	remaining: 2.81s
+257:	learn: 0.3718867	total: 977ms	remaining: 2.81s
+258:	learn: 0.3716381	total: 980ms	remaining: 2.8s
+259:	learn: 0.3715164	total: 984ms	remaining: 2.8s
+260:	learn: 0.3714028	total: 987ms	remaining: 2.79s
+261:	learn: 0.3713057	total: 990ms	remaining: 2.79s
+262:	learn: 0.3711577	total: 993ms	remaining: 2.78s
+263:	learn: 0.3710083	total: 996ms	remaining: 2.78s
+264:	learn: 0.3708882	total: 1000ms	remaining: 2.77s
+265:	learn: 0.3707506	total: 1s	remaining: 2.77s
+266:	learn: 0.3707324	total: 1.01s	remaining: 2.76s
+267:	learn: 0.3706091	total: 1.01s	remaining: 2.76s
+268:	learn: 0.3705000	total: 1.01s	remaining: 2.75s
+269:	learn: 0.3703361	total: 1.02s	remaining: 2.75s
+270:	learn: 0.3702304	total: 1.02s	remaining: 2.75s
+271:	learn: 0.3701696	total: 1.02s	remaining: 2.74s
+272:	learn: 0.3700753	total: 1.03s	remaining: 2.74s
+273:	learn: 0.3699643	total: 1.03s	remaining: 2.73s
+274:	learn: 0.3698327	total: 1.03s	remaining: 2.73s
+275:	learn: 0.3696958	total: 1.04s	remaining: 2.72s
+276:	learn: 0.3695781	total: 1.04s	remaining: 2.72s
+277:	learn: 0.3694675	total: 1.04s	remaining: 2.71s
+278:	learn: 0.3693612	total: 1.05s	remaining: 2.71s
+279:	learn: 0.3692752	total: 1.05s	remaining: 2.7s
+280:	learn: 0.3691379	total: 1.05s	remaining: 2.7s
+281:	learn: 0.3688805	total: 1.06s	remaining: 2.69s
+282:	learn: 0.3687582	total: 1.06s	remaining: 2.69s
+283:	learn: 0.3686510	total: 1.06s	remaining: 2.69s
+284:	learn: 0.3685418	total: 1.07s	remaining: 2.68s
+285:	learn: 0.3683796	total: 1.07s	remaining: 2.68s
+286:	learn: 0.3682200	total: 1.07s	remaining: 2.67s
+287:	learn: 0.3681084	total: 1.08s	remaining: 2.67s
+288:	learn: 0.3680087	total: 1.08s	remaining: 2.66s
+289:	learn: 0.3679310	total: 1.08s	remaining: 2.66s
+290:	learn: 0.3677205	total: 1.09s	remaining: 2.65s
+291:	learn: 0.3677190	total: 1.09s	remaining: 2.64s
+292:	learn: 0.3675748	total: 1.09s	remaining: 2.64s
+293:	learn: 0.3673891	total: 1.1s	remaining: 2.63s
+294:	learn: 0.3672941	total: 1.1s	remaining: 2.63s
+295:	learn: 0.3671466	total: 1.1s	remaining: 2.62s
+296:	learn: 0.3669848	total: 1.11s	remaining: 2.62s
+297:	learn: 0.3667902	total: 1.11s	remaining: 2.62s
+298:	learn: 0.3666516	total: 1.11s	remaining: 2.61s
+299:	learn: 0.3665698	total: 1.12s	remaining: 2.61s
+300:	learn: 0.3663879	total: 1.12s	remaining: 2.6s
+301:	learn: 0.3663023	total: 1.12s	remaining: 2.6s
+302:	learn: 0.3661696	total: 1.13s	remaining: 2.59s
+303:	learn: 0.3660856	total: 1.13s	remaining: 2.59s
+304:	learn: 0.3658924	total: 1.13s	remaining: 2.58s
+305:	learn: 0.3658351	total: 1.14s	remaining: 2.58s
+306:	learn: 0.3657388	total: 1.14s	remaining: 2.58s
+307:	learn: 0.3656763	total: 1.14s	remaining: 2.57s
+308:	learn: 0.3656038	total: 1.15s	remaining: 2.57s
+309:	learn: 0.3654993	total: 1.15s	remaining: 2.56s
+310:	learn: 0.3653510	total: 1.15s	remaining: 2.56s
+311:	learn: 0.3652006	total: 1.16s	remaining: 2.55s
+312:	learn: 0.3650890	total: 1.16s	remaining: 2.55s
+313:	learn: 0.3649624	total: 1.16s	remaining: 2.54s
+314:	learn: 0.3648214	total: 1.17s	remaining: 2.54s
+315:	learn: 0.3648011	total: 1.17s	remaining: 2.53s
+316:	learn: 0.3648002	total: 1.17s	remaining: 2.53s
+317:	learn: 0.3645544	total: 1.18s	remaining: 2.52s
+318:	learn: 0.3643676	total: 1.18s	remaining: 2.52s
+319:	learn: 0.3642186	total: 1.18s	remaining: 2.52s
+320:	learn: 0.3640377	total: 1.19s	remaining: 2.51s
+321:	learn: 0.3639040	total: 1.19s	remaining: 2.51s
+322:	learn: 0.3637598	total: 1.19s	remaining: 2.5s
+323:	learn: 0.3636553	total: 1.2s	remaining: 2.5s
+324:	learn: 0.3635885	total: 1.2s	remaining: 2.5s
+325:	learn: 0.3634921	total: 1.2s	remaining: 2.49s
+326:	learn: 0.3634014	total: 1.21s	remaining: 2.49s
+327:	learn: 0.3633188	total: 1.21s	remaining: 2.48s
+328:	learn: 0.3632380	total: 1.22s	remaining: 2.48s
+329:	learn: 0.3631160	total: 1.22s	remaining: 2.47s
+330:	learn: 0.3629549	total: 1.22s	remaining: 2.47s
+331:	learn: 0.3627819	total: 1.23s	remaining: 2.46s
+332:	learn: 0.3626438	total: 1.23s	remaining: 2.46s
+333:	learn: 0.3624893	total: 1.23s	remaining: 2.46s
+334:	learn: 0.3624129	total: 1.24s	remaining: 2.45s
+335:	learn: 0.3622477	total: 1.24s	remaining: 2.45s
+336:	learn: 0.3621441	total: 1.24s	remaining: 2.44s
+337:	learn: 0.3619427	total: 1.25s	remaining: 2.44s
+338:	learn: 0.3617688	total: 1.25s	remaining: 2.43s
+339:	learn: 0.3616257	total: 1.25s	remaining: 2.43s
+340:	learn: 0.3615348	total: 1.25s	remaining: 2.43s
+341:	learn: 0.3614757	total: 1.26s	remaining: 2.42s
+342:	learn: 0.3613027	total: 1.26s	remaining: 2.42s
+343:	learn: 0.3611407	total: 1.27s	remaining: 2.42s
+344:	learn: 0.3609628	total: 1.27s	remaining: 2.41s
+345:	learn: 0.3607881	total: 1.27s	remaining: 2.41s
+346:	learn: 0.3606553	total: 1.28s	remaining: 2.4s
+347:	learn: 0.3605235	total: 1.28s	remaining: 2.4s
+348:	learn: 0.3604153	total: 1.28s	remaining: 2.4s
+349:	learn: 0.3603109	total: 1.29s	remaining: 2.39s
+350:	learn: 0.3601923	total: 1.29s	remaining: 2.39s
+351:	learn: 0.3599850	total: 1.29s	remaining: 2.38s
+352:	learn: 0.3597648	total: 1.3s	remaining: 2.38s
+353:	learn: 0.3597104	total: 1.3s	remaining: 2.38s
+354:	learn: 0.3596185	total: 1.3s	remaining: 2.37s
+355:	learn: 0.3595147	total: 1.31s	remaining: 2.37s
+356:	learn: 0.3593518	total: 1.31s	remaining: 2.36s
+357:	learn: 0.3592246	total: 1.31s	remaining: 2.36s
+358:	learn: 0.3590770	total: 1.32s	remaining: 2.35s
+359:	learn: 0.3589629	total: 1.32s	remaining: 2.35s
+360:	learn: 0.3588584	total: 1.32s	remaining: 2.35s
+361:	learn: 0.3586944	total: 1.33s	remaining: 2.34s
+362:	learn: 0.3585575	total: 1.33s	remaining: 2.34s
+363:	learn: 0.3584147	total: 1.33s	remaining: 2.33s
+364:	learn: 0.3582809	total: 1.34s	remaining: 2.33s
+365:	learn: 0.3581890	total: 1.34s	remaining: 2.32s
+366:	learn: 0.3580565	total: 1.34s	remaining: 2.32s
+367:	learn: 0.3579589	total: 1.35s	remaining: 2.31s
+368:	learn: 0.3578328	total: 1.35s	remaining: 2.31s
+369:	learn: 0.3577321	total: 1.35s	remaining: 2.31s
+370:	learn: 0.3575951	total: 1.36s	remaining: 2.3s
+371:	learn: 0.3574547	total: 1.36s	remaining: 2.3s
+372:	learn: 0.3573736	total: 1.36s	remaining: 2.29s
+373:	learn: 0.3571908	total: 1.37s	remaining: 2.29s
+374:	learn: 0.3570380	total: 1.37s	remaining: 2.28s
+375:	learn: 0.3569589	total: 1.37s	remaining: 2.28s
+376:	learn: 0.3568439	total: 1.38s	remaining: 2.27s
+377:	learn: 0.3567452	total: 1.38s	remaining: 2.27s
+378:	learn: 0.3565106	total: 1.38s	remaining: 2.26s
+379:	learn: 0.3563862	total: 1.39s	remaining: 2.26s
+380:	learn: 0.3562919	total: 1.39s	remaining: 2.25s
+381:	learn: 0.3561940	total: 1.39s	remaining: 2.25s
+382:	learn: 0.3559940	total: 1.39s	remaining: 2.25s
+383:	learn: 0.3559405	total: 1.4s	remaining: 2.24s
+384:	learn: 0.3558489	total: 1.4s	remaining: 2.24s
+385:	learn: 0.3557234	total: 1.4s	remaining: 2.23s
+386:	learn: 0.3555370	total: 1.41s	remaining: 2.23s
+387:	learn: 0.3553822	total: 1.41s	remaining: 2.23s
+388:	learn: 0.3552649	total: 1.41s	remaining: 2.22s
+389:	learn: 0.3551371	total: 1.42s	remaining: 2.22s
+390:	learn: 0.3550270	total: 1.42s	remaining: 2.21s
+391:	learn: 0.3548780	total: 1.42s	remaining: 2.21s
+392:	learn: 0.3548110	total: 1.43s	remaining: 2.21s
+393:	learn: 0.3547197	total: 1.43s	remaining: 2.2s
+394:	learn: 0.3545971	total: 1.43s	remaining: 2.2s
+395:	learn: 0.3544048	total: 1.44s	remaining: 2.19s
+396:	learn: 0.3543187	total: 1.44s	remaining: 2.19s
+397:	learn: 0.3541791	total: 1.45s	remaining: 2.19s
+398:	learn: 0.3539992	total: 1.45s	remaining: 2.18s
+399:	learn: 0.3538546	total: 1.45s	remaining: 2.18s
+400:	learn: 0.3537362	total: 1.46s	remaining: 2.17s
+401:	learn: 0.3536183	total: 1.46s	remaining: 2.17s
+402:	learn: 0.3535001	total: 1.46s	remaining: 2.17s
+403:	learn: 0.3533516	total: 1.47s	remaining: 2.16s
+404:	learn: 0.3532880	total: 1.47s	remaining: 2.16s
+405:	learn: 0.3531755	total: 1.47s	remaining: 2.15s
+406:	learn: 0.3529660	total: 1.48s	remaining: 2.15s
+407:	learn: 0.3528426	total: 1.48s	remaining: 2.15s
+408:	learn: 0.3527835	total: 1.48s	remaining: 2.14s
+409:	learn: 0.3526222	total: 1.49s	remaining: 2.14s
+410:	learn: 0.3524563	total: 1.49s	remaining: 2.13s
+411:	learn: 0.3523311	total: 1.49s	remaining: 2.13s
+412:	learn: 0.3522350	total: 1.49s	remaining: 2.12s
+413:	learn: 0.3521511	total: 1.5s	remaining: 2.12s
+414:	learn: 0.3520183	total: 1.5s	remaining: 2.12s
+415:	learn: 0.3518633	total: 1.5s	remaining: 2.11s
+416:	learn: 0.3517261	total: 1.51s	remaining: 2.11s
+417:	learn: 0.3516260	total: 1.51s	remaining: 2.1s
+418:	learn: 0.3515068	total: 1.51s	remaining: 2.1s
+419:	learn: 0.3513787	total: 1.52s	remaining: 2.09s
+420:	learn: 0.3512804	total: 1.52s	remaining: 2.09s
+421:	learn: 0.3510878	total: 1.52s	remaining: 2.08s
+422:	learn: 0.3509755	total: 1.52s	remaining: 2.08s
+423:	learn: 0.3508771	total: 1.53s	remaining: 2.08s
+424:	learn: 0.3507784	total: 1.53s	remaining: 2.07s
+425:	learn: 0.3506922	total: 1.53s	remaining: 2.07s
+426:	learn: 0.3506043	total: 1.54s	remaining: 2.06s
+427:	learn: 0.3505082	total: 1.54s	remaining: 2.06s
+428:	learn: 0.3504214	total: 1.54s	remaining: 2.06s
+429:	learn: 0.3502789	total: 1.55s	remaining: 2.05s
+430:	learn: 0.3501469	total: 1.55s	remaining: 2.05s
+431:	learn: 0.3500452	total: 1.55s	remaining: 2.04s
+432:	learn: 0.3499082	total: 1.56s	remaining: 2.04s
+433:	learn: 0.3498051	total: 1.56s	remaining: 2.04s
+434:	learn: 0.3496655	total: 1.56s	remaining: 2.03s
+435:	learn: 0.3495492	total: 1.57s	remaining: 2.03s
+436:	learn: 0.3494612	total: 1.57s	remaining: 2.02s
+437:	learn: 0.3493825	total: 1.57s	remaining: 2.02s
+438:	learn: 0.3493034	total: 1.58s	remaining: 2.02s
+439:	learn: 0.3491194	total: 1.58s	remaining: 2.01s
+440:	learn: 0.3490057	total: 1.58s	remaining: 2.01s
+441:	learn: 0.3488519	total: 1.59s	remaining: 2.01s
+442:	learn: 0.3487228	total: 1.59s	remaining: 2s
+443:	learn: 0.3485863	total: 1.6s	remaining: 2s
+444:	learn: 0.3484691	total: 1.6s	remaining: 2s
+445:	learn: 0.3482863	total: 1.6s	remaining: 1.99s
+446:	learn: 0.3481680	total: 1.6s	remaining: 1.99s
+447:	learn: 0.3480822	total: 1.61s	remaining: 1.98s
+448:	learn: 0.3479443	total: 1.61s	remaining: 1.98s
+449:	learn: 0.3478169	total: 1.61s	remaining: 1.97s
+450:	learn: 0.3477133	total: 1.62s	remaining: 1.97s
+451:	learn: 0.3476243	total: 1.62s	remaining: 1.97s
+452:	learn: 0.3475281	total: 1.62s	remaining: 1.96s
+453:	learn: 0.3474362	total: 1.63s	remaining: 1.96s
+454:	learn: 0.3473381	total: 1.63s	remaining: 1.95s
+455:	learn: 0.3472095	total: 1.63s	remaining: 1.95s
+456:	learn: 0.3470018	total: 1.64s	remaining: 1.95s
+457:	learn: 0.3469056	total: 1.64s	remaining: 1.94s
+458:	learn: 0.3467870	total: 1.64s	remaining: 1.94s
+459:	learn: 0.3466845	total: 1.65s	remaining: 1.93s
+460:	learn: 0.3465290	total: 1.65s	remaining: 1.93s
+461:	learn: 0.3463604	total: 1.65s	remaining: 1.93s
+462:	learn: 0.3462599	total: 1.66s	remaining: 1.92s
+463:	learn: 0.3461597	total: 1.66s	remaining: 1.92s
+464:	learn: 0.3460595	total: 1.66s	remaining: 1.91s
+465:	learn: 0.3458906	total: 1.67s	remaining: 1.91s
+466:	learn: 0.3457204	total: 1.67s	remaining: 1.91s
+467:	learn: 0.3456435	total: 1.67s	remaining: 1.9s
+468:	learn: 0.3455313	total: 1.68s	remaining: 1.9s
+469:	learn: 0.3454177	total: 1.68s	remaining: 1.89s
+470:	learn: 0.3453192	total: 1.68s	remaining: 1.89s
+471:	learn: 0.3452414	total: 1.68s	remaining: 1.88s
+472:	learn: 0.3450557	total: 1.69s	remaining: 1.88s
+473:	learn: 0.3449419	total: 1.69s	remaining: 1.88s
+474:	learn: 0.3447239	total: 1.69s	remaining: 1.87s
+475:	learn: 0.3446123	total: 1.7s	remaining: 1.87s
+476:	learn: 0.3444954	total: 1.7s	remaining: 1.86s
+477:	learn: 0.3443321	total: 1.7s	remaining: 1.86s
+478:	learn: 0.3441909	total: 1.71s	remaining: 1.85s
+479:	learn: 0.3440856	total: 1.71s	remaining: 1.85s
+480:	learn: 0.3439624	total: 1.71s	remaining: 1.85s
+481:	learn: 0.3438781	total: 1.71s	remaining: 1.84s
+482:	learn: 0.3437863	total: 1.72s	remaining: 1.84s
+483:	learn: 0.3436497	total: 1.72s	remaining: 1.83s
+484:	learn: 0.3435247	total: 1.72s	remaining: 1.83s
+485:	learn: 0.3433906	total: 1.73s	remaining: 1.82s
+486:	learn: 0.3432925	total: 1.73s	remaining: 1.82s
+487:	learn: 0.3431974	total: 1.73s	remaining: 1.82s
+488:	learn: 0.3430783	total: 1.73s	remaining: 1.81s
+489:	learn: 0.3430044	total: 1.74s	remaining: 1.81s
+490:	learn: 0.3429162	total: 1.74s	remaining: 1.8s
+491:	learn: 0.3428096	total: 1.74s	remaining: 1.8s
+492:	learn: 0.3426997	total: 1.75s	remaining: 1.79s
+493:	learn: 0.3425260	total: 1.75s	remaining: 1.79s
+494:	learn: 0.3424480	total: 1.75s	remaining: 1.79s
+495:	learn: 0.3422998	total: 1.75s	remaining: 1.78s
+496:	learn: 0.3421948	total: 1.76s	remaining: 1.78s
+497:	learn: 0.3420484	total: 1.76s	remaining: 1.77s
+498:	learn: 0.3419260	total: 1.76s	remaining: 1.77s
+499:	learn: 0.3417732	total: 1.77s	remaining: 1.77s
+500:	learn: 0.3416462	total: 1.77s	remaining: 1.76s
+501:	learn: 0.3415573	total: 1.77s	remaining: 1.76s
+502:	learn: 0.3414661	total: 1.78s	remaining: 1.76s
+503:	learn: 0.3413681	total: 1.78s	remaining: 1.75s
+504:	learn: 0.3412167	total: 1.79s	remaining: 1.75s
+505:	learn: 0.3411062	total: 1.79s	remaining: 1.75s
+506:	learn: 0.3410060	total: 1.79s	remaining: 1.75s
+507:	learn: 0.3409320	total: 1.8s	remaining: 1.74s
+508:	learn: 0.3407665	total: 1.8s	remaining: 1.74s
+509:	learn: 0.3406837	total: 1.8s	remaining: 1.73s
+510:	learn: 0.3405451	total: 1.81s	remaining: 1.73s
+511:	learn: 0.3403607	total: 1.81s	remaining: 1.73s
+512:	learn: 0.3402882	total: 1.81s	remaining: 1.72s
+513:	learn: 0.3401728	total: 1.82s	remaining: 1.72s
+514:	learn: 0.3400844	total: 1.82s	remaining: 1.71s
+515:	learn: 0.3399896	total: 1.82s	remaining: 1.71s
+516:	learn: 0.3398694	total: 1.82s	remaining: 1.71s
+517:	learn: 0.3397426	total: 1.83s	remaining: 1.7s
+518:	learn: 0.3396347	total: 1.83s	remaining: 1.7s
+519:	learn: 0.3395177	total: 1.83s	remaining: 1.69s
+520:	learn: 0.3394228	total: 1.84s	remaining: 1.69s
+521:	learn: 0.3393183	total: 1.84s	remaining: 1.69s
+522:	learn: 0.3392315	total: 1.84s	remaining: 1.68s
+523:	learn: 0.3391422	total: 1.85s	remaining: 1.68s
+524:	learn: 0.3390645	total: 1.85s	remaining: 1.67s
+525:	learn: 0.3388799	total: 1.85s	remaining: 1.67s
+526:	learn: 0.3387601	total: 1.86s	remaining: 1.67s
+527:	learn: 0.3386223	total: 1.86s	remaining: 1.66s
+528:	learn: 0.3384932	total: 1.86s	remaining: 1.66s
+529:	learn: 0.3383399	total: 1.86s	remaining: 1.65s
+530:	learn: 0.3382291	total: 1.87s	remaining: 1.65s
+531:	learn: 0.3380988	total: 1.87s	remaining: 1.65s
+532:	learn: 0.3380178	total: 1.88s	remaining: 1.64s
+533:	learn: 0.3378809	total: 1.88s	remaining: 1.64s
+534:	learn: 0.3377035	total: 1.88s	remaining: 1.64s
+535:	learn: 0.3375495	total: 1.88s	remaining: 1.63s
+536:	learn: 0.3374168	total: 1.89s	remaining: 1.63s
+537:	learn: 0.3373427	total: 1.89s	remaining: 1.62s
+538:	learn: 0.3371777	total: 1.89s	remaining: 1.62s
+539:	learn: 0.3370153	total: 1.9s	remaining: 1.61s
+540:	learn: 0.3368988	total: 1.9s	remaining: 1.61s
+541:	learn: 0.3367850	total: 1.9s	remaining: 1.61s
+542:	learn: 0.3366898	total: 1.91s	remaining: 1.6s
+543:	learn: 0.3366091	total: 1.91s	remaining: 1.6s
+544:	learn: 0.3364876	total: 1.91s	remaining: 1.59s
+545:	learn: 0.3363727	total: 1.91s	remaining: 1.59s
+546:	learn: 0.3362577	total: 1.92s	remaining: 1.59s
+547:	learn: 0.3361830	total: 1.92s	remaining: 1.58s
+548:	learn: 0.3361069	total: 1.92s	remaining: 1.58s
+549:	learn: 0.3360308	total: 1.93s	remaining: 1.58s
+550:	learn: 0.3359446	total: 1.93s	remaining: 1.57s
+551:	learn: 0.3358554	total: 1.93s	remaining: 1.57s
+552:	learn: 0.3356681	total: 1.94s	remaining: 1.56s
+553:	learn: 0.3355171	total: 1.94s	remaining: 1.56s
+554:	learn: 0.3354162	total: 1.94s	remaining: 1.56s
+555:	learn: 0.3353106	total: 1.95s	remaining: 1.55s
+556:	learn: 0.3352455	total: 1.95s	remaining: 1.55s
+557:	learn: 0.3350961	total: 1.95s	remaining: 1.55s
+558:	learn: 0.3349887	total: 1.96s	remaining: 1.54s
+559:	learn: 0.3347431	total: 1.96s	remaining: 1.54s
+560:	learn: 0.3346358	total: 1.96s	remaining: 1.53s
+561:	learn: 0.3344017	total: 1.96s	remaining: 1.53s
+562:	learn: 0.3342520	total: 1.97s	remaining: 1.53s
+563:	learn: 0.3341540	total: 1.97s	remaining: 1.52s
+564:	learn: 0.3340647	total: 1.98s	remaining: 1.52s
+565:	learn: 0.3339922	total: 1.98s	remaining: 1.52s
+566:	learn: 0.3338899	total: 1.98s	remaining: 1.51s
+567:	learn: 0.3337931	total: 1.99s	remaining: 1.51s
+568:	learn: 0.3337193	total: 1.99s	remaining: 1.51s
+569:	learn: 0.3335320	total: 1.99s	remaining: 1.5s
+570:	learn: 0.3334007	total: 1.99s	remaining: 1.5s
+571:	learn: 0.3332894	total: 2s	remaining: 1.49s
+572:	learn: 0.3332006	total: 2s	remaining: 1.49s
+573:	learn: 0.3331250	total: 2s	remaining: 1.49s
+574:	learn: 0.3330229	total: 2.01s	remaining: 1.48s
+575:	learn: 0.3328966	total: 2.01s	remaining: 1.48s
+576:	learn: 0.3327697	total: 2.01s	remaining: 1.48s
+577:	learn: 0.3326640	total: 2.02s	remaining: 1.47s
+578:	learn: 0.3325102	total: 2.02s	remaining: 1.47s
+579:	learn: 0.3323492	total: 2.02s	remaining: 1.46s
+580:	learn: 0.3321990	total: 2.02s	remaining: 1.46s
+581:	learn: 0.3321226	total: 2.03s	remaining: 1.46s
+582:	learn: 0.3319678	total: 2.03s	remaining: 1.45s
+583:	learn: 0.3317885	total: 2.03s	remaining: 1.45s
+584:	learn: 0.3316771	total: 2.04s	remaining: 1.45s
+585:	learn: 0.3315376	total: 2.04s	remaining: 1.44s
+586:	learn: 0.3314355	total: 2.04s	remaining: 1.44s
+587:	learn: 0.3313453	total: 2.05s	remaining: 1.43s
+588:	learn: 0.3312302	total: 2.05s	remaining: 1.43s
+589:	learn: 0.3311298	total: 2.05s	remaining: 1.43s
+590:	learn: 0.3310242	total: 2.06s	remaining: 1.42s
+591:	learn: 0.3309631	total: 2.06s	remaining: 1.42s
+592:	learn: 0.3308455	total: 2.06s	remaining: 1.41s
+593:	learn: 0.3307808	total: 2.06s	remaining: 1.41s
+594:	learn: 0.3306899	total: 2.07s	remaining: 1.41s
+595:	learn: 0.3305390	total: 2.07s	remaining: 1.4s
+596:	learn: 0.3303188	total: 2.07s	remaining: 1.4s
+597:	learn: 0.3302592	total: 2.08s	remaining: 1.4s
+598:	learn: 0.3302018	total: 2.08s	remaining: 1.39s
+599:	learn: 0.3300678	total: 2.08s	remaining: 1.39s
+600:	learn: 0.3300062	total: 2.09s	remaining: 1.38s
+601:	learn: 0.3297797	total: 2.09s	remaining: 1.38s
+602:	learn: 0.3296572	total: 2.09s	remaining: 1.38s
+603:	learn: 0.3295758	total: 2.09s	remaining: 1.37s
+604:	learn: 0.3294652	total: 2.1s	remaining: 1.37s
+605:	learn: 0.3293669	total: 2.1s	remaining: 1.36s
+606:	learn: 0.3292392	total: 2.1s	remaining: 1.36s
+607:	learn: 0.3291171	total: 2.11s	remaining: 1.36s
+608:	learn: 0.3290189	total: 2.11s	remaining: 1.35s
+609:	learn: 0.3289321	total: 2.11s	remaining: 1.35s
+610:	learn: 0.3288738	total: 2.12s	remaining: 1.35s
+611:	learn: 0.3287294	total: 2.12s	remaining: 1.34s
+612:	learn: 0.3286126	total: 2.12s	remaining: 1.34s
+613:	learn: 0.3284960	total: 2.12s	remaining: 1.33s
+614:	learn: 0.3284415	total: 2.13s	remaining: 1.33s
+615:	learn: 0.3283097	total: 2.13s	remaining: 1.33s
+616:	learn: 0.3282237	total: 2.13s	remaining: 1.32s
+617:	learn: 0.3281308	total: 2.14s	remaining: 1.32s
+618:	learn: 0.3280309	total: 2.14s	remaining: 1.32s
+619:	learn: 0.3278959	total: 2.14s	remaining: 1.31s
+620:	learn: 0.3277747	total: 2.15s	remaining: 1.31s
+621:	learn: 0.3276822	total: 2.15s	remaining: 1.3s
+622:	learn: 0.3275330	total: 2.15s	remaining: 1.3s
+623:	learn: 0.3274638	total: 2.15s	remaining: 1.3s
+624:	learn: 0.3273172	total: 2.16s	remaining: 1.29s
+625:	learn: 0.3272356	total: 2.16s	remaining: 1.29s
+626:	learn: 0.3271470	total: 2.16s	remaining: 1.29s
+627:	learn: 0.3270546	total: 2.17s	remaining: 1.28s
+628:	learn: 0.3269691	total: 2.17s	remaining: 1.28s
+629:	learn: 0.3267663	total: 2.17s	remaining: 1.28s
+630:	learn: 0.3266830	total: 2.18s	remaining: 1.27s
+631:	learn: 0.3266017	total: 2.18s	remaining: 1.27s
+632:	learn: 0.3264878	total: 2.18s	remaining: 1.26s
+633:	learn: 0.3263479	total: 2.19s	remaining: 1.26s
+634:	learn: 0.3262637	total: 2.19s	remaining: 1.26s
+635:	learn: 0.3262264	total: 2.2s	remaining: 1.26s
+636:	learn: 0.3261292	total: 2.2s	remaining: 1.25s
+637:	learn: 0.3260051	total: 2.2s	remaining: 1.25s
+638:	learn: 0.3259106	total: 2.21s	remaining: 1.25s
+639:	learn: 0.3257740	total: 2.21s	remaining: 1.24s
+640:	learn: 0.3256641	total: 2.21s	remaining: 1.24s
+641:	learn: 0.3254966	total: 2.22s	remaining: 1.24s
+642:	learn: 0.3254479	total: 2.22s	remaining: 1.23s
+643:	learn: 0.3253391	total: 2.22s	remaining: 1.23s
+644:	learn: 0.3252104	total: 2.23s	remaining: 1.22s
+645:	learn: 0.3251151	total: 2.23s	remaining: 1.22s
+646:	learn: 0.3250496	total: 2.23s	remaining: 1.22s
+647:	learn: 0.3249699	total: 2.23s	remaining: 1.21s
+648:	learn: 0.3248864	total: 2.24s	remaining: 1.21s
+649:	learn: 0.3247771	total: 2.24s	remaining: 1.21s
+650:	learn: 0.3247141	total: 2.24s	remaining: 1.2s
+651:	learn: 0.3246095	total: 2.25s	remaining: 1.2s
+652:	learn: 0.3244729	total: 2.25s	remaining: 1.2s
+653:	learn: 0.3243349	total: 2.25s	remaining: 1.19s
+654:	learn: 0.3241985	total: 2.25s	remaining: 1.19s
+655:	learn: 0.3241315	total: 2.26s	remaining: 1.18s
+656:	learn: 0.3240440	total: 2.26s	remaining: 1.18s
+657:	learn: 0.3239257	total: 2.27s	remaining: 1.18s
+658:	learn: 0.3237559	total: 2.27s	remaining: 1.17s
+659:	learn: 0.3235905	total: 2.27s	remaining: 1.17s
+660:	learn: 0.3235148	total: 2.27s	remaining: 1.17s
+661:	learn: 0.3233670	total: 2.28s	remaining: 1.16s
+662:	learn: 0.3232638	total: 2.28s	remaining: 1.16s
+663:	learn: 0.3231700	total: 2.28s	remaining: 1.16s
+664:	learn: 0.3231218	total: 2.29s	remaining: 1.15s
+665:	learn: 0.3230324	total: 2.29s	remaining: 1.15s
+666:	learn: 0.3229082	total: 2.29s	remaining: 1.14s
+667:	learn: 0.3228380	total: 2.29s	remaining: 1.14s
+668:	learn: 0.3227662	total: 2.3s	remaining: 1.14s
+669:	learn: 0.3226982	total: 2.3s	remaining: 1.13s
+670:	learn: 0.3225835	total: 2.3s	remaining: 1.13s
+671:	learn: 0.3224425	total: 2.31s	remaining: 1.13s
+672:	learn: 0.3223790	total: 2.31s	remaining: 1.12s
+673:	learn: 0.3222528	total: 2.31s	remaining: 1.12s
+674:	learn: 0.3221250	total: 2.32s	remaining: 1.11s
+675:	learn: 0.3220549	total: 2.32s	remaining: 1.11s
+676:	learn: 0.3219462	total: 2.32s	remaining: 1.11s
+677:	learn: 0.3217877	total: 2.33s	remaining: 1.1s
+678:	learn: 0.3217160	total: 2.33s	remaining: 1.1s
+679:	learn: 0.3216379	total: 2.35s	remaining: 1.1s
+680:	learn: 0.3215001	total: 2.35s	remaining: 1.1s
+681:	learn: 0.3214173	total: 2.35s	remaining: 1.1s
+682:	learn: 0.3213163	total: 2.36s	remaining: 1.09s
+683:	learn: 0.3211944	total: 2.36s	remaining: 1.09s
+684:	learn: 0.3211297	total: 2.36s	remaining: 1.09s
+685:	learn: 0.3210026	total: 2.37s	remaining: 1.08s
+686:	learn: 0.3208796	total: 2.37s	remaining: 1.08s
+687:	learn: 0.3207287	total: 2.37s	remaining: 1.07s
+688:	learn: 0.3206265	total: 2.37s	remaining: 1.07s
+689:	learn: 0.3205224	total: 2.38s	remaining: 1.07s
+690:	learn: 0.3203804	total: 2.38s	remaining: 1.06s
+691:	learn: 0.3202648	total: 2.38s	remaining: 1.06s
+692:	learn: 0.3201830	total: 2.39s	remaining: 1.06s
+693:	learn: 0.3200559	total: 2.39s	remaining: 1.05s
+694:	learn: 0.3199233	total: 2.39s	remaining: 1.05s
+695:	learn: 0.3198572	total: 2.4s	remaining: 1.05s
+696:	learn: 0.3197585	total: 2.4s	remaining: 1.04s
+697:	learn: 0.3196147	total: 2.4s	remaining: 1.04s
+698:	learn: 0.3194835	total: 2.41s	remaining: 1.04s
+699:	learn: 0.3193485	total: 2.41s	remaining: 1.03s
+700:	learn: 0.3192432	total: 2.41s	remaining: 1.03s
+701:	learn: 0.3192141	total: 2.42s	remaining: 1.02s
+702:	learn: 0.3191394	total: 2.42s	remaining: 1.02s
+703:	learn: 0.3190495	total: 2.42s	remaining: 1.02s
+704:	learn: 0.3189237	total: 2.42s	remaining: 1.01s
+705:	learn: 0.3187957	total: 2.43s	remaining: 1.01s
+706:	learn: 0.3186556	total: 2.43s	remaining: 1.01s
+707:	learn: 0.3185282	total: 2.43s	remaining: 1s
+708:	learn: 0.3183777	total: 2.44s	remaining: 1s
+709:	learn: 0.3182564	total: 2.44s	remaining: 997ms
+710:	learn: 0.3181824	total: 2.44s	remaining: 993ms
+711:	learn: 0.3181112	total: 2.44s	remaining: 989ms
+712:	learn: 0.3179686	total: 2.45s	remaining: 986ms
+713:	learn: 0.3178313	total: 2.47s	remaining: 988ms
+714:	learn: 0.3177419	total: 2.47s	remaining: 985ms
+715:	learn: 0.3176475	total: 2.47s	remaining: 981ms
+716:	learn: 0.3175576	total: 2.48s	remaining: 977ms
+717:	learn: 0.3174026	total: 2.48s	remaining: 974ms
+718:	learn: 0.3172689	total: 2.48s	remaining: 970ms
+719:	learn: 0.3171462	total: 2.48s	remaining: 967ms
+720:	learn: 0.3169999	total: 2.49s	remaining: 963ms
+721:	learn: 0.3168880	total: 2.49s	remaining: 959ms
+722:	learn: 0.3168027	total: 2.49s	remaining: 956ms
+723:	learn: 0.3166785	total: 2.5s	remaining: 952ms
+724:	learn: 0.3165814	total: 2.5s	remaining: 949ms
+725:	learn: 0.3164975	total: 2.5s	remaining: 945ms
+726:	learn: 0.3164538	total: 2.51s	remaining: 941ms
+727:	learn: 0.3163359	total: 2.51s	remaining: 938ms
+728:	learn: 0.3161967	total: 2.51s	remaining: 934ms
+729:	learn: 0.3161677	total: 2.52s	remaining: 930ms
+730:	learn: 0.3160462	total: 2.52s	remaining: 927ms
+731:	learn: 0.3159606	total: 2.52s	remaining: 923ms
+732:	learn: 0.3158152	total: 2.52s	remaining: 920ms
+733:	learn: 0.3157500	total: 2.53s	remaining: 916ms
+734:	learn: 0.3156663	total: 2.53s	remaining: 912ms
+735:	learn: 0.3155507	total: 2.53s	remaining: 909ms
+736:	learn: 0.3154788	total: 2.54s	remaining: 905ms
+737:	learn: 0.3153157	total: 2.54s	remaining: 901ms
+738:	learn: 0.3152555	total: 2.54s	remaining: 898ms
+739:	learn: 0.3151577	total: 2.54s	remaining: 894ms
+740:	learn: 0.3151251	total: 2.55s	remaining: 891ms
+741:	learn: 0.3149996	total: 2.55s	remaining: 887ms
+742:	learn: 0.3148671	total: 2.55s	remaining: 883ms
+743:	learn: 0.3147553	total: 2.56s	remaining: 880ms
+744:	learn: 0.3146404	total: 2.56s	remaining: 877ms
+745:	learn: 0.3145560	total: 2.56s	remaining: 873ms
+746:	learn: 0.3144694	total: 2.57s	remaining: 870ms
+747:	learn: 0.3143536	total: 2.57s	remaining: 867ms
+748:	learn: 0.3142310	total: 2.58s	remaining: 863ms
+749:	learn: 0.3141358	total: 2.58s	remaining: 860ms
+750:	learn: 0.3140392	total: 2.58s	remaining: 856ms
+751:	learn: 0.3139553	total: 2.59s	remaining: 853ms
+752:	learn: 0.3138324	total: 2.59s	remaining: 849ms
+753:	learn: 0.3137668	total: 2.59s	remaining: 846ms
+754:	learn: 0.3136851	total: 2.6s	remaining: 843ms
+755:	learn: 0.3135952	total: 2.6s	remaining: 839ms
+756:	learn: 0.3134852	total: 2.6s	remaining: 836ms
+757:	learn: 0.3133952	total: 2.61s	remaining: 832ms
+758:	learn: 0.3132658	total: 2.61s	remaining: 828ms
+759:	learn: 0.3131590	total: 2.61s	remaining: 825ms
+760:	learn: 0.3130203	total: 2.61s	remaining: 821ms
+761:	learn: 0.3128976	total: 2.62s	remaining: 818ms
+762:	learn: 0.3128318	total: 2.62s	remaining: 814ms
+763:	learn: 0.3127136	total: 2.62s	remaining: 810ms
+764:	learn: 0.3126475	total: 2.63s	remaining: 807ms
+765:	learn: 0.3124935	total: 2.63s	remaining: 803ms
+766:	learn: 0.3124151	total: 2.63s	remaining: 800ms
+767:	learn: 0.3123499	total: 2.63s	remaining: 796ms
+768:	learn: 0.3122396	total: 2.64s	remaining: 792ms
+769:	learn: 0.3121549	total: 2.64s	remaining: 789ms
+770:	learn: 0.3120453	total: 2.64s	remaining: 785ms
+771:	learn: 0.3119595	total: 2.65s	remaining: 782ms
+772:	learn: 0.3118262	total: 2.65s	remaining: 778ms
+773:	learn: 0.3117502	total: 2.65s	remaining: 774ms
+774:	learn: 0.3116773	total: 2.65s	remaining: 771ms
+775:	learn: 0.3115916	total: 2.66s	remaining: 767ms
+776:	learn: 0.3114707	total: 2.66s	remaining: 764ms
+777:	learn: 0.3113290	total: 2.66s	remaining: 760ms
+778:	learn: 0.3112519	total: 2.67s	remaining: 756ms
+779:	learn: 0.3111470	total: 2.67s	remaining: 753ms
+780:	learn: 0.3110117	total: 2.67s	remaining: 749ms
+781:	learn: 0.3109101	total: 2.67s	remaining: 746ms
+782:	learn: 0.3108312	total: 2.68s	remaining: 742ms
+783:	learn: 0.3107591	total: 2.68s	remaining: 739ms
+784:	learn: 0.3106746	total: 2.68s	remaining: 735ms
+785:	learn: 0.3105750	total: 2.69s	remaining: 731ms
+786:	learn: 0.3105463	total: 2.69s	remaining: 728ms
+787:	learn: 0.3104767	total: 2.69s	remaining: 724ms
+788:	learn: 0.3103379	total: 2.69s	remaining: 721ms
+789:	learn: 0.3102495	total: 2.7s	remaining: 717ms
+790:	learn: 0.3102170	total: 2.7s	remaining: 714ms
+791:	learn: 0.3101023	total: 2.7s	remaining: 710ms
+792:	learn: 0.3100079	total: 2.71s	remaining: 707ms
+793:	learn: 0.3099036	total: 2.71s	remaining: 703ms
+794:	learn: 0.3097862	total: 2.71s	remaining: 699ms
+795:	learn: 0.3096837	total: 2.71s	remaining: 696ms
+796:	learn: 0.3096432	total: 2.72s	remaining: 692ms
+797:	learn: 0.3095791	total: 2.72s	remaining: 689ms
+798:	learn: 0.3095780	total: 2.72s	remaining: 685ms
+799:	learn: 0.3094510	total: 2.73s	remaining: 682ms
+800:	learn: 0.3093545	total: 2.73s	remaining: 678ms
+801:	learn: 0.3092802	total: 2.73s	remaining: 675ms
+802:	learn: 0.3092537	total: 2.73s	remaining: 671ms
+803:	learn: 0.3091843	total: 2.74s	remaining: 667ms
+804:	learn: 0.3091044	total: 2.74s	remaining: 664ms
+805:	learn: 0.3090388	total: 2.74s	remaining: 660ms
+806:	learn: 0.3089970	total: 2.75s	remaining: 657ms
+807:	learn: 0.3089547	total: 2.75s	remaining: 653ms
+808:	learn: 0.3088841	total: 2.75s	remaining: 650ms
+809:	learn: 0.3088318	total: 2.75s	remaining: 646ms
+810:	learn: 0.3087670	total: 2.76s	remaining: 643ms
+811:	learn: 0.3085762	total: 2.76s	remaining: 640ms
+812:	learn: 0.3084419	total: 2.77s	remaining: 636ms
+813:	learn: 0.3084015	total: 2.77s	remaining: 633ms
+814:	learn: 0.3083090	total: 2.77s	remaining: 629ms
+815:	learn: 0.3081154	total: 2.77s	remaining: 626ms
+816:	learn: 0.3080294	total: 2.78s	remaining: 622ms
+817:	learn: 0.3079532	total: 2.78s	remaining: 619ms
+818:	learn: 0.3078484	total: 2.78s	remaining: 615ms
+819:	learn: 0.3077499	total: 2.79s	remaining: 612ms
+820:	learn: 0.3076429	total: 2.79s	remaining: 608ms
+821:	learn: 0.3075435	total: 2.79s	remaining: 605ms
+822:	learn: 0.3074455	total: 2.8s	remaining: 601ms
+823:	learn: 0.3073346	total: 2.8s	remaining: 598ms
+824:	learn: 0.3072590	total: 2.8s	remaining: 594ms
+825:	learn: 0.3071162	total: 2.81s	remaining: 591ms
+826:	learn: 0.3070094	total: 2.81s	remaining: 587ms
+827:	learn: 0.3069065	total: 2.81s	remaining: 584ms
+828:	learn: 0.3068174	total: 2.81s	remaining: 580ms
+829:	learn: 0.3067683	total: 2.82s	remaining: 577ms
+830:	learn: 0.3066787	total: 2.82s	remaining: 573ms
+831:	learn: 0.3065642	total: 2.82s	remaining: 570ms
+832:	learn: 0.3065018	total: 2.83s	remaining: 566ms
+833:	learn: 0.3064380	total: 2.83s	remaining: 563ms
+834:	learn: 0.3063727	total: 2.83s	remaining: 559ms
+835:	learn: 0.3062974	total: 2.83s	remaining: 556ms
+836:	learn: 0.3061887	total: 2.84s	remaining: 553ms
+837:	learn: 0.3060403	total: 2.84s	remaining: 549ms
+838:	learn: 0.3059598	total: 2.84s	remaining: 546ms
+839:	learn: 0.3058248	total: 2.85s	remaining: 542ms
+840:	learn: 0.3057652	total: 2.85s	remaining: 539ms
+841:	learn: 0.3056466	total: 2.85s	remaining: 535ms
+842:	learn: 0.3055626	total: 2.85s	remaining: 532ms
+843:	learn: 0.3054825	total: 2.86s	remaining: 528ms
+844:	learn: 0.3054509	total: 2.86s	remaining: 525ms
+845:	learn: 0.3053310	total: 2.86s	remaining: 521ms
+846:	learn: 0.3052633	total: 2.87s	remaining: 518ms
+847:	learn: 0.3051925	total: 2.87s	remaining: 514ms
+848:	learn: 0.3050991	total: 2.87s	remaining: 511ms
+849:	learn: 0.3049499	total: 2.88s	remaining: 507ms
+850:	learn: 0.3048337	total: 2.88s	remaining: 504ms
+851:	learn: 0.3047649	total: 2.88s	remaining: 501ms
+852:	learn: 0.3047409	total: 2.88s	remaining: 497ms
+853:	learn: 0.3047009	total: 2.89s	remaining: 494ms
+854:	learn: 0.3046409	total: 2.89s	remaining: 490ms
+855:	learn: 0.3046007	total: 2.89s	remaining: 487ms
+856:	learn: 0.3044992	total: 2.9s	remaining: 483ms
+857:	learn: 0.3044098	total: 2.9s	remaining: 480ms
+858:	learn: 0.3043546	total: 2.9s	remaining: 476ms
+859:	learn: 0.3042434	total: 2.9s	remaining: 473ms
+860:	learn: 0.3041499	total: 2.91s	remaining: 469ms
+861:	learn: 0.3040687	total: 2.91s	remaining: 466ms
+862:	learn: 0.3039845	total: 2.91s	remaining: 463ms
+863:	learn: 0.3038924	total: 2.92s	remaining: 459ms
+864:	learn: 0.3037883	total: 2.92s	remaining: 456ms
+865:	learn: 0.3037040	total: 2.92s	remaining: 452ms
+866:	learn: 0.3036418	total: 2.92s	remaining: 449ms
+867:	learn: 0.3035399	total: 2.93s	remaining: 445ms
+868:	learn: 0.3034343	total: 2.93s	remaining: 442ms
+869:	learn: 0.3033126	total: 2.93s	remaining: 438ms
+870:	learn: 0.3031823	total: 2.94s	remaining: 435ms
+871:	learn: 0.3030548	total: 2.94s	remaining: 432ms
+872:	learn: 0.3029459	total: 2.94s	remaining: 428ms
+873:	learn: 0.3028834	total: 2.94s	remaining: 425ms
+874:	learn: 0.3027706	total: 2.95s	remaining: 421ms
+875:	learn: 0.3027440	total: 2.95s	remaining: 418ms
+876:	learn: 0.3026624	total: 2.95s	remaining: 414ms
+877:	learn: 0.3025727	total: 2.96s	remaining: 411ms
+878:	learn: 0.3024224	total: 2.96s	remaining: 408ms
+879:	learn: 0.3023966	total: 2.96s	remaining: 404ms
+880:	learn: 0.3023748	total: 2.97s	remaining: 401ms
+881:	learn: 0.3022669	total: 2.97s	remaining: 397ms
+882:	learn: 0.3022104	total: 2.97s	remaining: 394ms
+883:	learn: 0.3021539	total: 2.98s	remaining: 391ms
+884:	learn: 0.3020618	total: 2.98s	remaining: 387ms
+885:	learn: 0.3020227	total: 2.98s	remaining: 384ms
+886:	learn: 0.3019486	total: 2.98s	remaining: 380ms
+887:	learn: 0.3018454	total: 2.99s	remaining: 377ms
+888:	learn: 0.3017406	total: 2.99s	remaining: 374ms
+889:	learn: 0.3016416	total: 3s	remaining: 370ms
+890:	learn: 0.3015046	total: 3s	remaining: 367ms
+891:	learn: 0.3014799	total: 3s	remaining: 363ms
+892:	learn: 0.3013832	total: 3s	remaining: 360ms
+893:	learn: 0.3013272	total: 3.01s	remaining: 357ms
+894:	learn: 0.3012568	total: 3.01s	remaining: 353ms
+895:	learn: 0.3011184	total: 3.01s	remaining: 350ms
+896:	learn: 0.3010063	total: 3.02s	remaining: 346ms
+897:	learn: 0.3009320	total: 3.02s	remaining: 343ms
+898:	learn: 0.3008774	total: 3.02s	remaining: 340ms
+899:	learn: 0.3008050	total: 3.02s	remaining: 336ms
+900:	learn: 0.3007424	total: 3.03s	remaining: 333ms
+901:	learn: 0.3006852	total: 3.03s	remaining: 329ms
+902:	learn: 0.3006270	total: 3.03s	remaining: 326ms
+903:	learn: 0.3005027	total: 3.04s	remaining: 322ms
+904:	learn: 0.3003899	total: 3.04s	remaining: 319ms
+905:	learn: 0.3003364	total: 3.04s	remaining: 316ms
+906:	learn: 0.3002897	total: 3.04s	remaining: 312ms
+907:	learn: 0.3002031	total: 3.05s	remaining: 309ms
+908:	learn: 0.3001067	total: 3.05s	remaining: 305ms
+909:	learn: 0.3000306	total: 3.05s	remaining: 302ms
+910:	learn: 0.2999243	total: 3.06s	remaining: 299ms
+911:	learn: 0.2998230	total: 3.06s	remaining: 295ms
+912:	learn: 0.2997529	total: 3.06s	remaining: 292ms
+913:	learn: 0.2997223	total: 3.07s	remaining: 289ms
+914:	learn: 0.2996511	total: 3.07s	remaining: 285ms
+915:	learn: 0.2995638	total: 3.07s	remaining: 282ms
+916:	learn: 0.2994453	total: 3.08s	remaining: 278ms
+917:	learn: 0.2993044	total: 3.08s	remaining: 275ms
+918:	learn: 0.2992161	total: 3.08s	remaining: 272ms
+919:	learn: 0.2991329	total: 3.08s	remaining: 268ms
+920:	learn: 0.2990380	total: 3.09s	remaining: 265ms
+921:	learn: 0.2989930	total: 3.09s	remaining: 261ms
+922:	learn: 0.2989033	total: 3.09s	remaining: 258ms
+923:	learn: 0.2987467	total: 3.1s	remaining: 255ms
+924:	learn: 0.2987089	total: 3.1s	remaining: 251ms
+925:	learn: 0.2986280	total: 3.1s	remaining: 248ms
+926:	learn: 0.2985588	total: 3.1s	remaining: 245ms
+927:	learn: 0.2984860	total: 3.11s	remaining: 241ms
+928:	learn: 0.2984302	total: 3.11s	remaining: 238ms
+929:	learn: 0.2983154	total: 3.11s	remaining: 234ms
+930:	learn: 0.2981949	total: 3.12s	remaining: 231ms
+931:	learn: 0.2981128	total: 3.12s	remaining: 228ms
+932:	learn: 0.2980551	total: 3.12s	remaining: 224ms
+933:	learn: 0.2979758	total: 3.13s	remaining: 221ms
+934:	learn: 0.2978805	total: 3.13s	remaining: 217ms
+935:	learn: 0.2977877	total: 3.13s	remaining: 214ms
+936:	learn: 0.2977602	total: 3.13s	remaining: 211ms
+937:	learn: 0.2976814	total: 3.14s	remaining: 207ms
+938:	learn: 0.2976367	total: 3.14s	remaining: 204ms
+939:	learn: 0.2975537	total: 3.14s	remaining: 201ms
+940:	learn: 0.2974546	total: 3.15s	remaining: 197ms
+941:	learn: 0.2974315	total: 3.15s	remaining: 194ms
+942:	learn: 0.2973652	total: 3.15s	remaining: 191ms
+943:	learn: 0.2972746	total: 3.15s	remaining: 187ms
+944:	learn: 0.2971934	total: 3.16s	remaining: 184ms
+945:	learn: 0.2970759	total: 3.16s	remaining: 180ms
+946:	learn: 0.2969374	total: 3.16s	remaining: 177ms
+947:	learn: 0.2968457	total: 3.17s	remaining: 174ms
+948:	learn: 0.2967899	total: 3.17s	remaining: 170ms
+949:	learn: 0.2967126	total: 3.17s	remaining: 167ms
+950:	learn: 0.2966116	total: 3.18s	remaining: 164ms
+951:	learn: 0.2965078	total: 3.18s	remaining: 160ms
+952:	learn: 0.2964390	total: 3.18s	remaining: 157ms
+953:	learn: 0.2963606	total: 3.19s	remaining: 154ms
+954:	learn: 0.2962744	total: 3.19s	remaining: 150ms
+955:	learn: 0.2962036	total: 3.19s	remaining: 147ms
+956:	learn: 0.2961223	total: 3.2s	remaining: 144ms
+957:	learn: 0.2959971	total: 3.2s	remaining: 140ms
+958:	learn: 0.2959437	total: 3.2s	remaining: 137ms
+959:	learn: 0.2958565	total: 3.21s	remaining: 134ms
+960:	learn: 0.2957481	total: 3.21s	remaining: 130ms
+961:	learn: 0.2956798	total: 3.21s	remaining: 127ms
+962:	learn: 0.2955841	total: 3.21s	remaining: 124ms
+963:	learn: 0.2955391	total: 3.22s	remaining: 120ms
+964:	learn: 0.2954414	total: 3.22s	remaining: 117ms
+965:	learn: 0.2953205	total: 3.22s	remaining: 113ms
+966:	learn: 0.2952514	total: 3.23s	remaining: 110ms
+967:	learn: 0.2951612	total: 3.23s	remaining: 107ms
+968:	learn: 0.2951377	total: 3.23s	remaining: 103ms
+969:	learn: 0.2950474	total: 3.23s	remaining: 100ms
+970:	learn: 0.2950012	total: 3.24s	remaining: 96.7ms
+971:	learn: 0.2948977	total: 3.24s	remaining: 93.4ms
+972:	learn: 0.2948214	total: 3.24s	remaining: 90ms
+973:	learn: 0.2947200	total: 3.25s	remaining: 86.7ms
+974:	learn: 0.2946191	total: 3.25s	remaining: 83.3ms
+975:	learn: 0.2945956	total: 3.25s	remaining: 80ms
+976:	learn: 0.2945371	total: 3.25s	remaining: 76.6ms
+977:	learn: 0.2944434	total: 3.26s	remaining: 73.3ms
+978:	learn: 0.2944105	total: 3.26s	remaining: 70ms
+979:	learn: 0.2943257	total: 3.26s	remaining: 66.6ms
+980:	learn: 0.2942618	total: 3.27s	remaining: 63.3ms
+981:	learn: 0.2940753	total: 3.27s	remaining: 59.9ms
+982:	learn: 0.2940354	total: 3.27s	remaining: 56.6ms
+983:	learn: 0.2939675	total: 3.28s	remaining: 53.3ms
+984:	learn: 0.2939060	total: 3.28s	remaining: 49.9ms
+985:	learn: 0.2938297	total: 3.28s	remaining: 46.6ms
+986:	learn: 0.2937321	total: 3.29s	remaining: 43.3ms
+987:	learn: 0.2936520	total: 3.29s	remaining: 39.9ms
+988:	learn: 0.2935656	total: 3.29s	remaining: 36.6ms
+989:	learn: 0.2934729	total: 3.29s	remaining: 33.3ms
+990:	learn: 0.2934053	total: 3.3s	remaining: 29.9ms
+991:	learn: 0.2933348	total: 3.3s	remaining: 26.6ms
+992:	learn: 0.2932387	total: 3.3s	remaining: 23.3ms
+993:	learn: 0.2931575	total: 3.31s	remaining: 20ms
+994:	learn: 0.2931037	total: 3.31s	remaining: 16.6ms
+995:	learn: 0.2930765	total: 3.31s	remaining: 13.3ms
+996:	learn: 0.2930443	total: 3.31s	remaining: 9.97ms
+997:	learn: 0.2929764	total: 3.32s	remaining: 6.65ms
+998:	learn: 0.2928782	total: 3.32s	remaining: 3.32ms
+999:	learn: 0.2927755	total: 3.32s	remaining: 0us
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.84      0.91      0.87      1035
+           1       0.67      0.51      0.58       374
+
+    accuracy                           0.80      1409
+   macro avg       0.75      0.71      0.72      1409
+weighted avg       0.79      0.80      0.79      1409
+</pre></div>
+</div>
+<img alt="_images/5e03cb31b016af9a331c0e70f6bad7c4a288eb2c9c69e4e97baf0c43952ba077.png" src="_images/5e03cb31b016af9a331c0e70f6bad7c4a288eb2c9c69e4e97baf0c43952ba077.png" />
+<img alt="_images/e490100bbe9ba61ad18eb38b0869679378740892f0cbf90a94f276fcf5b40b01.png" src="_images/e490100bbe9ba61ad18eb38b0869679378740892f0cbf90a94f276fcf5b40b01.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.8019872249822569,
+ &#39;Precision&#39;: 0.791146207323927,
+ &#39;Recall&#39;: 0.8019872249822569,
+ &#39;F1-score&#39;: 0.7924431837560543}
+</pre></div>
+</div>
+</div>
+</div>
+<p>El modelo de Catboost es el mejor modelo entre los 4 benchmark ya que sus scores generales son mas altos de entre los 4 y su ROC es igual al de LGBM.</p>
+</section>
+<section id="modelos-balanceados-por-smote">
+<h3>Modelos balanceados por SMOTE<a class="headerlink" href="#modelos-balanceados-por-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_RF_bal</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_RF_bal</span><span class="o">=</span><span class="n">pipeline_RF_bal</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RF_bal</span><span class="o">=</span><span class="n">pipe_RF_bal</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">RF_bal</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.83      0.86      0.85      1035
+           1       0.58      0.52      0.55       374
+
+    accuracy                           0.77      1409
+   macro avg       0.71      0.69      0.70      1409
+weighted avg       0.77      0.77      0.77      1409
+</pre></div>
+</div>
+<img alt="_images/1a6fd80937ea0ac0811c9cc428455fb62ee3e560adc8454f426c78435c5471d6.png" src="_images/1a6fd80937ea0ac0811c9cc428455fb62ee3e560adc8454f426c78435c5471d6.png" />
+<img alt="_images/df4f52cbea8548b4b1c7b087df1bf271a6a4d720cc1b98c74e5f5d2f29204346.png" src="_images/df4f52cbea8548b4b1c7b087df1bf271a6a4d720cc1b98c74e5f5d2f29204346.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.772888573456352,
+ &#39;Precision&#39;: 0.7660701257743668,
+ &#39;Recall&#39;: 0.772888573456352,
+ &#39;F1-score&#39;: 0.7688579632311521}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que despues de realizar balanceo, bajaron un poco los scores de No y el ROC baja unas decimas pero queda mas balanceado ahora</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_XGB_bal</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">XGBClassifier</span><span class="p">(),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_XGB_bal</span><span class="o">=</span><span class="n">pipeline_XGB_bal</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XGB_bal</span> <span class="o">=</span> <span class="n">pipe_XGB_bal</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">XGB_bal</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.83      0.86      0.85      1035
+           1       0.58      0.52      0.55       374
+
+    accuracy                           0.77      1409
+   macro avg       0.71      0.69      0.70      1409
+weighted avg       0.77      0.77      0.77      1409
+</pre></div>
+</div>
+<img alt="_images/3fee8c41de5bf4aab6f4460cf25e11afb6990147d8e4ffd305a8d5065e43ab98.png" src="_images/3fee8c41de5bf4aab6f4460cf25e11afb6990147d8e4ffd305a8d5065e43ab98.png" />
+<img alt="_images/ed0881ba3393396561066f0a3a197065540b40e3174be13c82c29e797b15bda8.png" src="_images/ed0881ba3393396561066f0a3a197065540b40e3174be13c82c29e797b15bda8.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7743080198722498,
+ &#39;Precision&#39;: 0.7675447038531643,
+ &#39;Recall&#39;: 0.7743080198722498,
+ &#39;F1-score&#39;: 0.7703026009609573}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Igualmente al realizar el balanceo no se genero un cambio muy grande en los resultados de XGBoost, aunque disminuyo la precision de 1 y aumento el recall y disminuyo ligeramente las metricas globales por 0.01</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_LGBM_bal</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">LGBMClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_LGBM_bal</span><span class="o">=</span><span class="n">pipeline_LGBM_bal</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LGBM_bal</span> <span class="o">=</span> <span class="n">pipe_LGBM_bal</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[LightGBM] [Info] Number of positive: 4139, number of negative: 4139
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000518 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3495
+[LightGBM] [Info] Number of data points in the train set: 8278, number of used features: 43
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -&gt; initscore=0.000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">LGBM_bal</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      1035
+           1       0.58      0.57      0.57       374
+
+    accuracy                           0.78      1409
+   macro avg       0.71      0.71      0.71      1409
+weighted avg       0.77      0.78      0.78      1409
+</pre></div>
+</div>
+<img alt="_images/4fb0c9048fbd8c18d82fe7937bbfa4ddbf7311bebea5c24241b0f3ad3527031e.png" src="_images/4fb0c9048fbd8c18d82fe7937bbfa4ddbf7311bebea5c24241b0f3ad3527031e.png" />
+<img alt="_images/76b0f20e1a691cb1346e74ffcf99191120922da53871eb0f92b2e9aadc9ca458.png" src="_images/76b0f20e1a691cb1346e74ffcf99191120922da53871eb0f92b2e9aadc9ca458.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7757274662881476,
+ &#39;Precision&#39;: 0.7745924627235247,
+ &#39;Recall&#39;: 0.7757274662881476,
+ &#39;F1-score&#39;: 0.7751447972792752}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al realizar el balanceo en el modelo de LGBM podemos observar que es el que mas se asemeja a su version no balanceada con casi el mismo ROC por lo que al balancear no hubo una mejora tan significativa pero al menos esta mas balanceado</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_Cat_bal</span> <span class="o">=</span> <span class="n">crear_pipeline_preprocesamiento</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">CatBoostClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">usar_smote</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">escalar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_Cat_bal</span><span class="o">=</span><span class="n">pipeline_Cat_bal</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Cat_bal</span> <span class="o">=</span> <span class="n">pipe_Cat_bal</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning rate set to 0.025403
+0:	learn: 0.6788164	total: 4.6ms	remaining: 4.59s
+1:	learn: 0.6649833	total: 8.67ms	remaining: 4.32s
+2:	learn: 0.6504436	total: 13.1ms	remaining: 4.36s
+3:	learn: 0.6400321	total: 17.3ms	remaining: 4.3s
+4:	learn: 0.6286208	total: 21.7ms	remaining: 4.32s
+5:	learn: 0.6182178	total: 26.1ms	remaining: 4.32s
+6:	learn: 0.6092196	total: 30.2ms	remaining: 4.29s
+7:	learn: 0.5993864	total: 34.2ms	remaining: 4.25s
+8:	learn: 0.5917288	total: 38.4ms	remaining: 4.22s
+9:	learn: 0.5840593	total: 42.5ms	remaining: 4.21s
+10:	learn: 0.5751411	total: 47ms	remaining: 4.23s
+11:	learn: 0.5675586	total: 51ms	remaining: 4.2s
+12:	learn: 0.5597962	total: 55ms	remaining: 4.17s
+13:	learn: 0.5530090	total: 59.8ms	remaining: 4.21s
+14:	learn: 0.5467612	total: 63.7ms	remaining: 4.18s
+15:	learn: 0.5404105	total: 68.1ms	remaining: 4.19s
+16:	learn: 0.5347061	total: 72.4ms	remaining: 4.19s
+17:	learn: 0.5295712	total: 76.4ms	remaining: 4.17s
+18:	learn: 0.5241935	total: 80.8ms	remaining: 4.17s
+19:	learn: 0.5194328	total: 85.2ms	remaining: 4.17s
+20:	learn: 0.5144677	total: 89.6ms	remaining: 4.17s
+21:	learn: 0.5102233	total: 94ms	remaining: 4.18s
+22:	learn: 0.5052324	total: 98.2ms	remaining: 4.17s
+23:	learn: 0.5006825	total: 102ms	remaining: 4.17s
+24:	learn: 0.4971142	total: 107ms	remaining: 4.16s
+25:	learn: 0.4933092	total: 111ms	remaining: 4.16s
+26:	learn: 0.4901245	total: 115ms	remaining: 4.15s
+27:	learn: 0.4868365	total: 120ms	remaining: 4.17s
+28:	learn: 0.4830000	total: 124ms	remaining: 4.16s
+29:	learn: 0.4798350	total: 128ms	remaining: 4.15s
+30:	learn: 0.4764731	total: 133ms	remaining: 4.16s
+31:	learn: 0.4731752	total: 137ms	remaining: 4.15s
+32:	learn: 0.4704810	total: 141ms	remaining: 4.14s
+33:	learn: 0.4675811	total: 145ms	remaining: 4.13s
+34:	learn: 0.4648339	total: 149ms	remaining: 4.12s
+35:	learn: 0.4616442	total: 154ms	remaining: 4.11s
+36:	learn: 0.4591203	total: 158ms	remaining: 4.1s
+37:	learn: 0.4568526	total: 162ms	remaining: 4.1s
+38:	learn: 0.4540262	total: 166ms	remaining: 4.1s
+39:	learn: 0.4515893	total: 171ms	remaining: 4.1s
+40:	learn: 0.4489418	total: 176ms	remaining: 4.12s
+41:	learn: 0.4465958	total: 181ms	remaining: 4.12s
+42:	learn: 0.4449407	total: 185ms	remaining: 4.11s
+43:	learn: 0.4428811	total: 189ms	remaining: 4.1s
+44:	learn: 0.4411743	total: 194ms	remaining: 4.11s
+45:	learn: 0.4388642	total: 198ms	remaining: 4.1s
+46:	learn: 0.4365158	total: 202ms	remaining: 4.09s
+47:	learn: 0.4343073	total: 207ms	remaining: 4.11s
+48:	learn: 0.4326854	total: 212ms	remaining: 4.11s
+49:	learn: 0.4311408	total: 216ms	remaining: 4.1s
+50:	learn: 0.4298541	total: 220ms	remaining: 4.1s
+51:	learn: 0.4283057	total: 225ms	remaining: 4.09s
+52:	learn: 0.4268747	total: 229ms	remaining: 4.08s
+53:	learn: 0.4254803	total: 233ms	remaining: 4.08s
+54:	learn: 0.4240396	total: 237ms	remaining: 4.07s
+55:	learn: 0.4227492	total: 241ms	remaining: 4.06s
+56:	learn: 0.4214961	total: 245ms	remaining: 4.05s
+57:	learn: 0.4195739	total: 249ms	remaining: 4.04s
+58:	learn: 0.4183151	total: 254ms	remaining: 4.05s
+59:	learn: 0.4171098	total: 258ms	remaining: 4.04s
+60:	learn: 0.4157260	total: 262ms	remaining: 4.03s
+61:	learn: 0.4149957	total: 266ms	remaining: 4.03s
+62:	learn: 0.4137826	total: 270ms	remaining: 4.02s
+63:	learn: 0.4125150	total: 275ms	remaining: 4.02s
+64:	learn: 0.4115403	total: 279ms	remaining: 4.01s
+65:	learn: 0.4103335	total: 283ms	remaining: 4.01s
+66:	learn: 0.4093703	total: 287ms	remaining: 4s
+67:	learn: 0.4080488	total: 292ms	remaining: 4s
+68:	learn: 0.4067643	total: 296ms	remaining: 3.99s
+69:	learn: 0.4057582	total: 300ms	remaining: 3.99s
+70:	learn: 0.4047103	total: 304ms	remaining: 3.98s
+71:	learn: 0.4036396	total: 308ms	remaining: 3.98s
+72:	learn: 0.4028087	total: 313ms	remaining: 3.97s
+73:	learn: 0.4019058	total: 317ms	remaining: 3.97s
+74:	learn: 0.4009627	total: 322ms	remaining: 3.96s
+75:	learn: 0.3998598	total: 326ms	remaining: 3.97s
+76:	learn: 0.3989432	total: 330ms	remaining: 3.96s
+77:	learn: 0.3978933	total: 334ms	remaining: 3.95s
+78:	learn: 0.3970330	total: 339ms	remaining: 3.95s
+79:	learn: 0.3962900	total: 343ms	remaining: 3.94s
+80:	learn: 0.3955679	total: 347ms	remaining: 3.94s
+81:	learn: 0.3946920	total: 351ms	remaining: 3.93s
+82:	learn: 0.3940519	total: 355ms	remaining: 3.92s
+83:	learn: 0.3930830	total: 359ms	remaining: 3.92s
+84:	learn: 0.3922436	total: 363ms	remaining: 3.91s
+85:	learn: 0.3913906	total: 367ms	remaining: 3.9s
+86:	learn: 0.3904906	total: 372ms	remaining: 3.9s
+87:	learn: 0.3888974	total: 376ms	remaining: 3.9s
+88:	learn: 0.3878781	total: 381ms	remaining: 3.9s
+89:	learn: 0.3867645	total: 385ms	remaining: 3.9s
+90:	learn: 0.3861170	total: 390ms	remaining: 3.89s
+91:	learn: 0.3856609	total: 394ms	remaining: 3.89s
+92:	learn: 0.3849741	total: 398ms	remaining: 3.88s
+93:	learn: 0.3842925	total: 402ms	remaining: 3.88s
+94:	learn: 0.3832530	total: 407ms	remaining: 3.87s
+95:	learn: 0.3824506	total: 411ms	remaining: 3.87s
+96:	learn: 0.3816009	total: 415ms	remaining: 3.87s
+97:	learn: 0.3811670	total: 420ms	remaining: 3.87s
+98:	learn: 0.3802712	total: 424ms	remaining: 3.86s
+99:	learn: 0.3795720	total: 429ms	remaining: 3.86s
+100:	learn: 0.3791914	total: 433ms	remaining: 3.85s
+101:	learn: 0.3786887	total: 437ms	remaining: 3.85s
+102:	learn: 0.3780131	total: 441ms	remaining: 3.84s
+103:	learn: 0.3774313	total: 445ms	remaining: 3.83s
+104:	learn: 0.3768516	total: 449ms	remaining: 3.83s
+105:	learn: 0.3758066	total: 453ms	remaining: 3.82s
+106:	learn: 0.3751861	total: 458ms	remaining: 3.82s
+107:	learn: 0.3746015	total: 462ms	remaining: 3.82s
+108:	learn: 0.3739613	total: 467ms	remaining: 3.81s
+109:	learn: 0.3733692	total: 471ms	remaining: 3.81s
+110:	learn: 0.3725707	total: 475ms	remaining: 3.8s
+111:	learn: 0.3720725	total: 479ms	remaining: 3.8s
+112:	learn: 0.3716694	total: 483ms	remaining: 3.79s
+113:	learn: 0.3710861	total: 487ms	remaining: 3.79s
+114:	learn: 0.3705214	total: 491ms	remaining: 3.78s
+115:	learn: 0.3697648	total: 496ms	remaining: 3.78s
+116:	learn: 0.3691444	total: 500ms	remaining: 3.77s
+117:	learn: 0.3683533	total: 504ms	remaining: 3.76s
+118:	learn: 0.3677693	total: 508ms	remaining: 3.76s
+119:	learn: 0.3673711	total: 512ms	remaining: 3.76s
+120:	learn: 0.3669217	total: 516ms	remaining: 3.75s
+121:	learn: 0.3662353	total: 520ms	remaining: 3.74s
+122:	learn: 0.3654359	total: 525ms	remaining: 3.74s
+123:	learn: 0.3649846	total: 529ms	remaining: 3.73s
+124:	learn: 0.3646194	total: 533ms	remaining: 3.73s
+125:	learn: 0.3641220	total: 537ms	remaining: 3.72s
+126:	learn: 0.3637740	total: 541ms	remaining: 3.72s
+127:	learn: 0.3632014	total: 546ms	remaining: 3.72s
+128:	learn: 0.3627592	total: 549ms	remaining: 3.71s
+129:	learn: 0.3622089	total: 554ms	remaining: 3.71s
+130:	learn: 0.3617956	total: 558ms	remaining: 3.7s
+131:	learn: 0.3614092	total: 562ms	remaining: 3.69s
+132:	learn: 0.3608892	total: 566ms	remaining: 3.69s
+133:	learn: 0.3603659	total: 571ms	remaining: 3.69s
+134:	learn: 0.3600091	total: 575ms	remaining: 3.68s
+135:	learn: 0.3595855	total: 579ms	remaining: 3.68s
+136:	learn: 0.3592427	total: 583ms	remaining: 3.67s
+137:	learn: 0.3587977	total: 587ms	remaining: 3.67s
+138:	learn: 0.3582696	total: 592ms	remaining: 3.67s
+139:	learn: 0.3577546	total: 596ms	remaining: 3.66s
+140:	learn: 0.3573778	total: 600ms	remaining: 3.66s
+141:	learn: 0.3567958	total: 605ms	remaining: 3.65s
+142:	learn: 0.3565133	total: 609ms	remaining: 3.65s
+143:	learn: 0.3561901	total: 614ms	remaining: 3.65s
+144:	learn: 0.3555407	total: 618ms	remaining: 3.64s
+145:	learn: 0.3553228	total: 622ms	remaining: 3.64s
+146:	learn: 0.3548254	total: 626ms	remaining: 3.63s
+147:	learn: 0.3545240	total: 631ms	remaining: 3.63s
+148:	learn: 0.3541494	total: 635ms	remaining: 3.63s
+149:	learn: 0.3535931	total: 640ms	remaining: 3.62s
+150:	learn: 0.3532367	total: 643ms	remaining: 3.62s
+151:	learn: 0.3529689	total: 647ms	remaining: 3.61s
+152:	learn: 0.3527480	total: 652ms	remaining: 3.61s
+153:	learn: 0.3521586	total: 656ms	remaining: 3.6s
+154:	learn: 0.3519028	total: 661ms	remaining: 3.6s
+155:	learn: 0.3516600	total: 665ms	remaining: 3.6s
+156:	learn: 0.3514113	total: 669ms	remaining: 3.59s
+157:	learn: 0.3510809	total: 673ms	remaining: 3.59s
+158:	learn: 0.3507478	total: 677ms	remaining: 3.58s
+159:	learn: 0.3502272	total: 682ms	remaining: 3.58s
+160:	learn: 0.3497001	total: 686ms	remaining: 3.57s
+161:	learn: 0.3493342	total: 690ms	remaining: 3.57s
+162:	learn: 0.3490103	total: 694ms	remaining: 3.56s
+163:	learn: 0.3486810	total: 698ms	remaining: 3.56s
+164:	learn: 0.3484152	total: 702ms	remaining: 3.55s
+165:	learn: 0.3481928	total: 707ms	remaining: 3.55s
+166:	learn: 0.3477807	total: 711ms	remaining: 3.54s
+167:	learn: 0.3473621	total: 715ms	remaining: 3.54s
+168:	learn: 0.3470264	total: 734ms	remaining: 3.61s
+169:	learn: 0.3468092	total: 738ms	remaining: 3.6s
+170:	learn: 0.3464675	total: 742ms	remaining: 3.6s
+171:	learn: 0.3460742	total: 746ms	remaining: 3.59s
+172:	learn: 0.3458191	total: 751ms	remaining: 3.59s
+173:	learn: 0.3455229	total: 755ms	remaining: 3.58s
+174:	learn: 0.3453028	total: 759ms	remaining: 3.58s
+175:	learn: 0.3450517	total: 763ms	remaining: 3.57s
+176:	learn: 0.3447513	total: 767ms	remaining: 3.57s
+177:	learn: 0.3444863	total: 772ms	remaining: 3.56s
+178:	learn: 0.3440142	total: 776ms	remaining: 3.56s
+179:	learn: 0.3437353	total: 780ms	remaining: 3.55s
+180:	learn: 0.3432289	total: 784ms	remaining: 3.55s
+181:	learn: 0.3430165	total: 788ms	remaining: 3.54s
+182:	learn: 0.3428718	total: 793ms	remaining: 3.54s
+183:	learn: 0.3426758	total: 797ms	remaining: 3.53s
+184:	learn: 0.3424766	total: 801ms	remaining: 3.53s
+185:	learn: 0.3423642	total: 805ms	remaining: 3.52s
+186:	learn: 0.3420920	total: 810ms	remaining: 3.52s
+187:	learn: 0.3417083	total: 814ms	remaining: 3.52s
+188:	learn: 0.3414009	total: 819ms	remaining: 3.51s
+189:	learn: 0.3411549	total: 822ms	remaining: 3.51s
+190:	learn: 0.3409580	total: 827ms	remaining: 3.5s
+191:	learn: 0.3407226	total: 831ms	remaining: 3.5s
+192:	learn: 0.3403517	total: 835ms	remaining: 3.49s
+193:	learn: 0.3401499	total: 840ms	remaining: 3.49s
+194:	learn: 0.3398819	total: 843ms	remaining: 3.48s
+195:	learn: 0.3394636	total: 848ms	remaining: 3.48s
+196:	learn: 0.3391969	total: 852ms	remaining: 3.47s
+197:	learn: 0.3388677	total: 856ms	remaining: 3.47s
+198:	learn: 0.3387254	total: 860ms	remaining: 3.46s
+199:	learn: 0.3383846	total: 864ms	remaining: 3.46s
+200:	learn: 0.3381708	total: 869ms	remaining: 3.45s
+201:	learn: 0.3380584	total: 873ms	remaining: 3.45s
+202:	learn: 0.3378824	total: 877ms	remaining: 3.44s
+203:	learn: 0.3376825	total: 881ms	remaining: 3.44s
+204:	learn: 0.3375104	total: 886ms	remaining: 3.43s
+205:	learn: 0.3372815	total: 889ms	remaining: 3.43s
+206:	learn: 0.3371865	total: 894ms	remaining: 3.42s
+207:	learn: 0.3369346	total: 898ms	remaining: 3.42s
+208:	learn: 0.3366800	total: 902ms	remaining: 3.41s
+209:	learn: 0.3365246	total: 906ms	remaining: 3.41s
+210:	learn: 0.3362269	total: 911ms	remaining: 3.4s
+211:	learn: 0.3359729	total: 915ms	remaining: 3.4s
+212:	learn: 0.3357453	total: 919ms	remaining: 3.4s
+213:	learn: 0.3354651	total: 923ms	remaining: 3.39s
+214:	learn: 0.3351821	total: 928ms	remaining: 3.39s
+215:	learn: 0.3350281	total: 932ms	remaining: 3.38s
+216:	learn: 0.3347974	total: 936ms	remaining: 3.38s
+217:	learn: 0.3345907	total: 940ms	remaining: 3.37s
+218:	learn: 0.3343449	total: 944ms	remaining: 3.37s
+219:	learn: 0.3341768	total: 948ms	remaining: 3.36s
+220:	learn: 0.3339995	total: 953ms	remaining: 3.36s
+221:	learn: 0.3338160	total: 957ms	remaining: 3.35s
+222:	learn: 0.3335851	total: 961ms	remaining: 3.35s
+223:	learn: 0.3333112	total: 965ms	remaining: 3.34s
+224:	learn: 0.3330640	total: 969ms	remaining: 3.34s
+225:	learn: 0.3328148	total: 973ms	remaining: 3.33s
+226:	learn: 0.3325800	total: 978ms	remaining: 3.33s
+227:	learn: 0.3323657	total: 982ms	remaining: 3.32s
+228:	learn: 0.3321074	total: 986ms	remaining: 3.32s
+229:	learn: 0.3319759	total: 990ms	remaining: 3.31s
+230:	learn: 0.3316846	total: 994ms	remaining: 3.31s
+231:	learn: 0.3315467	total: 998ms	remaining: 3.3s
+232:	learn: 0.3313904	total: 1s	remaining: 3.3s
+233:	learn: 0.3310530	total: 1.01s	remaining: 3.29s
+234:	learn: 0.3307815	total: 1.01s	remaining: 3.29s
+235:	learn: 0.3305617	total: 1.01s	remaining: 3.29s
+236:	learn: 0.3304222	total: 1.02s	remaining: 3.28s
+237:	learn: 0.3302572	total: 1.02s	remaining: 3.28s
+238:	learn: 0.3299546	total: 1.03s	remaining: 3.27s
+239:	learn: 0.3296728	total: 1.03s	remaining: 3.27s
+240:	learn: 0.3295191	total: 1.04s	remaining: 3.27s
+241:	learn: 0.3293370	total: 1.04s	remaining: 3.26s
+242:	learn: 0.3291215	total: 1.04s	remaining: 3.26s
+243:	learn: 0.3288381	total: 1.05s	remaining: 3.25s
+244:	learn: 0.3285826	total: 1.05s	remaining: 3.25s
+245:	learn: 0.3283464	total: 1.06s	remaining: 3.24s
+246:	learn: 0.3282127	total: 1.06s	remaining: 3.24s
+247:	learn: 0.3280375	total: 1.07s	remaining: 3.23s
+248:	learn: 0.3277972	total: 1.07s	remaining: 3.23s
+249:	learn: 0.3275115	total: 1.07s	remaining: 3.23s
+250:	learn: 0.3272811	total: 1.08s	remaining: 3.22s
+251:	learn: 0.3270645	total: 1.08s	remaining: 3.21s
+252:	learn: 0.3269490	total: 1.09s	remaining: 3.21s
+253:	learn: 0.3267783	total: 1.09s	remaining: 3.21s
+254:	learn: 0.3266928	total: 1.1s	remaining: 3.2s
+255:	learn: 0.3265676	total: 1.1s	remaining: 3.2s
+256:	learn: 0.3262494	total: 1.1s	remaining: 3.19s
+257:	learn: 0.3260536	total: 1.11s	remaining: 3.19s
+258:	learn: 0.3258328	total: 1.11s	remaining: 3.19s
+259:	learn: 0.3256109	total: 1.12s	remaining: 3.18s
+260:	learn: 0.3254113	total: 1.12s	remaining: 3.18s
+261:	learn: 0.3252123	total: 1.13s	remaining: 3.17s
+262:	learn: 0.3250638	total: 1.13s	remaining: 3.17s
+263:	learn: 0.3248816	total: 1.14s	remaining: 3.17s
+264:	learn: 0.3247635	total: 1.14s	remaining: 3.16s
+265:	learn: 0.3246255	total: 1.15s	remaining: 3.16s
+266:	learn: 0.3244431	total: 1.15s	remaining: 3.15s
+267:	learn: 0.3242659	total: 1.15s	remaining: 3.15s
+268:	learn: 0.3241399	total: 1.16s	remaining: 3.15s
+269:	learn: 0.3240072	total: 1.16s	remaining: 3.14s
+270:	learn: 0.3237669	total: 1.17s	remaining: 3.14s
+271:	learn: 0.3236569	total: 1.17s	remaining: 3.13s
+272:	learn: 0.3234625	total: 1.17s	remaining: 3.13s
+273:	learn: 0.3232753	total: 1.18s	remaining: 3.12s
+274:	learn: 0.3230699	total: 1.18s	remaining: 3.12s
+275:	learn: 0.3228565	total: 1.19s	remaining: 3.12s
+276:	learn: 0.3225832	total: 1.19s	remaining: 3.11s
+277:	learn: 0.3224500	total: 1.2s	remaining: 3.11s
+278:	learn: 0.3221969	total: 1.2s	remaining: 3.1s
+279:	learn: 0.3220265	total: 1.2s	remaining: 3.1s
+280:	learn: 0.3219468	total: 1.21s	remaining: 3.09s
+281:	learn: 0.3217507	total: 1.21s	remaining: 3.09s
+282:	learn: 0.3215229	total: 1.22s	remaining: 3.08s
+283:	learn: 0.3213215	total: 1.22s	remaining: 3.08s
+284:	learn: 0.3210689	total: 1.23s	remaining: 3.07s
+285:	learn: 0.3209311	total: 1.23s	remaining: 3.07s
+286:	learn: 0.3207589	total: 1.23s	remaining: 3.06s
+287:	learn: 0.3206280	total: 1.24s	remaining: 3.06s
+288:	learn: 0.3204611	total: 1.24s	remaining: 3.06s
+289:	learn: 0.3202243	total: 1.25s	remaining: 3.05s
+290:	learn: 0.3200604	total: 1.25s	remaining: 3.05s
+291:	learn: 0.3198718	total: 1.25s	remaining: 3.04s
+292:	learn: 0.3197038	total: 1.26s	remaining: 3.04s
+293:	learn: 0.3195193	total: 1.26s	remaining: 3.03s
+294:	learn: 0.3193477	total: 1.27s	remaining: 3.03s
+295:	learn: 0.3192512	total: 1.27s	remaining: 3.03s
+296:	learn: 0.3190988	total: 1.28s	remaining: 3.02s
+297:	learn: 0.3188321	total: 1.28s	remaining: 3.02s
+298:	learn: 0.3186231	total: 1.29s	remaining: 3.02s
+299:	learn: 0.3184709	total: 1.29s	remaining: 3.01s
+300:	learn: 0.3182847	total: 1.29s	remaining: 3s
+301:	learn: 0.3180945	total: 1.3s	remaining: 3s
+302:	learn: 0.3179114	total: 1.3s	remaining: 3s
+303:	learn: 0.3178275	total: 1.31s	remaining: 2.99s
+304:	learn: 0.3176044	total: 1.31s	remaining: 2.99s
+305:	learn: 0.3173889	total: 1.32s	remaining: 2.98s
+306:	learn: 0.3172422	total: 1.32s	remaining: 2.98s
+307:	learn: 0.3170118	total: 1.32s	remaining: 2.98s
+308:	learn: 0.3169060	total: 1.33s	remaining: 2.97s
+309:	learn: 0.3167320	total: 1.33s	remaining: 2.97s
+310:	learn: 0.3165452	total: 1.34s	remaining: 2.96s
+311:	learn: 0.3164088	total: 1.34s	remaining: 2.96s
+312:	learn: 0.3162352	total: 1.34s	remaining: 2.95s
+313:	learn: 0.3160890	total: 1.35s	remaining: 2.95s
+314:	learn: 0.3159281	total: 1.35s	remaining: 2.94s
+315:	learn: 0.3157090	total: 1.36s	remaining: 2.94s
+316:	learn: 0.3155400	total: 1.36s	remaining: 2.93s
+317:	learn: 0.3152147	total: 1.37s	remaining: 2.93s
+318:	learn: 0.3150046	total: 1.37s	remaining: 2.93s
+319:	learn: 0.3147571	total: 1.38s	remaining: 2.92s
+320:	learn: 0.3145598	total: 1.38s	remaining: 2.92s
+321:	learn: 0.3143901	total: 1.38s	remaining: 2.91s
+322:	learn: 0.3142392	total: 1.39s	remaining: 2.91s
+323:	learn: 0.3141345	total: 1.39s	remaining: 2.9s
+324:	learn: 0.3140154	total: 1.4s	remaining: 2.9s
+325:	learn: 0.3138877	total: 1.4s	remaining: 2.89s
+326:	learn: 0.3136449	total: 1.4s	remaining: 2.89s
+327:	learn: 0.3134229	total: 1.41s	remaining: 2.88s
+328:	learn: 0.3132677	total: 1.41s	remaining: 2.88s
+329:	learn: 0.3130566	total: 1.42s	remaining: 2.88s
+330:	learn: 0.3128741	total: 1.42s	remaining: 2.87s
+331:	learn: 0.3127084	total: 1.43s	remaining: 2.87s
+332:	learn: 0.3125583	total: 1.43s	remaining: 2.86s
+333:	learn: 0.3124432	total: 1.43s	remaining: 2.86s
+334:	learn: 0.3122556	total: 1.44s	remaining: 2.85s
+335:	learn: 0.3120546	total: 1.44s	remaining: 2.85s
+336:	learn: 0.3119075	total: 1.45s	remaining: 2.85s
+337:	learn: 0.3118169	total: 1.45s	remaining: 2.84s
+338:	learn: 0.3116481	total: 1.45s	remaining: 2.84s
+339:	learn: 0.3115362	total: 1.46s	remaining: 2.83s
+340:	learn: 0.3113435	total: 1.46s	remaining: 2.83s
+341:	learn: 0.3112400	total: 1.47s	remaining: 2.82s
+342:	learn: 0.3110454	total: 1.47s	remaining: 2.82s
+343:	learn: 0.3109107	total: 1.48s	remaining: 2.81s
+344:	learn: 0.3107726	total: 1.48s	remaining: 2.81s
+345:	learn: 0.3106234	total: 1.48s	remaining: 2.8s
+346:	learn: 0.3104684	total: 1.49s	remaining: 2.8s
+347:	learn: 0.3103799	total: 1.49s	remaining: 2.79s
+348:	learn: 0.3102191	total: 1.5s	remaining: 2.79s
+349:	learn: 0.3100641	total: 1.5s	remaining: 2.79s
+350:	learn: 0.3099211	total: 1.5s	remaining: 2.78s
+351:	learn: 0.3097897	total: 1.51s	remaining: 2.78s
+352:	learn: 0.3095765	total: 1.51s	remaining: 2.77s
+353:	learn: 0.3092792	total: 1.52s	remaining: 2.77s
+354:	learn: 0.3090969	total: 1.52s	remaining: 2.76s
+355:	learn: 0.3089168	total: 1.52s	remaining: 2.76s
+356:	learn: 0.3087648	total: 1.53s	remaining: 2.75s
+357:	learn: 0.3085131	total: 1.53s	remaining: 2.75s
+358:	learn: 0.3084234	total: 1.54s	remaining: 2.75s
+359:	learn: 0.3083225	total: 1.54s	remaining: 2.74s
+360:	learn: 0.3081361	total: 1.54s	remaining: 2.74s
+361:	learn: 0.3079479	total: 1.55s	remaining: 2.73s
+362:	learn: 0.3077517	total: 1.55s	remaining: 2.73s
+363:	learn: 0.3075462	total: 1.56s	remaining: 2.72s
+364:	learn: 0.3074347	total: 1.56s	remaining: 2.72s
+365:	learn: 0.3072468	total: 1.57s	remaining: 2.71s
+366:	learn: 0.3071038	total: 1.57s	remaining: 2.71s
+367:	learn: 0.3069151	total: 1.58s	remaining: 2.71s
+368:	learn: 0.3068195	total: 1.58s	remaining: 2.7s
+369:	learn: 0.3066166	total: 1.59s	remaining: 2.7s
+370:	learn: 0.3064891	total: 1.59s	remaining: 2.7s
+371:	learn: 0.3063689	total: 1.59s	remaining: 2.69s
+372:	learn: 0.3062395	total: 1.6s	remaining: 2.69s
+373:	learn: 0.3061237	total: 1.61s	remaining: 2.69s
+374:	learn: 0.3059329	total: 1.62s	remaining: 2.69s
+375:	learn: 0.3057631	total: 1.62s	remaining: 2.69s
+376:	learn: 0.3056403	total: 1.63s	remaining: 2.7s
+377:	learn: 0.3055015	total: 1.64s	remaining: 2.69s
+378:	learn: 0.3053502	total: 1.64s	remaining: 2.69s
+379:	learn: 0.3052650	total: 1.65s	remaining: 2.69s
+380:	learn: 0.3050648	total: 1.65s	remaining: 2.68s
+381:	learn: 0.3048722	total: 1.65s	remaining: 2.68s
+382:	learn: 0.3047239	total: 1.66s	remaining: 2.67s
+383:	learn: 0.3045230	total: 1.66s	remaining: 2.67s
+384:	learn: 0.3044383	total: 1.67s	remaining: 2.66s
+385:	learn: 0.3042860	total: 1.67s	remaining: 2.66s
+386:	learn: 0.3041735	total: 1.68s	remaining: 2.66s
+387:	learn: 0.3040060	total: 1.68s	remaining: 2.65s
+388:	learn: 0.3038270	total: 1.69s	remaining: 2.65s
+389:	learn: 0.3037439	total: 1.69s	remaining: 2.65s
+390:	learn: 0.3035767	total: 1.7s	remaining: 2.64s
+391:	learn: 0.3034261	total: 1.7s	remaining: 2.63s
+392:	learn: 0.3033323	total: 1.7s	remaining: 2.63s
+393:	learn: 0.3031867	total: 1.71s	remaining: 2.63s
+394:	learn: 0.3030967	total: 1.71s	remaining: 2.62s
+395:	learn: 0.3029455	total: 1.72s	remaining: 2.62s
+396:	learn: 0.3028211	total: 1.72s	remaining: 2.61s
+397:	learn: 0.3026202	total: 1.72s	remaining: 2.61s
+398:	learn: 0.3024932	total: 1.73s	remaining: 2.6s
+399:	learn: 0.3023487	total: 1.73s	remaining: 2.6s
+400:	learn: 0.3021484	total: 1.73s	remaining: 2.59s
+401:	learn: 0.3018109	total: 1.74s	remaining: 2.59s
+402:	learn: 0.3016842	total: 1.74s	remaining: 2.58s
+403:	learn: 0.3015363	total: 1.75s	remaining: 2.58s
+404:	learn: 0.3013417	total: 1.75s	remaining: 2.57s
+405:	learn: 0.3012052	total: 1.75s	remaining: 2.57s
+406:	learn: 0.3010132	total: 1.76s	remaining: 2.56s
+407:	learn: 0.3008999	total: 1.76s	remaining: 2.56s
+408:	learn: 0.3007212	total: 1.77s	remaining: 2.55s
+409:	learn: 0.3006222	total: 1.77s	remaining: 2.55s
+410:	learn: 0.3004078	total: 1.77s	remaining: 2.54s
+411:	learn: 0.3002749	total: 1.78s	remaining: 2.54s
+412:	learn: 0.3001836	total: 1.78s	remaining: 2.53s
+413:	learn: 0.3000538	total: 1.79s	remaining: 2.53s
+414:	learn: 0.2999235	total: 1.79s	remaining: 2.52s
+415:	learn: 0.2998069	total: 1.79s	remaining: 2.52s
+416:	learn: 0.2996907	total: 1.8s	remaining: 2.51s
+417:	learn: 0.2995679	total: 1.8s	remaining: 2.51s
+418:	learn: 0.2994700	total: 1.81s	remaining: 2.5s
+419:	learn: 0.2993584	total: 1.81s	remaining: 2.5s
+420:	learn: 0.2992287	total: 1.81s	remaining: 2.5s
+421:	learn: 0.2991399	total: 1.82s	remaining: 2.49s
+422:	learn: 0.2990513	total: 1.82s	remaining: 2.48s
+423:	learn: 0.2987577	total: 1.82s	remaining: 2.48s
+424:	learn: 0.2986099	total: 1.83s	remaining: 2.48s
+425:	learn: 0.2984102	total: 1.83s	remaining: 2.47s
+426:	learn: 0.2982750	total: 1.84s	remaining: 2.47s
+427:	learn: 0.2981021	total: 1.84s	remaining: 2.46s
+428:	learn: 0.2978701	total: 1.85s	remaining: 2.46s
+429:	learn: 0.2977505	total: 1.85s	remaining: 2.45s
+430:	learn: 0.2976344	total: 1.85s	remaining: 2.45s
+431:	learn: 0.2973140	total: 1.86s	remaining: 2.44s
+432:	learn: 0.2972078	total: 1.86s	remaining: 2.44s
+433:	learn: 0.2970229	total: 1.87s	remaining: 2.44s
+434:	learn: 0.2969296	total: 1.87s	remaining: 2.43s
+435:	learn: 0.2966370	total: 1.88s	remaining: 2.43s
+436:	learn: 0.2965187	total: 1.88s	remaining: 2.42s
+437:	learn: 0.2962167	total: 1.88s	remaining: 2.42s
+438:	learn: 0.2960649	total: 1.89s	remaining: 2.41s
+439:	learn: 0.2959223	total: 1.89s	remaining: 2.41s
+440:	learn: 0.2958253	total: 1.9s	remaining: 2.4s
+441:	learn: 0.2957035	total: 1.9s	remaining: 2.4s
+442:	learn: 0.2955013	total: 1.9s	remaining: 2.39s
+443:	learn: 0.2953487	total: 1.91s	remaining: 2.39s
+444:	learn: 0.2952536	total: 1.91s	remaining: 2.38s
+445:	learn: 0.2951435	total: 1.92s	remaining: 2.38s
+446:	learn: 0.2950205	total: 1.92s	remaining: 2.38s
+447:	learn: 0.2948337	total: 1.92s	remaining: 2.37s
+448:	learn: 0.2947467	total: 1.93s	remaining: 2.37s
+449:	learn: 0.2945797	total: 1.93s	remaining: 2.36s
+450:	learn: 0.2944014	total: 1.94s	remaining: 2.36s
+451:	learn: 0.2943239	total: 1.94s	remaining: 2.35s
+452:	learn: 0.2942174	total: 1.94s	remaining: 2.35s
+453:	learn: 0.2940632	total: 1.95s	remaining: 2.34s
+454:	learn: 0.2938831	total: 1.95s	remaining: 2.34s
+455:	learn: 0.2937983	total: 1.96s	remaining: 2.33s
+456:	learn: 0.2936774	total: 1.96s	remaining: 2.33s
+457:	learn: 0.2934717	total: 1.96s	remaining: 2.33s
+458:	learn: 0.2933332	total: 1.97s	remaining: 2.32s
+459:	learn: 0.2932145	total: 1.97s	remaining: 2.31s
+460:	learn: 0.2930958	total: 1.98s	remaining: 2.31s
+461:	learn: 0.2930192	total: 1.98s	remaining: 2.31s
+462:	learn: 0.2929097	total: 1.98s	remaining: 2.3s
+463:	learn: 0.2926368	total: 1.99s	remaining: 2.3s
+464:	learn: 0.2924745	total: 1.99s	remaining: 2.29s
+465:	learn: 0.2923816	total: 2s	remaining: 2.29s
+466:	learn: 0.2922506	total: 2s	remaining: 2.28s
+467:	learn: 0.2920749	total: 2s	remaining: 2.28s
+468:	learn: 0.2919840	total: 2.01s	remaining: 2.27s
+469:	learn: 0.2918770	total: 2.01s	remaining: 2.27s
+470:	learn: 0.2917932	total: 2.02s	remaining: 2.26s
+471:	learn: 0.2915973	total: 2.02s	remaining: 2.26s
+472:	learn: 0.2914510	total: 2.02s	remaining: 2.26s
+473:	learn: 0.2912567	total: 2.03s	remaining: 2.25s
+474:	learn: 0.2911612	total: 2.03s	remaining: 2.25s
+475:	learn: 0.2910840	total: 2.04s	remaining: 2.24s
+476:	learn: 0.2909271	total: 2.04s	remaining: 2.24s
+477:	learn: 0.2908323	total: 2.04s	remaining: 2.23s
+478:	learn: 0.2907151	total: 2.05s	remaining: 2.23s
+479:	learn: 0.2905028	total: 2.05s	remaining: 2.22s
+480:	learn: 0.2904031	total: 2.06s	remaining: 2.22s
+481:	learn: 0.2902035	total: 2.06s	remaining: 2.21s
+482:	learn: 0.2900496	total: 2.06s	remaining: 2.21s
+483:	learn: 0.2899662	total: 2.07s	remaining: 2.21s
+484:	learn: 0.2898748	total: 2.07s	remaining: 2.2s
+485:	learn: 0.2897036	total: 2.08s	remaining: 2.2s
+486:	learn: 0.2896011	total: 2.08s	remaining: 2.19s
+487:	learn: 0.2893301	total: 2.09s	remaining: 2.19s
+488:	learn: 0.2891197	total: 2.09s	remaining: 2.19s
+489:	learn: 0.2889692	total: 2.09s	remaining: 2.18s
+490:	learn: 0.2888584	total: 2.1s	remaining: 2.17s
+491:	learn: 0.2887557	total: 2.1s	remaining: 2.17s
+492:	learn: 0.2886376	total: 2.11s	remaining: 2.17s
+493:	learn: 0.2885368	total: 2.11s	remaining: 2.16s
+494:	learn: 0.2883423	total: 2.11s	remaining: 2.16s
+495:	learn: 0.2882396	total: 2.12s	remaining: 2.15s
+496:	learn: 0.2881399	total: 2.12s	remaining: 2.15s
+497:	learn: 0.2880665	total: 2.13s	remaining: 2.14s
+498:	learn: 0.2878800	total: 2.13s	remaining: 2.14s
+499:	learn: 0.2877896	total: 2.13s	remaining: 2.13s
+500:	learn: 0.2876708	total: 2.14s	remaining: 2.13s
+501:	learn: 0.2875652	total: 2.14s	remaining: 2.13s
+502:	learn: 0.2874873	total: 2.15s	remaining: 2.12s
+503:	learn: 0.2873786	total: 2.15s	remaining: 2.12s
+504:	learn: 0.2872577	total: 2.15s	remaining: 2.11s
+505:	learn: 0.2870857	total: 2.16s	remaining: 2.11s
+506:	learn: 0.2869373	total: 2.16s	remaining: 2.1s
+507:	learn: 0.2867673	total: 2.17s	remaining: 2.1s
+508:	learn: 0.2866718	total: 2.17s	remaining: 2.09s
+509:	learn: 0.2865648	total: 2.17s	remaining: 2.09s
+510:	learn: 0.2864134	total: 2.18s	remaining: 2.08s
+511:	learn: 0.2863251	total: 2.18s	remaining: 2.08s
+512:	learn: 0.2862529	total: 2.19s	remaining: 2.08s
+513:	learn: 0.2860877	total: 2.19s	remaining: 2.07s
+514:	learn: 0.2859252	total: 2.19s	remaining: 2.07s
+515:	learn: 0.2857899	total: 2.2s	remaining: 2.06s
+516:	learn: 0.2856444	total: 2.2s	remaining: 2.06s
+517:	learn: 0.2855683	total: 2.21s	remaining: 2.05s
+518:	learn: 0.2853899	total: 2.21s	remaining: 2.05s
+519:	learn: 0.2852368	total: 2.21s	remaining: 2.04s
+520:	learn: 0.2851029	total: 2.22s	remaining: 2.04s
+521:	learn: 0.2850221	total: 2.22s	remaining: 2.04s
+522:	learn: 0.2849066	total: 2.23s	remaining: 2.03s
+523:	learn: 0.2847769	total: 2.23s	remaining: 2.03s
+524:	learn: 0.2846475	total: 2.24s	remaining: 2.02s
+525:	learn: 0.2845806	total: 2.24s	remaining: 2.02s
+526:	learn: 0.2844189	total: 2.24s	remaining: 2.01s
+527:	learn: 0.2843334	total: 2.25s	remaining: 2.01s
+528:	learn: 0.2842584	total: 2.25s	remaining: 2.01s
+529:	learn: 0.2840765	total: 2.26s	remaining: 2s
+530:	learn: 0.2840177	total: 2.26s	remaining: 2s
+531:	learn: 0.2839169	total: 2.27s	remaining: 1.99s
+532:	learn: 0.2838416	total: 2.27s	remaining: 1.99s
+533:	learn: 0.2837608	total: 2.27s	remaining: 1.98s
+534:	learn: 0.2836039	total: 2.28s	remaining: 1.98s
+535:	learn: 0.2834932	total: 2.28s	remaining: 1.97s
+536:	learn: 0.2832991	total: 2.29s	remaining: 1.97s
+537:	learn: 0.2831694	total: 2.29s	remaining: 1.97s
+538:	learn: 0.2830565	total: 2.29s	remaining: 1.96s
+539:	learn: 0.2829430	total: 2.3s	remaining: 1.96s
+540:	learn: 0.2827953	total: 2.3s	remaining: 1.95s
+541:	learn: 0.2826633	total: 2.31s	remaining: 1.95s
+542:	learn: 0.2825843	total: 2.31s	remaining: 1.94s
+543:	learn: 0.2825096	total: 2.31s	remaining: 1.94s
+544:	learn: 0.2822842	total: 2.32s	remaining: 1.94s
+545:	learn: 0.2821850	total: 2.32s	remaining: 1.93s
+546:	learn: 0.2820808	total: 2.33s	remaining: 1.93s
+547:	learn: 0.2819719	total: 2.33s	remaining: 1.92s
+548:	learn: 0.2818455	total: 2.33s	remaining: 1.92s
+549:	learn: 0.2817584	total: 2.34s	remaining: 1.91s
+550:	learn: 0.2816022	total: 2.34s	remaining: 1.91s
+551:	learn: 0.2814993	total: 2.35s	remaining: 1.9s
+552:	learn: 0.2813488	total: 2.35s	remaining: 1.9s
+553:	learn: 0.2812793	total: 2.35s	remaining: 1.9s
+554:	learn: 0.2812117	total: 2.36s	remaining: 1.89s
+555:	learn: 0.2810596	total: 2.36s	remaining: 1.89s
+556:	learn: 0.2809230	total: 2.37s	remaining: 1.88s
+557:	learn: 0.2808357	total: 2.37s	remaining: 1.88s
+558:	learn: 0.2806874	total: 2.37s	remaining: 1.87s
+559:	learn: 0.2805172	total: 2.38s	remaining: 1.87s
+560:	learn: 0.2804267	total: 2.38s	remaining: 1.86s
+561:	learn: 0.2803315	total: 2.38s	remaining: 1.86s
+562:	learn: 0.2802308	total: 2.39s	remaining: 1.85s
+563:	learn: 0.2800762	total: 2.39s	remaining: 1.85s
+564:	learn: 0.2799355	total: 2.4s	remaining: 1.84s
+565:	learn: 0.2798495	total: 2.4s	remaining: 1.84s
+566:	learn: 0.2797404	total: 2.4s	remaining: 1.84s
+567:	learn: 0.2796427	total: 2.41s	remaining: 1.83s
+568:	learn: 0.2795424	total: 2.41s	remaining: 1.83s
+569:	learn: 0.2794804	total: 2.42s	remaining: 1.82s
+570:	learn: 0.2794056	total: 2.42s	remaining: 1.82s
+571:	learn: 0.2792483	total: 2.43s	remaining: 1.81s
+572:	learn: 0.2791385	total: 2.43s	remaining: 1.81s
+573:	learn: 0.2790682	total: 2.44s	remaining: 1.81s
+574:	learn: 0.2789261	total: 2.44s	remaining: 1.8s
+575:	learn: 0.2788429	total: 2.44s	remaining: 1.8s
+576:	learn: 0.2787250	total: 2.45s	remaining: 1.79s
+577:	learn: 0.2786570	total: 2.45s	remaining: 1.79s
+578:	learn: 0.2784932	total: 2.45s	remaining: 1.78s
+579:	learn: 0.2783499	total: 2.46s	remaining: 1.78s
+580:	learn: 0.2782134	total: 2.46s	remaining: 1.78s
+581:	learn: 0.2781408	total: 2.47s	remaining: 1.77s
+582:	learn: 0.2780209	total: 2.47s	remaining: 1.77s
+583:	learn: 0.2779104	total: 2.48s	remaining: 1.76s
+584:	learn: 0.2778412	total: 2.48s	remaining: 1.76s
+585:	learn: 0.2777305	total: 2.48s	remaining: 1.75s
+586:	learn: 0.2776358	total: 2.49s	remaining: 1.75s
+587:	learn: 0.2775719	total: 2.49s	remaining: 1.75s
+588:	learn: 0.2774693	total: 2.5s	remaining: 1.74s
+589:	learn: 0.2773946	total: 2.5s	remaining: 1.74s
+590:	learn: 0.2772558	total: 2.5s	remaining: 1.73s
+591:	learn: 0.2771021	total: 2.51s	remaining: 1.73s
+592:	learn: 0.2770090	total: 2.51s	remaining: 1.72s
+593:	learn: 0.2769189	total: 2.52s	remaining: 1.72s
+594:	learn: 0.2766932	total: 2.52s	remaining: 1.72s
+595:	learn: 0.2765536	total: 2.52s	remaining: 1.71s
+596:	learn: 0.2764708	total: 2.53s	remaining: 1.71s
+597:	learn: 0.2763606	total: 2.53s	remaining: 1.7s
+598:	learn: 0.2762552	total: 2.54s	remaining: 1.7s
+599:	learn: 0.2761614	total: 2.54s	remaining: 1.69s
+600:	learn: 0.2759665	total: 2.54s	remaining: 1.69s
+601:	learn: 0.2758283	total: 2.55s	remaining: 1.68s
+602:	learn: 0.2756923	total: 2.55s	remaining: 1.68s
+603:	learn: 0.2756059	total: 2.56s	remaining: 1.68s
+604:	learn: 0.2755411	total: 2.56s	remaining: 1.67s
+605:	learn: 0.2753742	total: 2.56s	remaining: 1.67s
+606:	learn: 0.2752306	total: 2.57s	remaining: 1.66s
+607:	learn: 0.2751631	total: 2.57s	remaining: 1.66s
+608:	learn: 0.2750712	total: 2.58s	remaining: 1.65s
+609:	learn: 0.2750100	total: 2.58s	remaining: 1.65s
+610:	learn: 0.2748954	total: 2.58s	remaining: 1.64s
+611:	learn: 0.2748074	total: 2.59s	remaining: 1.64s
+612:	learn: 0.2746891	total: 2.59s	remaining: 1.64s
+613:	learn: 0.2745947	total: 2.6s	remaining: 1.63s
+614:	learn: 0.2744553	total: 2.6s	remaining: 1.63s
+615:	learn: 0.2743592	total: 2.6s	remaining: 1.62s
+616:	learn: 0.2742326	total: 2.61s	remaining: 1.62s
+617:	learn: 0.2741073	total: 2.61s	remaining: 1.61s
+618:	learn: 0.2739998	total: 2.62s	remaining: 1.61s
+619:	learn: 0.2738556	total: 2.62s	remaining: 1.61s
+620:	learn: 0.2737694	total: 2.62s	remaining: 1.6s
+621:	learn: 0.2736420	total: 2.63s	remaining: 1.6s
+622:	learn: 0.2734776	total: 2.63s	remaining: 1.59s
+623:	learn: 0.2733150	total: 2.64s	remaining: 1.59s
+624:	learn: 0.2732005	total: 2.64s	remaining: 1.58s
+625:	learn: 0.2730820	total: 2.65s	remaining: 1.58s
+626:	learn: 0.2730352	total: 2.65s	remaining: 1.58s
+627:	learn: 0.2729636	total: 2.65s	remaining: 1.57s
+628:	learn: 0.2728249	total: 2.66s	remaining: 1.57s
+629:	learn: 0.2727007	total: 2.66s	remaining: 1.56s
+630:	learn: 0.2725700	total: 2.67s	remaining: 1.56s
+631:	learn: 0.2724522	total: 2.67s	remaining: 1.55s
+632:	learn: 0.2723390	total: 2.67s	remaining: 1.55s
+633:	learn: 0.2722817	total: 2.68s	remaining: 1.54s
+634:	learn: 0.2721314	total: 2.68s	remaining: 1.54s
+635:	learn: 0.2719770	total: 2.69s	remaining: 1.54s
+636:	learn: 0.2718730	total: 2.69s	remaining: 1.53s
+637:	learn: 0.2717174	total: 2.69s	remaining: 1.53s
+638:	learn: 0.2716644	total: 2.7s	remaining: 1.52s
+639:	learn: 0.2715698	total: 2.7s	remaining: 1.52s
+640:	learn: 0.2714927	total: 2.71s	remaining: 1.52s
+641:	learn: 0.2714023	total: 2.71s	remaining: 1.51s
+642:	learn: 0.2713173	total: 2.71s	remaining: 1.51s
+643:	learn: 0.2711897	total: 2.72s	remaining: 1.5s
+644:	learn: 0.2710904	total: 2.72s	remaining: 1.5s
+645:	learn: 0.2710301	total: 2.73s	remaining: 1.49s
+646:	learn: 0.2708800	total: 2.73s	remaining: 1.49s
+647:	learn: 0.2708103	total: 2.73s	remaining: 1.49s
+648:	learn: 0.2706709	total: 2.74s	remaining: 1.48s
+649:	learn: 0.2706066	total: 2.74s	remaining: 1.48s
+650:	learn: 0.2704744	total: 2.75s	remaining: 1.47s
+651:	learn: 0.2703988	total: 2.75s	remaining: 1.47s
+652:	learn: 0.2703088	total: 2.76s	remaining: 1.46s
+653:	learn: 0.2702020	total: 2.76s	remaining: 1.46s
+654:	learn: 0.2700815	total: 2.77s	remaining: 1.46s
+655:	learn: 0.2698968	total: 2.77s	remaining: 1.45s
+656:	learn: 0.2697928	total: 2.77s	remaining: 1.45s
+657:	learn: 0.2696750	total: 2.78s	remaining: 1.44s
+658:	learn: 0.2695603	total: 2.78s	remaining: 1.44s
+659:	learn: 0.2694232	total: 2.79s	remaining: 1.44s
+660:	learn: 0.2693559	total: 2.79s	remaining: 1.43s
+661:	learn: 0.2692550	total: 2.79s	remaining: 1.43s
+662:	learn: 0.2691917	total: 2.8s	remaining: 1.42s
+663:	learn: 0.2691336	total: 2.8s	remaining: 1.42s
+664:	learn: 0.2690736	total: 2.81s	remaining: 1.41s
+665:	learn: 0.2689487	total: 2.81s	remaining: 1.41s
+666:	learn: 0.2688681	total: 2.81s	remaining: 1.41s
+667:	learn: 0.2687974	total: 2.82s	remaining: 1.4s
+668:	learn: 0.2687341	total: 2.82s	remaining: 1.4s
+669:	learn: 0.2685779	total: 2.83s	remaining: 1.39s
+670:	learn: 0.2684390	total: 2.83s	remaining: 1.39s
+671:	learn: 0.2683093	total: 2.83s	remaining: 1.38s
+672:	learn: 0.2681960	total: 2.84s	remaining: 1.38s
+673:	learn: 0.2681109	total: 2.84s	remaining: 1.38s
+674:	learn: 0.2679918	total: 2.85s	remaining: 1.37s
+675:	learn: 0.2678678	total: 2.85s	remaining: 1.37s
+676:	learn: 0.2677041	total: 2.85s	remaining: 1.36s
+677:	learn: 0.2675608	total: 2.86s	remaining: 1.36s
+678:	learn: 0.2674285	total: 2.86s	remaining: 1.35s
+679:	learn: 0.2672996	total: 2.87s	remaining: 1.35s
+680:	learn: 0.2671800	total: 2.87s	remaining: 1.34s
+681:	learn: 0.2671295	total: 2.88s	remaining: 1.34s
+682:	learn: 0.2670053	total: 2.88s	remaining: 1.34s
+683:	learn: 0.2669198	total: 2.88s	remaining: 1.33s
+684:	learn: 0.2668565	total: 2.89s	remaining: 1.33s
+685:	learn: 0.2666755	total: 2.89s	remaining: 1.32s
+686:	learn: 0.2665785	total: 2.9s	remaining: 1.32s
+687:	learn: 0.2664518	total: 2.9s	remaining: 1.31s
+688:	learn: 0.2663686	total: 2.9s	remaining: 1.31s
+689:	learn: 0.2662136	total: 2.91s	remaining: 1.31s
+690:	learn: 0.2661163	total: 2.91s	remaining: 1.3s
+691:	learn: 0.2659559	total: 2.92s	remaining: 1.3s
+692:	learn: 0.2658230	total: 2.92s	remaining: 1.29s
+693:	learn: 0.2657419	total: 2.92s	remaining: 1.29s
+694:	learn: 0.2656309	total: 2.93s	remaining: 1.28s
+695:	learn: 0.2654621	total: 2.93s	remaining: 1.28s
+696:	learn: 0.2653897	total: 2.94s	remaining: 1.28s
+697:	learn: 0.2653047	total: 2.94s	remaining: 1.27s
+698:	learn: 0.2651756	total: 2.95s	remaining: 1.27s
+699:	learn: 0.2650312	total: 2.95s	remaining: 1.26s
+700:	learn: 0.2649438	total: 2.96s	remaining: 1.26s
+701:	learn: 0.2648212	total: 2.96s	remaining: 1.26s
+702:	learn: 0.2646536	total: 2.96s	remaining: 1.25s
+703:	learn: 0.2645789	total: 2.97s	remaining: 1.25s
+704:	learn: 0.2644017	total: 2.97s	remaining: 1.24s
+705:	learn: 0.2642694	total: 2.98s	remaining: 1.24s
+706:	learn: 0.2641701	total: 2.98s	remaining: 1.23s
+707:	learn: 0.2640538	total: 2.98s	remaining: 1.23s
+708:	learn: 0.2639618	total: 2.99s	remaining: 1.23s
+709:	learn: 0.2638671	total: 2.99s	remaining: 1.22s
+710:	learn: 0.2638084	total: 3s	remaining: 1.22s
+711:	learn: 0.2637480	total: 3s	remaining: 1.21s
+712:	learn: 0.2636276	total: 3s	remaining: 1.21s
+713:	learn: 0.2635674	total: 3.01s	remaining: 1.2s
+714:	learn: 0.2634128	total: 3.01s	remaining: 1.2s
+715:	learn: 0.2632460	total: 3.02s	remaining: 1.2s
+716:	learn: 0.2631714	total: 3.02s	remaining: 1.19s
+717:	learn: 0.2630569	total: 3.02s	remaining: 1.19s
+718:	learn: 0.2628774	total: 3.03s	remaining: 1.18s
+719:	learn: 0.2627562	total: 3.03s	remaining: 1.18s
+720:	learn: 0.2626229	total: 3.04s	remaining: 1.18s
+721:	learn: 0.2625147	total: 3.04s	remaining: 1.17s
+722:	learn: 0.2623781	total: 3.04s	remaining: 1.17s
+723:	learn: 0.2623028	total: 3.05s	remaining: 1.16s
+724:	learn: 0.2622487	total: 3.05s	remaining: 1.16s
+725:	learn: 0.2621249	total: 3.06s	remaining: 1.15s
+726:	learn: 0.2619675	total: 3.06s	remaining: 1.15s
+727:	learn: 0.2618177	total: 3.07s	remaining: 1.15s
+728:	learn: 0.2617678	total: 3.07s	remaining: 1.14s
+729:	learn: 0.2616990	total: 3.07s	remaining: 1.14s
+730:	learn: 0.2616356	total: 3.08s	remaining: 1.13s
+731:	learn: 0.2615605	total: 3.08s	remaining: 1.13s
+732:	learn: 0.2614738	total: 3.08s	remaining: 1.12s
+733:	learn: 0.2614083	total: 3.09s	remaining: 1.12s
+734:	learn: 0.2612654	total: 3.09s	remaining: 1.11s
+735:	learn: 0.2611341	total: 3.1s	remaining: 1.11s
+736:	learn: 0.2610816	total: 3.1s	remaining: 1.11s
+737:	learn: 0.2609481	total: 3.1s	remaining: 1.1s
+738:	learn: 0.2608842	total: 3.11s	remaining: 1.1s
+739:	learn: 0.2608007	total: 3.11s	remaining: 1.09s
+740:	learn: 0.2607508	total: 3.12s	remaining: 1.09s
+741:	learn: 0.2606150	total: 3.12s	remaining: 1.08s
+742:	learn: 0.2605353	total: 3.13s	remaining: 1.08s
+743:	learn: 0.2604970	total: 3.13s	remaining: 1.08s
+744:	learn: 0.2604303	total: 3.13s	remaining: 1.07s
+745:	learn: 0.2603421	total: 3.14s	remaining: 1.07s
+746:	learn: 0.2602834	total: 3.14s	remaining: 1.06s
+747:	learn: 0.2601345	total: 3.15s	remaining: 1.06s
+748:	learn: 0.2600669	total: 3.15s	remaining: 1.05s
+749:	learn: 0.2599700	total: 3.15s	remaining: 1.05s
+750:	learn: 0.2598746	total: 3.16s	remaining: 1.05s
+751:	learn: 0.2597602	total: 3.16s	remaining: 1.04s
+752:	learn: 0.2596263	total: 3.17s	remaining: 1.04s
+753:	learn: 0.2595463	total: 3.17s	remaining: 1.03s
+754:	learn: 0.2593907	total: 3.17s	remaining: 1.03s
+755:	learn: 0.2593387	total: 3.18s	remaining: 1.02s
+756:	learn: 0.2592390	total: 3.18s	remaining: 1.02s
+757:	learn: 0.2591712	total: 3.19s	remaining: 1.02s
+758:	learn: 0.2591032	total: 3.19s	remaining: 1.01s
+759:	learn: 0.2589871	total: 3.19s	remaining: 1.01s
+760:	learn: 0.2589192	total: 3.2s	remaining: 1s
+761:	learn: 0.2588231	total: 3.2s	remaining: 1s
+762:	learn: 0.2587034	total: 3.21s	remaining: 996ms
+763:	learn: 0.2585759	total: 3.21s	remaining: 992ms
+764:	learn: 0.2584734	total: 3.21s	remaining: 987ms
+765:	learn: 0.2583787	total: 3.22s	remaining: 983ms
+766:	learn: 0.2582512	total: 3.22s	remaining: 979ms
+767:	learn: 0.2581346	total: 3.23s	remaining: 975ms
+768:	learn: 0.2580482	total: 3.23s	remaining: 971ms
+769:	learn: 0.2579980	total: 3.23s	remaining: 966ms
+770:	learn: 0.2579269	total: 3.24s	remaining: 962ms
+771:	learn: 0.2577842	total: 3.24s	remaining: 958ms
+772:	learn: 0.2577079	total: 3.25s	remaining: 954ms
+773:	learn: 0.2576455	total: 3.25s	remaining: 949ms
+774:	learn: 0.2575385	total: 3.25s	remaining: 945ms
+775:	learn: 0.2574410	total: 3.26s	remaining: 941ms
+776:	learn: 0.2573456	total: 3.26s	remaining: 937ms
+777:	learn: 0.2572800	total: 3.27s	remaining: 932ms
+778:	learn: 0.2571753	total: 3.27s	remaining: 928ms
+779:	learn: 0.2570342	total: 3.27s	remaining: 924ms
+780:	learn: 0.2569749	total: 3.28s	remaining: 920ms
+781:	learn: 0.2568366	total: 3.28s	remaining: 915ms
+782:	learn: 0.2567366	total: 3.29s	remaining: 911ms
+783:	learn: 0.2566337	total: 3.29s	remaining: 907ms
+784:	learn: 0.2565773	total: 3.3s	remaining: 903ms
+785:	learn: 0.2564806	total: 3.3s	remaining: 898ms
+786:	learn: 0.2564212	total: 3.3s	remaining: 894ms
+787:	learn: 0.2563206	total: 3.31s	remaining: 890ms
+788:	learn: 0.2562422	total: 3.31s	remaining: 886ms
+789:	learn: 0.2561269	total: 3.31s	remaining: 881ms
+790:	learn: 0.2560351	total: 3.32s	remaining: 877ms
+791:	learn: 0.2559307	total: 3.32s	remaining: 873ms
+792:	learn: 0.2558664	total: 3.33s	remaining: 869ms
+793:	learn: 0.2557611	total: 3.33s	remaining: 864ms
+794:	learn: 0.2556512	total: 3.33s	remaining: 860ms
+795:	learn: 0.2555728	total: 3.34s	remaining: 856ms
+796:	learn: 0.2554369	total: 3.34s	remaining: 852ms
+797:	learn: 0.2552817	total: 3.35s	remaining: 848ms
+798:	learn: 0.2551326	total: 3.35s	remaining: 844ms
+799:	learn: 0.2550378	total: 3.36s	remaining: 839ms
+800:	learn: 0.2549692	total: 3.36s	remaining: 835ms
+801:	learn: 0.2549115	total: 3.37s	remaining: 831ms
+802:	learn: 0.2548625	total: 3.37s	remaining: 827ms
+803:	learn: 0.2547527	total: 3.37s	remaining: 822ms
+804:	learn: 0.2547120	total: 3.38s	remaining: 818ms
+805:	learn: 0.2546706	total: 3.38s	remaining: 814ms
+806:	learn: 0.2545777	total: 3.38s	remaining: 809ms
+807:	learn: 0.2544656	total: 3.39s	remaining: 805ms
+808:	learn: 0.2543515	total: 3.39s	remaining: 801ms
+809:	learn: 0.2542340	total: 3.4s	remaining: 797ms
+810:	learn: 0.2542025	total: 3.41s	remaining: 794ms
+811:	learn: 0.2541277	total: 3.41s	remaining: 790ms
+812:	learn: 0.2540826	total: 3.42s	remaining: 786ms
+813:	learn: 0.2539730	total: 3.42s	remaining: 782ms
+814:	learn: 0.2538615	total: 3.44s	remaining: 781ms
+815:	learn: 0.2537342	total: 3.44s	remaining: 777ms
+816:	learn: 0.2536732	total: 3.45s	remaining: 772ms
+817:	learn: 0.2536197	total: 3.45s	remaining: 768ms
+818:	learn: 0.2535405	total: 3.46s	remaining: 764ms
+819:	learn: 0.2534354	total: 3.46s	remaining: 760ms
+820:	learn: 0.2533629	total: 3.46s	remaining: 755ms
+821:	learn: 0.2532385	total: 3.47s	remaining: 751ms
+822:	learn: 0.2532090	total: 3.47s	remaining: 747ms
+823:	learn: 0.2531151	total: 3.48s	remaining: 743ms
+824:	learn: 0.2529818	total: 3.48s	remaining: 738ms
+825:	learn: 0.2529055	total: 3.48s	remaining: 734ms
+826:	learn: 0.2528103	total: 3.49s	remaining: 730ms
+827:	learn: 0.2527532	total: 3.49s	remaining: 726ms
+828:	learn: 0.2526587	total: 3.5s	remaining: 721ms
+829:	learn: 0.2525745	total: 3.5s	remaining: 717ms
+830:	learn: 0.2525002	total: 3.5s	remaining: 713ms
+831:	learn: 0.2523851	total: 3.51s	remaining: 709ms
+832:	learn: 0.2522806	total: 3.51s	remaining: 704ms
+833:	learn: 0.2521892	total: 3.52s	remaining: 700ms
+834:	learn: 0.2520618	total: 3.52s	remaining: 696ms
+835:	learn: 0.2519228	total: 3.52s	remaining: 692ms
+836:	learn: 0.2518211	total: 3.53s	remaining: 687ms
+837:	learn: 0.2517860	total: 3.53s	remaining: 683ms
+838:	learn: 0.2517373	total: 3.54s	remaining: 679ms
+839:	learn: 0.2516947	total: 3.54s	remaining: 675ms
+840:	learn: 0.2516426	total: 3.55s	remaining: 670ms
+841:	learn: 0.2515573	total: 3.55s	remaining: 666ms
+842:	learn: 0.2514702	total: 3.55s	remaining: 662ms
+843:	learn: 0.2513767	total: 3.56s	remaining: 658ms
+844:	learn: 0.2513179	total: 3.56s	remaining: 653ms
+845:	learn: 0.2512725	total: 3.57s	remaining: 649ms
+846:	learn: 0.2511668	total: 3.57s	remaining: 645ms
+847:	learn: 0.2510430	total: 3.57s	remaining: 641ms
+848:	learn: 0.2509794	total: 3.58s	remaining: 636ms
+849:	learn: 0.2509307	total: 3.58s	remaining: 632ms
+850:	learn: 0.2508247	total: 3.59s	remaining: 628ms
+851:	learn: 0.2507143	total: 3.59s	remaining: 624ms
+852:	learn: 0.2505988	total: 3.6s	remaining: 620ms
+853:	learn: 0.2504969	total: 3.6s	remaining: 615ms
+854:	learn: 0.2504201	total: 3.6s	remaining: 611ms
+855:	learn: 0.2503255	total: 3.61s	remaining: 607ms
+856:	learn: 0.2502427	total: 3.61s	remaining: 603ms
+857:	learn: 0.2501308	total: 3.62s	remaining: 599ms
+858:	learn: 0.2500486	total: 3.62s	remaining: 594ms
+859:	learn: 0.2499516	total: 3.63s	remaining: 590ms
+860:	learn: 0.2498634	total: 3.63s	remaining: 586ms
+861:	learn: 0.2497559	total: 3.63s	remaining: 582ms
+862:	learn: 0.2496970	total: 3.64s	remaining: 577ms
+863:	learn: 0.2495915	total: 3.64s	remaining: 573ms
+864:	learn: 0.2495209	total: 3.65s	remaining: 569ms
+865:	learn: 0.2494348	total: 3.65s	remaining: 565ms
+866:	learn: 0.2493127	total: 3.66s	remaining: 561ms
+867:	learn: 0.2492072	total: 3.66s	remaining: 557ms
+868:	learn: 0.2490824	total: 3.66s	remaining: 552ms
+869:	learn: 0.2489874	total: 3.67s	remaining: 548ms
+870:	learn: 0.2488930	total: 3.67s	remaining: 544ms
+871:	learn: 0.2487723	total: 3.68s	remaining: 540ms
+872:	learn: 0.2487006	total: 3.68s	remaining: 536ms
+873:	learn: 0.2486493	total: 3.69s	remaining: 531ms
+874:	learn: 0.2485626	total: 3.69s	remaining: 527ms
+875:	learn: 0.2484709	total: 3.69s	remaining: 523ms
+876:	learn: 0.2483557	total: 3.7s	remaining: 519ms
+877:	learn: 0.2482888	total: 3.7s	remaining: 514ms
+878:	learn: 0.2482402	total: 3.71s	remaining: 510ms
+879:	learn: 0.2481993	total: 3.71s	remaining: 506ms
+880:	learn: 0.2481283	total: 3.71s	remaining: 502ms
+881:	learn: 0.2480775	total: 3.72s	remaining: 498ms
+882:	learn: 0.2480070	total: 3.72s	remaining: 493ms
+883:	learn: 0.2478991	total: 3.73s	remaining: 489ms
+884:	learn: 0.2478571	total: 3.73s	remaining: 485ms
+885:	learn: 0.2478076	total: 3.73s	remaining: 481ms
+886:	learn: 0.2476965	total: 3.74s	remaining: 476ms
+887:	learn: 0.2475963	total: 3.74s	remaining: 472ms
+888:	learn: 0.2475466	total: 3.75s	remaining: 468ms
+889:	learn: 0.2474339	total: 3.75s	remaining: 464ms
+890:	learn: 0.2473645	total: 3.76s	remaining: 460ms
+891:	learn: 0.2473074	total: 3.76s	remaining: 455ms
+892:	learn: 0.2472105	total: 3.76s	remaining: 451ms
+893:	learn: 0.2471154	total: 3.77s	remaining: 447ms
+894:	learn: 0.2470569	total: 3.77s	remaining: 443ms
+895:	learn: 0.2469990	total: 3.78s	remaining: 438ms
+896:	learn: 0.2469005	total: 3.78s	remaining: 434ms
+897:	learn: 0.2468181	total: 3.79s	remaining: 430ms
+898:	learn: 0.2467413	total: 3.79s	remaining: 426ms
+899:	learn: 0.2466803	total: 3.79s	remaining: 421ms
+900:	learn: 0.2466186	total: 3.8s	remaining: 417ms
+901:	learn: 0.2465451	total: 3.8s	remaining: 413ms
+902:	learn: 0.2464979	total: 3.81s	remaining: 409ms
+903:	learn: 0.2464134	total: 3.81s	remaining: 405ms
+904:	learn: 0.2463341	total: 3.81s	remaining: 400ms
+905:	learn: 0.2462434	total: 3.82s	remaining: 396ms
+906:	learn: 0.2461634	total: 3.82s	remaining: 392ms
+907:	learn: 0.2460611	total: 3.83s	remaining: 388ms
+908:	learn: 0.2460085	total: 3.83s	remaining: 384ms
+909:	learn: 0.2459615	total: 3.83s	remaining: 379ms
+910:	learn: 0.2458666	total: 3.84s	remaining: 375ms
+911:	learn: 0.2457489	total: 3.84s	remaining: 371ms
+912:	learn: 0.2456578	total: 3.85s	remaining: 367ms
+913:	learn: 0.2455988	total: 3.85s	remaining: 362ms
+914:	learn: 0.2454937	total: 3.86s	remaining: 358ms
+915:	learn: 0.2454013	total: 3.86s	remaining: 354ms
+916:	learn: 0.2452974	total: 3.86s	remaining: 350ms
+917:	learn: 0.2452205	total: 3.87s	remaining: 346ms
+918:	learn: 0.2451877	total: 3.87s	remaining: 341ms
+919:	learn: 0.2451154	total: 3.88s	remaining: 337ms
+920:	learn: 0.2450376	total: 3.88s	remaining: 333ms
+921:	learn: 0.2449285	total: 3.88s	remaining: 329ms
+922:	learn: 0.2448386	total: 3.89s	remaining: 324ms
+923:	learn: 0.2447493	total: 3.89s	remaining: 320ms
+924:	learn: 0.2446909	total: 3.9s	remaining: 316ms
+925:	learn: 0.2445884	total: 3.9s	remaining: 312ms
+926:	learn: 0.2444879	total: 3.91s	remaining: 308ms
+927:	learn: 0.2444146	total: 3.91s	remaining: 303ms
+928:	learn: 0.2443440	total: 3.92s	remaining: 299ms
+929:	learn: 0.2442821	total: 3.92s	remaining: 295ms
+930:	learn: 0.2442449	total: 3.92s	remaining: 291ms
+931:	learn: 0.2442135	total: 3.93s	remaining: 287ms
+932:	learn: 0.2441696	total: 3.93s	remaining: 282ms
+933:	learn: 0.2440874	total: 3.94s	remaining: 278ms
+934:	learn: 0.2440047	total: 3.94s	remaining: 274ms
+935:	learn: 0.2439252	total: 3.94s	remaining: 270ms
+936:	learn: 0.2438632	total: 3.95s	remaining: 265ms
+937:	learn: 0.2437388	total: 3.95s	remaining: 261ms
+938:	learn: 0.2436706	total: 3.96s	remaining: 257ms
+939:	learn: 0.2436055	total: 3.96s	remaining: 253ms
+940:	learn: 0.2435279	total: 3.96s	remaining: 249ms
+941:	learn: 0.2434900	total: 3.97s	remaining: 244ms
+942:	learn: 0.2434131	total: 3.97s	remaining: 240ms
+943:	learn: 0.2432915	total: 3.98s	remaining: 236ms
+944:	learn: 0.2431738	total: 3.98s	remaining: 232ms
+945:	learn: 0.2431084	total: 3.99s	remaining: 228ms
+946:	learn: 0.2430182	total: 3.99s	remaining: 223ms
+947:	learn: 0.2429725	total: 3.99s	remaining: 219ms
+948:	learn: 0.2428979	total: 4s	remaining: 215ms
+949:	learn: 0.2428466	total: 4s	remaining: 211ms
+950:	learn: 0.2427929	total: 4.01s	remaining: 206ms
+951:	learn: 0.2427320	total: 4.01s	remaining: 202ms
+952:	learn: 0.2426578	total: 4.01s	remaining: 198ms
+953:	learn: 0.2425266	total: 4.02s	remaining: 194ms
+954:	learn: 0.2424720	total: 4.02s	remaining: 190ms
+955:	learn: 0.2423826	total: 4.03s	remaining: 185ms
+956:	learn: 0.2423299	total: 4.03s	remaining: 181ms
+957:	learn: 0.2421990	total: 4.04s	remaining: 177ms
+958:	learn: 0.2421226	total: 4.04s	remaining: 173ms
+959:	learn: 0.2420494	total: 4.04s	remaining: 169ms
+960:	learn: 0.2419782	total: 4.05s	remaining: 164ms
+961:	learn: 0.2419078	total: 4.05s	remaining: 160ms
+962:	learn: 0.2418361	total: 4.06s	remaining: 156ms
+963:	learn: 0.2418073	total: 4.06s	remaining: 152ms
+964:	learn: 0.2417002	total: 4.07s	remaining: 147ms
+965:	learn: 0.2416497	total: 4.07s	remaining: 143ms
+966:	learn: 0.2415570	total: 4.07s	remaining: 139ms
+967:	learn: 0.2414997	total: 4.08s	remaining: 135ms
+968:	learn: 0.2413893	total: 4.08s	remaining: 131ms
+969:	learn: 0.2413105	total: 4.09s	remaining: 126ms
+970:	learn: 0.2412353	total: 4.09s	remaining: 122ms
+971:	learn: 0.2411902	total: 4.1s	remaining: 118ms
+972:	learn: 0.2411596	total: 4.1s	remaining: 114ms
+973:	learn: 0.2410535	total: 4.1s	remaining: 110ms
+974:	learn: 0.2409929	total: 4.11s	remaining: 105ms
+975:	learn: 0.2408967	total: 4.11s	remaining: 101ms
+976:	learn: 0.2408188	total: 4.12s	remaining: 96.9ms
+977:	learn: 0.2407664	total: 4.12s	remaining: 92.7ms
+978:	learn: 0.2407091	total: 4.12s	remaining: 88.5ms
+979:	learn: 0.2406165	total: 4.13s	remaining: 84.3ms
+980:	learn: 0.2405223	total: 4.13s	remaining: 80ms
+981:	learn: 0.2404113	total: 4.14s	remaining: 75.8ms
+982:	learn: 0.2403168	total: 4.14s	remaining: 71.6ms
+983:	learn: 0.2402661	total: 4.14s	remaining: 67.4ms
+984:	learn: 0.2401904	total: 4.15s	remaining: 63.2ms
+985:	learn: 0.2401233	total: 4.15s	remaining: 59ms
+986:	learn: 0.2400820	total: 4.16s	remaining: 54.8ms
+987:	learn: 0.2399716	total: 4.16s	remaining: 50.6ms
+988:	learn: 0.2398732	total: 4.17s	remaining: 46.4ms
+989:	learn: 0.2398463	total: 4.17s	remaining: 42.1ms
+990:	learn: 0.2397678	total: 4.18s	remaining: 37.9ms
+991:	learn: 0.2397250	total: 4.18s	remaining: 33.7ms
+992:	learn: 0.2396289	total: 4.18s	remaining: 29.5ms
+993:	learn: 0.2395074	total: 4.19s	remaining: 25.3ms
+994:	learn: 0.2394587	total: 4.19s	remaining: 21.1ms
+995:	learn: 0.2393890	total: 4.2s	remaining: 16.9ms
+996:	learn: 0.2393042	total: 4.2s	remaining: 12.6ms
+997:	learn: 0.2392116	total: 4.21s	remaining: 8.43ms
+998:	learn: 0.2391446	total: 4.21s	remaining: 4.21ms
+999:	learn: 0.2390680	total: 4.21s	remaining: 0us
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">Cat_bal</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.85      0.86      0.85      1035
+           1       0.60      0.59      0.59       374
+
+    accuracy                           0.79      1409
+   macro avg       0.72      0.72      0.72      1409
+weighted avg       0.78      0.79      0.79      1409
+</pre></div>
+</div>
+<img alt="_images/d80f7cf558d6838e225ca0118290a0d4c51b564327775338f030162963ac3efc.png" src="_images/d80f7cf558d6838e225ca0118290a0d4c51b564327775338f030162963ac3efc.png" />
+<img alt="_images/4e647fa031cd9843df7fde8843b17721f8ea68eaa59b82fafc7f8e74eb218292.png" src="_images/4e647fa031cd9843df7fde8843b17721f8ea68eaa59b82fafc7f8e74eb218292.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7856635911994322,
+ &#39;Precision&#39;: 0.7845809542873693,
+ &#39;Recall&#39;: 0.7856635911994322,
+ &#39;F1-score&#39;: 0.78510673664032}
+</pre></div>
+</div>
+</div>
+</div>
+<p>En cuanto a CatBoost hubo una decaida de la curva ROC de manera ligera pero sigue siendo 0.84, y se puede apreciar que esta mas balanceado el modelo a comparacion de antes con los cambios entre las metricas</p>
+</section>
+<section id="gridsearch">
+<h3>Gridsearch<a class="headerlink" href="#gridsearch" title="Link to this heading">#</a></h3>
+<p>Realizamos el gridsearch para cada uno de los modelos</p>
+</section>
+<section id="parametros">
+<h3>Parametros<a class="headerlink" href="#parametros" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid_rf</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;modelo__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;sqrt&#39;</span><span class="p">,</span> <span class="s1">&#39;log2&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__bootstrap&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid_xgb</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;modelo__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__subsample&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__colsample_bytree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__min_child_weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__reg_alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__reg_lambda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid_lgbm</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;modelo__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">63</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__min_child_samples&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__subsample&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__colsample_bytree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__reg_alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__reg_lambda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__max_bin&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">255</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__verbose&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid_cat</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;modelo__iterations&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__l2_leaf_reg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__bagging_temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__border_count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__random_strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__subsample&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;modelo__verbose&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">=</span><span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>implementacion<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_rf</span> <span class="o">=</span> <span class="n">realizar_gridsearch</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">pipe_RF_bal</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_rf</span><span class="p">,</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> 
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Iniciando GridSearch para: Pipeline ...
+ GridSearch finalizado en 929.70 segundos
+  Mejor score (roc_auc): 0.8414
+  Mejores parámetros: {&#39;modelo__bootstrap&#39;: True, &#39;modelo__criterion&#39;: &#39;entropy&#39;, &#39;modelo__max_depth&#39;: 10, &#39;modelo__max_features&#39;: &#39;log2&#39;, &#39;modelo__min_samples_leaf&#39;: 1, &#39;modelo__min_samples_split&#39;: 5, &#39;modelo__n_estimators&#39;: 200}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_XG</span> <span class="o">=</span> <span class="n">realizar_gridsearch</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">pipe_XGB_bal</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_xgb</span><span class="p">,</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> 
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Iniciando GridSearch para: Pipeline ...
+ GridSearch finalizado en 561.53 segundos
+  Mejor score (roc_auc): 0.8415
+  Mejores parámetros: {&#39;modelo__colsample_bytree&#39;: 0.8, &#39;modelo__gamma&#39;: 0.3, &#39;modelo__learning_rate&#39;: 0.05, &#39;modelo__min_child_weight&#39;: 3, &#39;modelo__n_estimators&#39;: 200, &#39;modelo__reg_alpha&#39;: 0, &#39;modelo__reg_lambda&#39;: 5, &#39;modelo__subsample&#39;: 1.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_LGBM</span> <span class="o">=</span> <span class="n">realizar_gridsearch</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">pipe_LGBM_bal</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_lgbm</span><span class="p">,</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> 
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Iniciando GridSearch para: Pipeline ...
+ GridSearch finalizado en 492.24 segundos
+  Mejor score (roc_auc): 0.8381
+  Mejores parámetros: {&#39;modelo__colsample_bytree&#39;: 0.8, &#39;modelo__learning_rate&#39;: 0.05, &#39;modelo__max_bin&#39;: 255, &#39;modelo__min_child_samples&#39;: 10, &#39;modelo__n_estimators&#39;: 200, &#39;modelo__num_leaves&#39;: 31, &#39;modelo__reg_alpha&#39;: 0.1, &#39;modelo__reg_lambda&#39;: 0, &#39;modelo__subsample&#39;: 0.8, &#39;modelo__verbose&#39;: -1}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_Cat</span> <span class="o">=</span> <span class="n">realizar_gridsearch</span><span class="p">(</span>
+    <span class="n">modelo</span><span class="o">=</span><span class="n">pipe_Cat_bal</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_cat</span><span class="p">,</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> 
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Iniciando GridSearch para: Pipeline ...
+ GridSearch finalizado en 2503.84 segundos
+  Mejor score (roc_auc): 0.8411
+  Mejores parámetros: {&#39;modelo__bagging_temperature&#39;: 1, &#39;modelo__border_count&#39;: 64, &#39;modelo__depth&#39;: 6, &#39;modelo__iterations&#39;: 300, &#39;modelo__l2_leaf_reg&#39;: 5, &#39;modelo__learning_rate&#39;: 0.05, &#39;modelo__random_strength&#39;: 2, &#39;modelo__subsample&#39;: 1.0, &#39;modelo__verbose&#39;: 0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor_modelo_rf</span> <span class="o">=</span> <span class="n">resultados_rf</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">mejor_modelo_rf</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.88      0.81      0.84      1035
+           1       0.56      0.69      0.62       374
+
+    accuracy                           0.78      1409
+   macro avg       0.72      0.75      0.73      1409
+weighted avg       0.79      0.78      0.78      1409
+</pre></div>
+</div>
+<img alt="_images/6009c77426856cf00110aff6e7414cce3f755b67397d5ea7b04950b12e93b76e.png" src="_images/6009c77426856cf00110aff6e7414cce3f755b67397d5ea7b04950b12e93b76e.png" />
+<img alt="_images/33dfcf929284b5bb41e6554ac0deb9bffd6f751ec623aa620c2b34010403b449.png" src="_images/33dfcf929284b5bb41e6554ac0deb9bffd6f751ec623aa620c2b34010403b449.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7757274662881476,
+ &#39;Precision&#39;: 0.7939800790425299,
+ &#39;Recall&#39;: 0.7757274662881476,
+ &#39;F1-score&#39;: 0.7821806500628267}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que en randomforest luego de hacer gridsearch hubo una mejora significativa en el recall de yes y tambien que el ROC aumento a 0.84 y hubo mejora en la precision global del modelo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor_modelo_xg</span> <span class="o">=</span> <span class="n">resultados_XG</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">mejor_modelo_xg</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.86      0.84      0.85      1035
+           1       0.58      0.61      0.59       374
+
+    accuracy                           0.78      1409
+   macro avg       0.72      0.72      0.72      1409
+weighted avg       0.78      0.78      0.78      1409
+</pre></div>
+</div>
+<img alt="_images/582b51f8c1f29082572165d515735f5f3fedd03725a2a3703ebac3816fcdc05b.png" src="_images/582b51f8c1f29082572165d515735f5f3fedd03725a2a3703ebac3816fcdc05b.png" />
+<img alt="_images/e386c40fe391bb4c338f95ffad4d04ea4bc85159ab920e9542de0a510628d40d.png" src="_images/e386c40fe391bb4c338f95ffad4d04ea4bc85159ab920e9542de0a510628d40d.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7771469127040455,
+ &#39;Precision&#39;: 0.7811075980385155,
+ &#39;Recall&#39;: 0.7771469127040455,
+ &#39;F1-score&#39;: 0.778961557380833}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al realizar gridsearch de xgboost, hubo un aumento de la curva ROC tambien a 0.84 y hubo un aumento en los scores de las 3 metricas tanto en yes como en no ligeramente, asi como tambien hubo mejoras en las metricas generales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor_modelo_lgbm</span> <span class="o">=</span> <span class="n">resultados_LGBM</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">mejor_modelo_lgbm</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.85      0.85      0.85      1035
+           1       0.59      0.60      0.60       374
+
+    accuracy                           0.78      1409
+   macro avg       0.72      0.72      0.72      1409
+weighted avg       0.79      0.78      0.79      1409
+</pre></div>
+</div>
+<img alt="_images/257f5b02987296f9e7a66501f829ffe7976e3405b3fb99405adab385f20f8f49.png" src="_images/257f5b02987296f9e7a66501f829ffe7976e3405b3fb99405adab385f20f8f49.png" />
+<img alt="_images/524b27fcff87de1027b3b064c1513aebba1600d4e0d66f5e0ce5631241eddd90.png" src="_images/524b27fcff87de1027b3b064c1513aebba1600d4e0d66f5e0ce5631241eddd90.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7849538679914834,
+ &#39;Precision&#39;: 0.7851378981668458,
+ &#39;Recall&#39;: 0.7849538679914834,
+ &#39;F1-score&#39;: 0.7850454548710578}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que aumento ligeramente ROC AUC aunque las metricas en comparacion a la de el modelo balanceado por SMOTE en 0 o 1 siguen siendo practicamente iguales</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor_modelo_cat</span> <span class="o">=</span> <span class="n">resultados_Cat</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluar_modelo_clasificacion</span><span class="p">(</span><span class="n">mejor_modelo_cat</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.86      0.85      0.86      1035
+           1       0.60      0.63      0.61       374
+
+    accuracy                           0.79      1409
+   macro avg       0.73      0.74      0.74      1409
+weighted avg       0.79      0.79      0.79      1409
+</pre></div>
+</div>
+<img alt="_images/16d02144576684b5747c06f63f7f9f8d488abbf904cf8d95d1eb902032e6666c.png" src="_images/16d02144576684b5747c06f63f7f9f8d488abbf904cf8d95d1eb902032e6666c.png" />
+<img alt="_images/39b3b2a27ddc38c2252c70e04f717f2622e5b0c25c3917ecb1f9fc54be4ea743.png" src="_images/39b3b2a27ddc38c2252c70e04f717f2622e5b0c25c3917ecb1f9fc54be4ea743.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Accuracy&#39;: 0.7920511000709723,
+ &#39;Precision&#39;: 0.7944348566117194,
+ &#39;Recall&#39;: 0.7920511000709723,
+ &#39;F1-score&#39;: 0.7931701669366552}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al realizar gridsearch hubo una ligera mejora en el ROC, pero aparte de eso solo hubo una ligera mejora en las metricas de yes</p>
+</section>
+</section>
+<section id="feature-importance">
+<h2>Feature importance<a class="headerlink" href="#feature-importance" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelo_rf</span><span class="p">,</span> <span class="n">importancias_rf</span><span class="p">,</span> <span class="n">features_rf</span><span class="o">=</span><span class="n">obtener_importancias_y_features</span><span class="p">(</span><span class="n">mejor_modelo_rf</span><span class="p">)</span>
+<span class="n">modelo_xg</span><span class="p">,</span> <span class="n">importancias_xg</span><span class="p">,</span> <span class="n">features_xg</span><span class="o">=</span><span class="n">obtener_importancias_y_features</span><span class="p">(</span><span class="n">mejor_modelo_xg</span><span class="p">)</span>
+<span class="n">modelo_lgbm</span><span class="p">,</span> <span class="n">importancias_lgbm</span><span class="p">,</span> <span class="n">features_lgbm</span><span class="o">=</span><span class="n">obtener_importancias_y_features</span><span class="p">(</span><span class="n">mejor_modelo_lgbm</span><span class="p">)</span>
+<span class="n">modelo_cat</span><span class="p">,</span> <span class="n">importancias_cat</span><span class="p">,</span> <span class="n">features_cat</span><span class="o">=</span><span class="n">obtener_importancias_y_features</span><span class="p">(</span><span class="n">mejor_modelo_cat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mostrar_importancias</span><span class="p">(</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="n">importancias_rf</span><span class="p">,</span> <span class="n">features_rf</span><span class="p">)</span>
+<span class="n">mostrar_importancias</span><span class="p">(</span><span class="s2">&quot;XGBoost&quot;</span><span class="p">,</span> <span class="n">importancias_xg</span><span class="p">,</span> <span class="n">features_xg</span><span class="p">)</span>
+<span class="n">mostrar_importancias</span><span class="p">(</span><span class="s2">&quot;LightGBM&quot;</span><span class="p">,</span> <span class="n">importancias_lgbm</span><span class="p">,</span> <span class="n">features_lgbm</span><span class="p">)</span>
+<span class="n">mostrar_importancias</span><span class="p">(</span><span class="s2">&quot;CatBoost&quot;</span><span class="p">,</span> <span class="n">importancias_cat</span><span class="p">,</span> <span class="n">features_cat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+🔹 Top 15 características más importantes - Random Forest
+============================================================
+                     Característica  Importancia
+       cat__Contract_Month-to-month     0.116919
+                        num__tenure     0.091485
+                  num__TotalCharges     0.076736
+             cat__Contract_Two year     0.072980
+             cat__OnlineSecurity_No     0.067365
+cat__PaymentMethod_Electronic check     0.060044
+                cat__TechSupport_No     0.056895
+                num__MonthlyCharges     0.052025
+   cat__InternetService_Fiber optic     0.032523
+             cat__Contract_One year     0.030721
+            cat__OnlineSecurity_Yes     0.028419
+               cat__OnlineBackup_No     0.023349
+           cat__PaperlessBilling_No     0.019499
+               cat__TechSupport_Yes     0.018522
+          cat__PaperlessBilling_Yes     0.018019
+</pre></div>
+</div>
+<img alt="_images/f6427f1e1df3132c74091d542c9258657a5df8b00f37f5cf22c0f52cbf398f8b.png" src="_images/f6427f1e1df3132c74091d542c9258657a5df8b00f37f5cf22c0f52cbf398f8b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+🔹 Top 15 características más importantes - XGBoost
+============================================================
+                     Característica  Importancia
+       cat__Contract_Month-to-month     0.282562
+             cat__OnlineSecurity_No     0.147127
+             cat__Contract_Two year     0.049919
+   cat__InternetService_Fiber optic     0.041405
+cat__PaymentMethod_Electronic check     0.039519
+                cat__TechSupport_No     0.037734
+                   cat__Partner_Yes     0.032551
+             cat__Contract_One year     0.029288
+            cat__OnlineSecurity_Yes     0.020820
+           cat__InternetService_DSL     0.020758
+          cat__PaperlessBilling_Yes     0.019580
+               cat__OnlineBackup_No     0.019410
+               cat__TechSupport_Yes     0.017786
+              cat__MultipleLines_No     0.016283
+           cat__PaperlessBilling_No     0.015693
+</pre></div>
+</div>
+<img alt="_images/7337bdb1da78b572c18f39c180187ba1fd050c5ff831d61bd22f5af38674ecb8.png" src="_images/7337bdb1da78b572c18f39c180187ba1fd050c5ff831d61bd22f5af38674ecb8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+🔹 Top 15 características más importantes - LightGBM
+============================================================
+                              Característica  Importancia
+                         num__MonthlyCharges         1166
+                                 num__tenure         1095
+                           num__TotalCharges          850
+         cat__PaymentMethod_Electronic check          187
+                    cat__PaperlessBilling_No          154
+                        cat__OnlineBackup_No          153
+cat__PaymentMethod_Bank transfer (automatic)          139
+  cat__PaymentMethod_Credit card (automatic)          125
+                       cat__MultipleLines_No          123
+                      cat__Contract_One year          122
+                cat__Contract_Month-to-month          114
+                      cat__OnlineSecurity_No          106
+                             cat__Partner_No          105
+                          cat__Dependents_No          105
+                         cat__TechSupport_No          100
+</pre></div>
+</div>
+<img alt="_images/77c2e2c2d05f289fb0a7273c0e966791349aeb311ee2758deff62a34b62cfec5.png" src="_images/77c2e2c2d05f289fb0a7273c0e966791349aeb311ee2758deff62a34b62cfec5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+🔹 Top 15 características más importantes - CatBoost
+============================================================
+                              Característica  Importancia
+         cat__PaymentMethod_Electronic check    10.505318
+                                 num__tenure     9.194032
+                cat__Contract_Month-to-month     6.031093
+                      cat__OnlineSecurity_No     4.813376
+                        cat__OnlineBackup_No     4.575378
+  cat__PaymentMethod_Credit card (automatic)     4.328004
+                       cat__MultipleLines_No     4.306645
+                         cat__TechSupport_No     3.778647
+                    cat__PaperlessBilling_No     3.567089
+                           num__TotalCharges     3.479657
+                   cat__PaperlessBilling_Yes     2.783182
+                     cat__OnlineSecurity_Yes     2.676589
+cat__PaymentMethod_Bank transfer (automatic)     2.554472
+                         cat__Dependents_Yes     2.509029
+                       cat__OnlineBackup_Yes     2.456136
+</pre></div>
+</div>
+<img alt="_images/7ea7eae70585a0343ec4c4d6e4343d7f6b54e8eca3b1f9f5d507bb848226c56d.png" src="_images/7ea7eae70585a0343ec4c4d6e4343d7f6b54e8eca3b1f9f5d507bb848226c56d.png" />
+</div>
+</div>
+<p>Podemos observar que en los 4 modelos generales con gridsearch algunas de las variables mas importantes que se repiten son tenure, Contract Month to Month, Electronic check y Online Security No, estas podriamos considerarlas como las variables mas importantes a tener en cuenta si se quieres saber si hay churn o no</p>
+</section>
+<section id="exportar-mejor-modelo">
+<h2>Exportar mejor modelo<a class="headerlink" href="#exportar-mejor-modelo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor_pipeline</span> <span class="o">=</span> <span class="n">resultados_rf</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exporta el pipeline completo</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mejor_pipeline</span><span class="p">,</span> <span class="s2">&quot;app/model.joblib&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pipeline completo exportado en app/model.joblib&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline completo exportado en app/model.joblib
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_Preprocesamiento_de_datos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Preprocesamiento de datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_interpretabilidad.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interpretabilidad usando lime</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos">Modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-normales">Modelos normales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-balanceados-por-smote">Modelos balanceados por SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gridsearch">Gridsearch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parametros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">implementacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance">Feature importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-mejor-modelo">Exportar mejor modelo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel Jaimes, Mateo Gomez, Mateo Molinares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
